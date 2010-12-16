@@ -99,5 +99,5 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 export PATH="$PATH:$HOME/.gem/ruby/1.8/bin"
-source dot-files/color-prompt.bash
+source ~/dot-files/color-prompt.bash
 
