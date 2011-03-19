@@ -47,10 +47,14 @@ export PATH="/opt/local/bin:$PATH"
 
 # ruby
 export RUBYOPT=-rubygems
-export PATH=~/.gem/ruby/1.8/bin:"$PATH"
+export PATH="$HOME/.gem/ruby/1.8/bin:$PATH"
 
 if [ -f /opt/local/etc/bash_completion ]; then
     . /opt/local/etc/bash_completion
 fi
 
 export EDITOR=vim
+
+for i in ~/dot-files/bash.d/*; do 
+    	source "$i"
+done

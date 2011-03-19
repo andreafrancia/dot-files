@@ -51,4 +51,3 @@ Now try logging into the machine, with "ssh '$host'", and check in:
 to make sure we haven't added extra keys that you weren't expecting.
 
 EOF
-
