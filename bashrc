@@ -24,7 +24,6 @@ esac
 
 
 export PATH="$PATH:$HOME/.gem/ruby/1.8/bin"
-source ~/dot-files/color-prompt.bash
 
 alias rm='rm -i'
 alias cp='cp -i'
