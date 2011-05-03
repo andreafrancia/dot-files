@@ -22,7 +22,6 @@ case "$TERM" in
     xterm-color) color_prompt=yes;;
 esac
 
-
 export PATH="$PATH:$HOME/.gem/ruby/1.8/bin"
 
 alias rm='rm -i'
@@ -33,7 +32,7 @@ alias ls='ls --color=auto'
 source ~/.profile
 
 PS1='[\u@\h \W]\$'
-PS1='\[\e[1;32m\]'"$PS1"'\[\e[0m\] '
+#PS1='\[\e[1;32m\]'"$PS1"'\[\e[0m\] '
 
 export PATH="$HOME/bin:$PATH"
 export PATH="/opt/local/apache2/bin:$PATH"
@@ -55,5 +54,7 @@ fi
 export EDITOR=vim
 
 for i in ~/dot-files/bash.d/*; do 
-    	source "$i"
+    source "$i"
 done
+
+export PS1

@@ -1,0 +1,4 @@
+*.swp
+*.swo
+.vim/.netrwhist
+mac-commands
