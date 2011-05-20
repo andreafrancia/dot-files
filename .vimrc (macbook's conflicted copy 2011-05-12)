@@ -5,18 +5,12 @@ set omnifunc=syntaxcomplete#Complete
 
 filetype plugin indent on
 syntax on 
-set ruler
-
-" Draw a red line on column (one char after the textwidth value)
-" from " http://stackoverflow.com/questions/235439/vim-80-column-layout-concerns/3765575#3765575
-if exists('+colorcolumn')
-    set colorcolumn=+1
-endif
-
-set t_Co=256 " enable 256 colors
 
 set smartindent
 set cursorline
+
+set ruler
+set t_Co=256 " Let vim use all the 256 colors of iTerm2
 
 " show statusline always
 set laststatus=2
@@ -25,7 +19,7 @@ set laststatus=2
 set history=1000
 
 " Writing text
-au BufRead,BufNewFile *.txt setfiletype text
+au BufRead,BufNewFile *.txt		setfiletype text
 runtime macros/justify.vim
 autocmd FileType text setlocal textwidth=0 formatoptions+=w
 
@@ -34,4 +28,5 @@ autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab textwidth=78
 
 " Use emacs-style tab completion when selecting files, etc
 set wildmode=longest,list
-
+colorscheme andrea
+set hidden

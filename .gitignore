@@ -2,3 +2,4 @@
 *.swo
 .vim/.netrwhist
 mac-commands
+.DS_Store

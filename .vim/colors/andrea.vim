@@ -1,7 +1,5 @@
-" ir_black color scheme
-" More at: http://blog.infinitered.com/entries/show/8
-
-
+" Copied from ir_black color scheme
+"
 " ********************************************************************************
 " Standard colors used in all ir_black themes:
 " Note, x:x:x are RGB values
@@ -60,7 +58,7 @@ if exists("syntax_on")
   syntax reset
 endif
 
-let colors_name = "ir_black"
+let colors_name = "andrea"
 
 
 "hi Example         guifg=NONE        guibg=NONE        gui=NONE      ctermfg=NONE        ctermbg=NONE        cterm=NONE
@@ -99,7 +97,7 @@ if version >= 700 " Vim 7.x specific colors
   hi MatchParen     guifg=#f6f3e8     guibg=#857b6f     gui=BOLD      ctermfg=white       ctermbg=darkgray    cterm=NONE
   hi Pmenu          guifg=#f6f3e8     guibg=#444444     gui=NONE      ctermfg=NONE        ctermbg=NONE        cterm=NONE
   hi PmenuSel       guifg=#000000     guibg=#cae682     gui=NONE      ctermfg=NONE        ctermbg=NONE        cterm=NONE
-  hi Search         guifg=NONE        guibg=NONE        gui=underline ctermfg=NONE        ctermbg=NONE        cterm=underline
+  hi Search         guifg=NONE        guibg=#00cccc     gui=underline ctermfg=Yellow      ctermbg=Black       cterm=reverse  
 endif
 
 " Syntax highlighting
