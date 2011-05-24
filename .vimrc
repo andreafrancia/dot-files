@@ -14,6 +14,7 @@ if exists('+colorcolumn')
 endif
 
 set t_Co=256 " enable 256 colors
+colorscheme xoria256
 
 set smartindent
 set cursorline
