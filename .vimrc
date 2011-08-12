@@ -39,16 +39,19 @@ colorscheme xoria256
 set smartindent
 set cursorline
 
-" show statusline always
-set laststatus=2
 
-" I want a big history (the default is only 20 commands)
-set history=1000
+set laststatus=2 " show statusline always
+
+set history=1000 " I want a big history (the default is only 20 commands)
 
 " Writing text
 au BufRead,BufNewFile *.txt setfiletype text
-runtime macros/justify.vim
+runtime macros/justify.vim  " format with _j
 autocmd FileType text setlocal textwidth=0 formatoptions+=w textwidth=78
+
+set shiftwidth=4
+set softtabstop=4
+set expandtab
 
 autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab textwidth=78 foldmethod=indent
 autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab textwidth=78 foldmethod=syntax
@@ -56,12 +59,8 @@ autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab textwidth=78
 " Use emacs-style tab completion when selecting files, etc
 set wildmode=longest,list
 
-set expandtab
-set shiftwidth=4
-set softtabstop=4
 set autoindent
 set omnifunc=syntaxcomplete#Complete
-set laststatus=2
 set showmatch
 set incsearch
 
@@ -82,5 +81,10 @@ endfunction
 " GRB: clear the search buffer when hitting return
 :nnoremap ,<CR> :nohlsearch<cr>
 
+" Should open all (almost) level 
+set foldlevelstart=20
 
+" Move the cursor to the last position on reopen
+" See http://vimdoc.sourceforge.net/htmldoc/eval.html#last-position-jump
+:au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
