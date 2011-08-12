@@ -1,6 +1,13 @@
+" Use Vim settings, rather then Vi settings (much better!).
+" This must be first, because it changes other options as a side effect.
+set nocompatible
+
 " Allow backgrounding buffers without writing them, and remember marks/undo
 " for backgrounded buffers
 set hidden
+
+" Remember more commands and search history
+set history=1000
 
 " Make tab completion for files/buffers act like bash
 set wildmenu
@@ -12,79 +19,135 @@ set smartcase
 " Keep more context when scrolling off the end of a buffer
 set scrolloff=3
 
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-
 " Store temporary files in a central spot
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
 
+" allow backspacing over everything in insert mode
+set backspace=indent,eol,start
+
+if has("vms")
+  set nobackup		" do not keep a backup file, use versions instead
+else
+  set backup		" keep a backup file
+endif
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 
+" Don't use Ex mode, use Q for formatting
+map Q gq
 
-filetype plugin indent on
-syntax on 
-set ruler
+" Switch syntax highlighting on, when the terminal has colors
+" Also switch on highlighting the last used search pattern.
+if &t_Co > 2 || has("gui_running")
+  syntax on
+  set hlsearch
+endif
 
-" Draw a red line on column (one char after the textwidth value)
+" Andrea: light colorschme
+colorscheme morning
+
+" Only do this part when compiled with support for autocommands.
+if has("autocmd")
+
+  " Enable file type detection.
+  " Use the default filetype settings, so that mail gets 'tw' set to 72,
+  " 'cindent' is on in C files, etc.
+  " Also load indent files, to automatically do language-dependent indenting.
+  filetype plugin indent on
+
+  " Put these in an autocmd group, so that we can delete them easily.
+  augroup vimrcEx
+  au!
+
+  " For all text files set 'textwidth' to 78 characters.
+  autocmd FileType text setlocal textwidth=78
+
+  " When editing a file, always jump to the last known cursor position.
+  " Don't do it when the position is invalid or when inside an event handler
+  " (happens when dropping a file on gvim).
+  autocmd BufReadPost *
+    \ if line("'\"") > 0 && line("'\"") <= line("$") |
+    \   exe "normal g`\"" |
+    \ endif
+
+  augroup END
+
+else
+
+  set autoindent		" always set autoindenting on
+
+endif " has("autocmd")
+
+
+" GRB: hide the toolbar in GUI mode
+if has("gui_running")
+    set go-=T
+end
+
+" From GRB:
+" Remap the tab key to do autocompletion or indentation depending on the
+" context (from http://www.vim.org/tips/tip.php?tip_id=102)
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
+
+" From GRB:
+" Seriously, guys. It's not like :W is bound to anything anyway.
+command! W :w
+
+command! KillWhitespace :normal :%s/ *$//g<cr><c-o><cr>
+
+" Andrea modifications =====================================================
+" Andrea: Draw a red line on column (one char after the textwidth value)
 " from " http://stackoverflow.com/questions/235439/vim-80-column-layout-concerns/3765575#3765575
 if exists('+colorcolumn')
     set colorcolumn=+1
 endif
 
-set t_Co=256 " enable 256 colors
-colorscheme xoria256
+set t_Co=256 " Andrea: enable 256 colors
 
-set smartindent
+" Anrea: highlight the line containing the cursor
 set cursorline
-
-
-set laststatus=2 " show statusline always
-
-set history=1000 " I want a big history (the default is only 20 commands)
+set history=1001 " I want a big history (the default is only 20 commands)
 
 " Writing text
 au BufRead,BufNewFile *.txt setfiletype text
 runtime macros/justify.vim  " format with _j
 autocmd FileType text setlocal textwidth=0 formatoptions+=w textwidth=78
 
+" GRB: Use emacs-style tab completion when selecting files, etc
+set wildmode=longest,list
+
+set omnifunc=syntaxcomplete#Complete
+
+" Andrea: Should open all (almost) level 
+set foldlevelstart=20
+
+" Andrea: sane editing configuration:
+set expandtab
+set tabstop=8
 set shiftwidth=4
 set softtabstop=4
-set expandtab
+set laststatus=2 " show statusline always
+set showmatch
+set incsearch
+set hlsearch     " higlight found word after search
+" GRB: clear the search buffer when hitting comma then return
+nnoremap ,<CR> :nohlsearch<CR> 
+set switchbuf=useopen
+set number
+set numberwidth=5
 
 autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab textwidth=78 foldmethod=indent
 autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab textwidth=78 foldmethod=syntax
 
-" Use emacs-style tab completion when selecting files, etc
-set wildmode=longest,list
 
-set autoindent
-set omnifunc=syntaxcomplete#Complete
-set showmatch
-set incsearch
-
-" === Python ================================================================= 
-
-" GRB: add pydoc command
-:command! -nargs=+ Pydoc :call ShowPydoc("<args>")
-function! ShowPydoc(module, ...)
-    let fPath = "/tmp/pyHelp_" . a:module . ".pydoc"
-    :execute ":!pydoc " . a:module . " > " . fPath
-    :execute ":sp ".fPath
-endfunction
-
-" GRB: Put useful info in status line
-:set statusline=%<%f\ (%{&ft})\ %-4(%m%)%=%-19(%3l,%02c%03V%)
-:hi User1 term=inverse,bold cterm=inverse,bold ctermfg=red
-
-" GRB: clear the search buffer when hitting return
-:nnoremap ,<CR> :nohlsearch<cr>
-
-" Should open all (almost) level 
-set foldlevelstart=20
-
-" Move the cursor to the last position on reopen
-" See http://vimdoc.sourceforge.net/htmldoc/eval.html#last-position-jump
-:au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
