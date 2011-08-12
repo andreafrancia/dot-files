@@ -1,0 +1,9 @@
+[user]
+	name = Andrea Francia
+	email = andrea@andreafrancia.it
+[core]
+	excludesfile = ~/.cvsignore
+[color]
+	diff = auto
+	status = auto
+	branch = auto
