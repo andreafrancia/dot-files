@@ -1,10 +1,7 @@
 
 rubycomplete Mark Guzman <segfault@hasno.info>
-
-
 ack.vim --> Installa Ack su Vim
 conqueTerm 
-fugitive
 vim-git
 indent-object
 nerdtree
@@ -12,19 +9,25 @@ nerdcommenter
 taglist
 vividchalk
 markdown
-vim-endwise
 syntastic
 command_t
+
+Installati:
+===========
+fugitive  - Shell per Git
+
+
 
 
 Cose ruby:
 ==========
 vim-ruby-debugger
+vim-endwise
 
 Minor:
 
 vim-repeat
-
+vim-tcomment
 
 
 

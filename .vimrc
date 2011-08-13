@@ -139,6 +139,7 @@ set expandtab
 set tabstop=8
 set shiftwidth=4
 set softtabstop=4
+set smarttab "Tab insert blanks and backspace eat blanks
 set laststatus=2 " show statusline always
 set showmatch
 set incsearch
@@ -149,8 +150,12 @@ set switchbuf=useopen
 set number
 set numberwidth=5
 
-autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab textwidth=78 foldmethod=indent
-autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab textwidth=78 foldmethod=syntax
+if has("autocmd")
+    autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab textwidth=78 foldmethod=indent smarttab
+    autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab textwidth=78 foldmethod=syntax
+endif
 
+"Enable completion
+set completeopt=menu,preview,longest,menuone
 
 
