@@ -1,4 +1,10 @@
+Interessanti:
+ https://github.com/vim-scripts/DirDiff.vim
+ https://github.com/vim-scripts/DrawIt   <--- disegnare in Vim
+ https://github.com/vim-scripts/pytest.vim
+ http://lug.fh-swf.de/vim/vim-bash/screenshots-en.html
 
+Ruby
 rubycomplete Mark Guzman <segfault@hasno.info>
 ack.vim --> Installa Ack su Vim
 conqueTerm 
