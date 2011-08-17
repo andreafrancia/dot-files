@@ -160,6 +160,10 @@ set omnifunc=syntaxcomplete#Complete
 "Enable completion
 set completeopt=menu,preview,longest,menuone
 
+" NERDTree
+nnoremap <leader>f :NERDTreeToggle<CR>
+
+
 source ~/dot-files/utilities.vim
 
 
