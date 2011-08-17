@@ -7,3 +7,6 @@
 [submodule ".vim/bundle/copy-as-rtf"]
 	path = .vim/bundle/copy-as-rtf
 	url = https://github.com/vim-scripts/copy-as-rtf.git
+[submodule ".vim/bundle/xoria256"]
+	path = .vim/bundle/xoria256
+	url = https://github.com/vim-scripts/xoria256.vim.git

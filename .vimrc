@@ -47,8 +47,8 @@ if &t_Co > 2 || has("gui_running")
   set hlsearch
 endif
 
-" Andrea: light colorschme
-colorscheme morning
+" Andrea: my colorschme
+colorscheme xoria256
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
@@ -117,7 +117,7 @@ endif
 
 set t_Co=256 " Andrea: enable 256 colors
 
-" Anrea: highlight the line containing the cursor
+" Andrea: highlight the line containing the cursor
 set cursorline
 set history=1001 " I want a big history (the default is only 20 commands)
 
@@ -126,7 +126,7 @@ au BufRead,BufNewFile *.txt setfiletype text
 runtime macros/justify.vim  " format with _j
 autocmd FileType text setlocal textwidth=0 formatoptions+=w textwidth=78
 
-" GRB: Use emacs-style tab completion when selecting files, etc
+" GRB: Use emacs-style tab completion when selecting files, etc..
 set wildmode=longest,list
 
 set omnifunc=syntaxcomplete#Complete
@@ -143,19 +143,23 @@ set smarttab "Tab insert blanks and backspace eat blanks
 set laststatus=2 " show statusline always
 set showmatch
 set incsearch
-set hlsearch     " higlight found word after search
+set hlsearch     " highlight found word after search
 " GRB: clear the search buffer when hitting comma then return
 nnoremap ,<CR> :nohlsearch<CR> 
 set switchbuf=useopen
 set number
 set numberwidth=5
 
-if has("autocmd")
-    autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab textwidth=78 foldmethod=indent smarttab
-    autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab textwidth=78 foldmethod=syntax
-endif
+autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab textwidth=78 foldmethod=indent
+autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab textwidth=78 foldmethod=syntax
+autocmd FileType python set omnifunc=pythoncomplete#Complete
+
+" Completion fall-back for non supported languages
+set omnifunc=syntaxcomplete#Complete
 
 "Enable completion
 set completeopt=menu,preview,longest,menuone
+
+source ~/dot-files/utilities.vim
 
 
