@@ -10,3 +10,6 @@
 [submodule ".vim/bundle/xoria256"]
 	path = .vim/bundle/xoria256
 	url = https://github.com/vim-scripts/xoria256.vim.git
+[submodule ".vim/bundle/ack"]
+	path = .vim/bundle/ack
+	url = https://github.com/vim-scripts/ack.vim.git
