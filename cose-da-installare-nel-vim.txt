@@ -3,12 +3,10 @@ Interessanti:
  https://github.com/vim-scripts/DrawIt   <--- disegnare in Vim
  https://github.com/vim-scripts/pytest.vim
  http://lug.fh-swf.de/vim/vim-bash/screenshots-en.html
- https://bitbucket.org/ns9tks/vim-fuzzyfinder/
  makegreen.vim
  https://github.com/vim-scripts/Command-T
 
 Ruby:
-ack.vim --> Installa Ack su Vim
 conqueTerm 
 vim-git
 indent-object
@@ -48,17 +46,9 @@ endfunction
 let g:NERDSnippets_key = '<c-h>'
 
 
-" From GRB:
-" Map ,e and ,v to open files in the same directory as the current file
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
-map <leader>e :edit %%
-map <leader>v :view %%
-
-
-
 map <leader>rm :BikeExtract<cr>
 
-set makeprg=python\ -m\ nose.core\ --machine-out
+met makeprg=python\ -m\ nose.core\ --machine-out
 
 if &diff
   nmap <c-h> :diffget 1<cr>

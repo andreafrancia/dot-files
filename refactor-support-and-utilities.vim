@@ -55,4 +55,5 @@ map <leader>n :call RenameFile()<cr>
 " Refactoring
 vnoremap <leader>rv :call ExtractVariable()<cr>
 nnoremap <leader>ri :call InlineVariable()<cr>
+map <leader>rm :BikeExtract<cr>
 
