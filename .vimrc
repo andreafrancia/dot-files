@@ -37,9 +37,6 @@ endif
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 
-" Don't use Ex mode, use Q for formatting
-map Q gq
-
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
@@ -110,7 +107,7 @@ command! KillWhitespace :normal :%s/ *$//g<cr><c-o><cr>
 
 " Andrea modifications =====================================================
 " Andrea: Draw a red line on column (one char after the textwidth value)
-" from " http://stackoverflow.com/questions/235439/vim-80-column-layout-concerns/3765575#3765575
+" from http://stackoverflow.com/questions/235439/vim-80-column-layout-concerns/3765575#3765575
 if exists('+colorcolumn')
     set colorcolumn=+1
 endif
@@ -126,10 +123,10 @@ au BufRead,BufNewFile *.txt setfiletype text
 runtime macros/justify.vim  " format with _j
 autocmd FileType text setlocal textwidth=0 formatoptions+=w textwidth=78
 
-" GRB: Use emacs-style tab completion when selecting files, etc..
-set wildmode=longest,list
-
-set omnifunc=syntaxcomplete#Complete
+" Andrea: formatting
+set formatoptions+=n " numbered lists
+" From GRB: Don't use Ex mode, use Q for formatting
+map Q gq
 
 " Andrea: Should open all (almost) level 
 set foldlevelstart=20
@@ -144,8 +141,12 @@ set laststatus=2 " show statusline always
 set showmatch
 set incsearch
 set hlsearch     " highlight found word after search
+
+" Andrea: show tabs and spaces:
+set listchars=tab:>-,trail:·
+
 " GRB: clear the search buffer when hitting comma then return
-nnoremap ,<CR> :nohlsearch<CR> 
+nnoremap ,<CR> :nohlsearch<CR>
 set switchbuf=useopen
 set number
 set numberwidth=5
@@ -153,6 +154,7 @@ set numberwidth=5
 autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab textwidth=78 foldmethod=indent
 autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab textwidth=78 foldmethod=syntax
 autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType python set formatoptions+=l
 
 " Completion fall-back for non supported languages
 set omnifunc=syntaxcomplete#Complete
@@ -160,10 +162,13 @@ set omnifunc=syntaxcomplete#Complete
 "Enable completion
 set completeopt=menu,preview,longest,menuone
 
+" GRB: Use emacs-style tab completion when selecting files, etc..
+set wildmode=longest,list
+
 " NERDTree
 nnoremap <leader>f :NERDTreeToggle<CR>
 
-
 source ~/dot-files/refactor-support-and-utilities.vim
 
+set autoindent
 
