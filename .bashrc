@@ -15,16 +15,8 @@ source ~/.profile
 
 export PS1='[\u@\h \W]\$'
 
-[ -x "$(which pip)" ] && eval "`pip completion --bash`"
-
-export PATH="/usr/local/bin:${PATH}"
-
-
-for i in ~/dot-files/bash.d/*; do 
+for i in ~/dot-files/bash-interactive.d/*.bash; do 
     source "$i"
 done
 
-export PATH="/usr/local/share/python:$PATH"
 export PATH=~/bin.local:"$PATH"
-
-
