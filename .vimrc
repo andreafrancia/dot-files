@@ -151,10 +151,20 @@ set switchbuf=useopen
 set number
 set numberwidth=5
 
-autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab textwidth=78 foldmethod=indent
 autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab textwidth=78 foldmethod=syntax
+
+" Python configuration
+autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab textwidth=78 foldmethod=indent
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType python set formatoptions+=l
+
+" Syntastic for python
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_enable_signs=1
+let g:syntastic_auto_loc_list=1
+
 
 " Completion fall-back for non supported languages
 set omnifunc=syntaxcomplete#Complete

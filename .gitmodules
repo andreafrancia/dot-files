@@ -19,3 +19,6 @@
 [submodule ".vim/bundle/bccalc"]
 	path = .vim/bundle/bccalc
 	url = https://github.com/vim-scripts/bccalc.vim.git
+[submodule ".vim/bundle/syntastic"]
+	path = .vim/bundle/syntastic
+	url = https://github.com/scrooloose/syntastic.git
