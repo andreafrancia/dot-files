@@ -159,11 +159,11 @@ autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType python set formatoptions+=l
 
 " Syntastic for python
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
 let g:syntastic_enable_signs=1
-let g:syntastic_auto_loc_list=1
+let g:syntastic_auto_loc_list=0
 
 
 " Completion fall-back for non supported languages
