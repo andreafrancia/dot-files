@@ -23,6 +23,7 @@ alias mv='mv -i'
 
 # Some aliases ---------------------------------------------------------------
 alias kdiff3='/Applications/kdiff3.app/Contents/MacOS/kdiff3'
+alias grep='grep --color'
 alias grep-sources='grep --exclude-dir=.svn --color -r .'
 
 # PATH (the last inserted win) -----------------------------------------------
@@ -30,6 +31,7 @@ export PATH="/sbin:/usr/sbin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/bin:${PATH}" # standard homebrew location
 export PATH=~/homebrew/bin:"$PATH"   # user homebrew installation
+export PATH="$(brew --prefix)/sbin:$PATH"
 export PATH=~/bin:"$PATH"        # user executable shared among all machines
 export PATH=~/bin.local:"$PATH"  # user executable for this machine
 export PATH=~/local/bin:"$PATH"  # software built with --prefix=~/local
