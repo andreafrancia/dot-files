@@ -1,1 +1,94 @@
-/Applications/svnX.app/Contents/Resources/svnx
+#! /bin/sh
+#
+# svnx <command> [path-or-URL]
+
+TELL='tell app id "com.lachoseinteractive.svnX"'
+alias AS="osascript -e 'on run args' -e"
+
+function fullPath ()
+{
+	if [ -z "$1" -o "$1" == '.' ]; then
+		pwd
+	elif [ -e "$1" ]; then
+		local d=`dirname -- "$1"`
+		echo `cd -L "$d" && pwd`/"${1##*/}"
+	else
+		echo "$1"
+	fi
+}
+
+function doFn ()	# fn arg
+{
+	AS "$TELL" -e "activate" -e "$1 args" -e "end" -e "end" "`fullPath \"$2\"`"
+}
+
+function openLogWindow ()	# <file-path>
+{
+	if [ -e "${1:?}" ]; then doFn 'displayHistory' "$1"; fi
+}
+
+function openWCWindow ()	# [working-copy-path]
+{
+	f="`fullPath \"$1\"`"
+	if [ ! -d "$f" ]; then f=`dirname "$f"`; fi
+	if [ -d "$f" ]; then doFn 'openWorkingCopy' "$f"; fi
+}
+
+function openRepoWindow ()	# [wc-path-or-URL]
+{
+	f="$1"
+	if [ "$f" == "${f#[a-9]:}" ]; then
+		f=`fullPath "$f"`
+		if [ ! -e "$f" ]; then return 1; fi
+		if [ -f "$f" ]; then f=`dirname "$f"`; fi
+		f=`svn info "$f" | grep 'URL:' | cut -d ' ' -f2`
+	fi
+	doFn 'openRepository' "$f"
+}
+
+function diffFiles ()	# files...
+{
+	for f; {
+		AS "$TELL to diffFiles args" -e 'end' "`fullPath \"$f\"`"
+	}
+}
+
+function openFiles ()	# files...
+{
+	for f; {
+		AS "$TELL to openFiles args" -e 'end' "`fullPath \"$f\"`"
+	}
+}
+
+function resolveFiles ()	# files...
+{
+	for f; {
+		AS "$TELL to resolveFiles args" -e 'end' "`fullPath \"$f\"`"
+	}
+}
+
+function usage ()
+{
+	echo 'svnx <command> [path-or-URL]   - the svnX command line tool.'
+	echo '     help                      - display this usage text.'
+	echo '     log|-l <file-path>        - open log sheet for file-path.'
+	echo '     wc|-w [working-copy-path] - open window for working-copy-path (defaults to ".").'
+	echo '     rep|-r [wc-path-or-URL]   - open repository window for wc-path-or-URL (defaults to ".").'
+	echo '     diff|-d <file-path...>    - compare the files with their base revisions.'
+	echo '     open|-o <file-path...>    - open the files and/or folders in appropriate applications.'
+	echo '     resolve|-v <file-path...> - interactively resolve conflicted files.'
+}
+
+
+#echo "SVNX <$1>"
+
+case "$1" in
+	log|-l)			openLogWindow "$2";;
+	wc|-w)			openWCWindow "$2";;
+	rep|-r)			openRepoWindow "$2";;
+	diff|-d)		shift; diffFiles "$@";;
+	open|-o)		shift; openFiles "$@";;
+	resolve|-v)		shift; resolveFiles "$@";;
+	help|*)			usage;;
+esac
+

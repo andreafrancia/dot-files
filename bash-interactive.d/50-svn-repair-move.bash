@@ -1,4 +1,4 @@
-function svn-repair-move-of() {
+function svn-repair-move() {
     usage="Usage:
     $FUNCNAME SRC DEST"
     local src="${1?"$usage"}"

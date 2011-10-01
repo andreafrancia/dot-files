@@ -37,6 +37,16 @@ endif
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
 
+" Use:
+"  - Ctrl-W to delete the previous word, 
+"  - Ctrl-U to delete a line, and 
+"  - Ctrl-Y to paste what you've deleted back, 
+" all while remaining in insert mode.
+" See comment in http://vim.wikia.com/wiki/Recover_from_accidental_Ctrl-U
+inoremap <silent> <C-W> <C-\><C-O>db
+inoremap <silent> <C-U> <C-\><C-O>d0
+inoremap <silent> <C-Y> <C-R>"
+
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if &t_Co > 2 || has("gui_running")
@@ -153,6 +163,15 @@ set numberwidth=5
 
 autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab textwidth=78 foldmethod=syntax
 
+" Javascript
+au BufRead,BufNewFile Jakefile setfiletype javascript
+au BufRead,BufNewFile *.json setfiletype javascript
+
+" Text file configuration
+au BufRead,BufNewFile *.txt setfiletype text
+au BufRead,BufNewFile README setfiletype text
+autocmd FileType text setlocal textwidth=78
+
 " Python configuration
 autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab textwidth=78 foldmethod=indent
 autocmd FileType python set omnifunc=pythoncomplete#Complete
@@ -162,7 +181,7 @@ autocmd FileType python set formatoptions+=l
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
-let g:syntastic_enable_signs=1
+let g:syntastic_enable_signs=0
 let g:syntastic_auto_loc_list=0
 
 
