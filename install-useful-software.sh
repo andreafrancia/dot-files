@@ -29,3 +29,9 @@ curl http://worksintheory.org/files/misc/bash_completion_svn -o "$prefix/etc/bas
 brew install
 # Software Elisa
 brew install gfortran gnuplot 
+
+# Other useful configurations ....
+
+# Tell svnX to not create an alias in ~/bin
+defaults write com.lachoseinteractive.svnX installSvnxTool -bool NO
+
