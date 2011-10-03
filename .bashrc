@@ -53,11 +53,13 @@ export HISTSIZE=$((1024*1024*365))
 shopt -s histappend # Don't overwrite the history at the start of every new session
 HISTCONTROL= # setting to nothing means to remember both commands with spaces and duplicages
 
-# Bash completion
+# Bash completion ------------------------------------------------------------
 prefix="$(brew --prefix || true)"
 [ -f "$prefix/etc/bash_completion" ] && source "$prefix/etc/bash_completion"
 [ -x "$(which pip)" ] && eval "`pip completion --bash`" # pip
 source "$(brew --prefix)/Library/Contributions/brew_bash_completion.sh"
+[ -x "$(which pycompletion)" ] && source "$(which pycompletion)" || \
+    echo "Use 'pip install pycompletion' if you wants bash completions for nose, fabric, virtualenv, ... and others."
 
 # PIP download cache
 export PIP_DOWNLOAD_CACHE=~/.pip/cache
