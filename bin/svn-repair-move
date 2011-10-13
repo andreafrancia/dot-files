@@ -9,7 +9,7 @@ usage="Usage:
 src="${1?"$usage"}"
 dest="${2?"$usage"}"
 
-[ -f "$src" ] && { echo "Refusing overwriting \`$src'" >&2 ; return; }
+[ -f "$src" ] && { echo "Refusing overwriting \`$src'" >&2 ; exit 1; }
 
 mv --no-clobber "$dest" "$src"
 
