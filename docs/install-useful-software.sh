@@ -6,6 +6,8 @@ brew install coreutils findutils --default-names
 brew install ctags lftp ncftp wget ack unrar watch git subversion \
              a2ps bash colordiff duff markdown nmap grep curl \
              ctags iftop dos2unix w3m par htop
+
+# MacVim
 brew install macvim --enable-cscope --enable-clipboard \
                     --custom-icons --with-envycoder --override-system-vim 
 mkdir -p ~/Applications
