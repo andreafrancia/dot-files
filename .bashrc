@@ -6,11 +6,6 @@ shopt -s checkwinsize
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# set a fancy prompt (non-color, unless we know we "want" color)
-case "$TERM" in
-    xterm-color) color_prompt=yes;;
-esac
-
 source ~/.profile
 
 # prompt ---------------------------------------------------------------------
@@ -26,7 +21,7 @@ alias kdiff3='/Applications/kdiff3.app/Contents/MacOS/kdiff3'
 alias grep='grep --color'
 alias grep-sources='grep --exclude-dir=.svn --color -r .'
 
-# PATH (the last inserted win) -----------------------------------------------
+# PATH (the last inserted wins) ----------------------------------------------
 export PATH="/sbin:/usr/sbin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/bin:${PATH}" # standard homebrew location
@@ -64,8 +59,6 @@ source "$(brew --prefix)/Library/Contributions/brew_bash_completion.sh"
 # PIP download cache
 export PIP_DOWNLOAD_CACHE=~/.pip/cache
 
-# rest -----------------------------------------------------------------------
-for i in ~/dot-files/bash-interactive.d/*.bash; do 
-    source "$i"
-done
+# GIT Prompt
+source ~/git-prompt/git-prompt.sh
 
