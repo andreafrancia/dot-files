@@ -42,14 +42,6 @@ autocmd BufReadPost *
 " From GRB:
 " Remap the tab key to do autocompletion or indentation depending on the
 " context (from http://www.vim.org/tips/tip.php?tip_id=102)
-function! InsertTabWrapper()
-    let col = col('.') - 1
-    if !col || getline('.')[col - 1] !~ '\k'
-        return "\<tab>"
-    else
-        return "\<c-p>"
-    endif
-endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 
@@ -72,6 +64,7 @@ set history=65535    " I want a big history (the default is only 20 commands)
 set foldlevelstart=20 " Andrea: Should open all (almost) level
 
 " Andrea: sane editing configuration:
+set autoindent
 set expandtab
 set tabstop=8
 set shiftwidth=4
@@ -82,6 +75,7 @@ set laststatus=2    " show statusline always
 " ============================================================================
 " Searching
 " ============================================================================
+
 set showmatch
 set incsearch
 set hlsearch     " highlight found word after search
@@ -104,6 +98,7 @@ colorscheme xoria256    " Andrea: my colorschme
 set cursorline       " Andrea: highlight the line containing the cursor
 set ruler		" show the cursor position all the time
 set showcmd		" display incomplete commands
+set number
 set numberwidth=5
 set scrolloff=3         " Keep more context when scrolling off the end of a 
                         " buffer
@@ -148,15 +143,15 @@ au BufRead,BufNewFile *.json setfiletype javascript
 " Text files configuration
 au BufRead,BufNewFile *.txt setfiletype text
 au BufRead,BufNewFile README setfiletype text
-autocmd FileType text setlocal textwidth=78
-autocmd FileType text setlocal formatoptions+=w textwidth=78
-autocmd FileType text setlocal formatoptions+=n " numbered lists
+autocmd FileType text setlocal formatoptions+=w textwidth=78  " wrap at col 78
+                             \ formatoptions+=n               " numbered lists
 runtime macros/justify.vim  " format with _j
 
 " Python configuration
-autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab textwidth=78 foldmethod=indent
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType python setlocal formatoptions+=l formatoptions-=w
+autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab 
+                               \ textwidth=78 foldmethod=indent
+                               \ omnifunc=pythoncomplete#Complete
+                               \ formatoptions+=l formatoptions-=w
 
 " Ruby files:
 autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab textwidth=78 foldmethod=syntax
@@ -179,7 +174,76 @@ let g:syntastic_auto_loc_list=0
 " NERDTree
 nnoremap <leader>f :NERDTreeToggle<CR>
 
-source ~/refactor-support-and-utilities.vim
+" ============================================================================
 
-set autoindent
+" Map ,e and ,v to open files in the same directory as the current file
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+map <leader>e :edit %%
+map <leader>v :view %%
+" Map \n to rename file
+map <leader>n :call RenameFile()<cr>
+" Refactoring
+vnoremap <leader>rv :call ExtractVariable()<cr>
+nnoremap <leader>ri :call InlineVariable()<cr>
+map <leader>rm :BikeExtract<cr>
 
+" ============================================================================
+" Function definitions
+" ============================================================================
+
+function! ExtractVariable()
+    let name = input("Variable name: ")
+    if name == ''
+        return
+    endif
+    " Enter visual mode (not sure why this is needed since we're already in
+    " visual mode anyway)
+    normal! gv
+
+    " Replace selected text with the variable name
+    exec "normal c" . name
+    " Define the variable on the line above
+    exec "normal! O" . name . " = "
+    " Paste the original selected text to be the variable value
+    normal! $p
+endfunction
+
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'))
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
+
+function! InlineVariable()
+    " Copy the variable under the cursor into the 'a' register
+    " XXX: How do I copy into a variable so I don't pollute the registers?
+    :normal "ayiw
+    " It takes 4 diws to get the variable, equal sign, and surrounding
+    " whitespace. I'm not sure why. diw is different from dw in this respect.
+    :normal 4diw
+    " Delete the expression into the 'b' register
+    :normal "bd$
+    " Delete the remnants of the line
+    :normal dd
+    " Go to the end of the previous line so we can start our search for the
+    " usage of the variable to replace. Doing '0' instead of 'k$' doesn't
+    " work; I'm not sure why.
+    normal k$
+    " Find the next occurence of the variable
+    exec '/\<' . @a . '\>'
+    " Replace that occurence with the text we yanked
+    exec ':.s/\<' . @a . '\>/' . @b
+endfunction
+
+function! InsertTabWrapper()
+    let col = col('.') - 1
+    if !col || getline('.')[col - 1] !~ '\k'
+        return "\<tab>"
+    else
+        return "\<c-p>"
+    endif
+endfunction
