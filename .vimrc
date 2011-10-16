@@ -2,98 +2,42 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-call pathogen#infect()
-:Helptags
+call pathogen#infect()  " Enable pathogen and all its installed bundles
+:Helptags               " enable help for pathogen bundles
 
-" Allow backgrounding buffers without writing them, and remember marks/undo
-" for backgrounded buffers
-set hidden
+" Usage section
+set hidden              " Allow backgrounding buffers without writing them
 
-" Remember more commands and search history
-set history=1000
-
-" Make tab completion for files/buffers act like bash
-set wildmenu
-
-" Make searches case-sensitive only if they contain upper-case characters
-set ignorecase
-set smartcase
-
-" Keep more context when scrolling off the end of a buffer
-set scrolloff=3
-
-" Store temporary files in a central spot
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-
-" allow backspacing over everything in insert mode
-set backspace=indent,eol,start
-
-if has("vms")
-  set nobackup		" do not keep a backup file, use versions instead
-else
-  set backup		" keep a backup file
-endif
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
-
+" ============================================================================
+" Editing
+" ============================================================================
+set backspace=indent,eol,start    " allow backspacing over everything in 
+                                  " insert mode
 " Use:
-"  - Ctrl-W to delete the previous word, 
-"  - Ctrl-U to delete a line, and 
-"  - Ctrl-Y to paste what you've deleted back, 
+"  - Ctrl-W to delete the previous word,
+"  - Ctrl-U to delete a line, and
 " all while remaining in insert mode.
 " See comment in http://vim.wikia.com/wiki/Recover_from_accidental_Ctrl-U
 inoremap <silent> <C-W> <C-\><C-O>db
 inoremap <silent> <C-U> <C-\><C-O>d0
-inoremap <silent> <C-Y> <C-R>"
 
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if &t_Co > 2 || has("gui_running")
-  syntax on
-  set hlsearch
-endif
+" ============================================================================
+" Directory for swap files and backups
+" ============================================================================
+set backup		" keep a backup file
+" Store temporary files in a central spot : 
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp  " where to put backups
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp  " where to put swapfile
 
-" Andrea: my colorschme
-colorscheme xoria256
+filetype plugin indent on          " Enable file type detection.
 
-" Only do this part when compiled with support for autocommands.
-if has("autocmd")
-
-  " Enable file type detection.
-  " Use the default filetype settings, so that mail gets 'tw' set to 72,
-  " 'cindent' is on in C files, etc.
-  " Also load indent files, to automatically do language-dependent indenting.
-  filetype plugin indent on
-
-  " Put these in an autocmd group, so that we can delete them easily.
-  augroup vimrcEx
-  au!
-
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
-
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  " (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
-
-  augroup END
-
-else
-
-  set autoindent		" always set autoindenting on
-
-endif " has("autocmd")
-
-
-" GRB: hide the toolbar in GUI mode
-if has("gui_running")
-    set go-=T
-end
+" When editing a file, always jump to the last known cursor position.
+" Don't do it when the position is invalid or when inside an event handler
+" (happens when dropping a file on gvim).
+autocmd BufReadPost *
+\ if line("'\"") > 0 && line("'\"") <= line("$") |
+\   exe "normal g`\"" |
+\ endif
 
 " From GRB:
 " Remap the tab key to do autocompletion or indentation depending on the
@@ -109,73 +53,117 @@ endfunction
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 
-" From GRB:
-" Seriously, guys. It's not like :W is bound to anything anyway.
+" From GRB: Seriously, guys. It's not like :W is bound to anything anyway.
 command! W :w
+"
+" Andrea: formatting
+map Q gq
 
 command! KillWhitespace :normal :%s/ *$//g<cr><c-o><cr>
 
-" Andrea modifications =====================================================
 " Andrea: Draw a red line on column (one char after the textwidth value)
 " from http://stackoverflow.com/questions/235439/vim-80-column-layout-concerns/3765575#3765575
-if exists('+colorcolumn')
-    set colorcolumn=+1
-endif
+if exists('+colorcolumn') | set colorcolumn=+1 | endif
 
 set t_Co=256 " Andrea: enable 256 colors
 
-" Andrea: highlight the line containing the cursor
-set cursorline
-set history=1001 " I want a big history (the default is only 20 commands)
+set history=65535    " I want a big history (the default is only 20 commands)
 
-" Writing text
-au BufRead,BufNewFile *.txt setfiletype text
-runtime macros/justify.vim  " format with _j
-autocmd FileType text setlocal textwidth=0 formatoptions+=w textwidth=78
-
-" Andrea: formatting
-set formatoptions+=n " numbered lists
-" From GRB: Don't use Ex mode, use Q for formatting
-map Q gq
-
-" Andrea: Should open all (almost) level 
-set foldlevelstart=20
+set foldlevelstart=20 " Andrea: Should open all (almost) level
 
 " Andrea: sane editing configuration:
 set expandtab
 set tabstop=8
 set shiftwidth=4
-set softtabstop=4
-set smarttab "Tab insert blanks and backspace eat blanks
-set laststatus=2 " show statusline always
+set softtabstop=4   
+set smarttab        "Tab insert blanks and backspace eat blanks
+set laststatus=2    " show statusline always
+
+" ============================================================================
+" Searching
+" ============================================================================
 set showmatch
 set incsearch
 set hlsearch     " highlight found word after search
+
+" Make searches case-sensitive only if they contain upper-case characters
+set ignorecase 
+set smartcase
 
 " Andrea: show tabs and spaces:
 set listchars=tab:>-,trail:·
 
 " GRB: clear the search buffer when hitting comma then return
 nnoremap ,<CR> :nohlsearch<CR>
-set switchbuf=useopen
-set number
+
+" ============================================================================
+" Visualisation
+" ============================================================================
+
+colorscheme xoria256    " Andrea: my colorschme
+set cursorline       " Andrea: highlight the line containing the cursor
+set ruler		" show the cursor position all the time
+set showcmd		" display incomplete commands
 set numberwidth=5
+set scrolloff=3         " Keep more context when scrolling off the end of a 
+                        " buffer
+syntax on
 
-autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab textwidth=78 foldmethod=syntax
+if has("gui_running") | set go-=T | endif  " hide the toolbar in GUI mode
 
-" Javascript
+" ============================================================================
+" Not understood
+" ============================================================================
+set switchbuf=useopen
+
+" ============================================================================
+" Completion
+" ============================================================================
+"
+" Completion fall-back for non supported languages
+set omnifunc=syntaxcomplete#Complete
+
+" Configure completino for buffers
+set completeopt=
+set completeopt+=menu     " Show menu
+set completeopt+=menuone  " Show menu also when there is only one item
+set completeopt+=longest  " Complete with the longest match available
+set completeopt+=preview  " Show extra information about the the current item
+
+" Configure the command line completion
+set wildchar=<Tab>        " Tab start the completion
+set wildmenu
+set wildmode=full   
+set wildignore+=*.pyc
+set wildignorecase
+
+" ============================================================================
+" Specific file formats section
+" ============================================================================
+
+" Javascript files 
 au BufRead,BufNewFile Jakefile setfiletype javascript
 au BufRead,BufNewFile *.json setfiletype javascript
 
-" Text file configuration
+" Text files configuration
 au BufRead,BufNewFile *.txt setfiletype text
 au BufRead,BufNewFile README setfiletype text
 autocmd FileType text setlocal textwidth=78
+autocmd FileType text setlocal formatoptions+=w textwidth=78
+autocmd FileType text setlocal formatoptions+=n " numbered lists
+runtime macros/justify.vim  " format with _j
 
 " Python configuration
 autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab textwidth=78 foldmethod=indent
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType python set formatoptions+=l
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType python setlocal formatoptions+=l formatoptions-=w
+
+" Ruby files:
+autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab textwidth=78 foldmethod=syntax
+
+" ============================================================================
+" Syntastic
+" ============================================================================
 
 " Syntastic for python
 "set statusline+=%#warningmsg#
@@ -184,15 +172,9 @@ autocmd FileType python set formatoptions+=l
 let g:syntastic_enable_signs=0
 let g:syntastic_auto_loc_list=0
 
-
-" Completion fall-back for non supported languages
-set omnifunc=syntaxcomplete#Complete
-
-"Enable completion
-set completeopt=menu,preview,longest,menuone
-
-" GRB: Use emacs-style tab completion when selecting files, etc..
-set wildmode=longest,list
+" ============================================================================
+" Key mappings
+" ============================================================================
 
 " NERDTree
 nnoremap <leader>f :NERDTreeToggle<CR>
