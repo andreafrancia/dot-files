@@ -7,28 +7,15 @@ Interessanti:
  https://github.com/vim-scripts/Command-T
 
 Ruby:
-conqueTerm 
-vim-git
-indent-object
-nerdtree
-nerdcommenter
-taglist
-vividchalk
-markdown
-syntastic
-command_t
-
-Cose ruby:
-==========
-vim-ruby-debugger
-vim-endwise
-rubycomplete Mark Guzman <segfault@hasno.info>
-
-Minor:
-vim-tcomment
-
-getmail
-
+ conqueTerm 
+ indent-object
+ nerdcommenter
+ taglist
+ vividchalk
+ markdown
+ vim-ruby-debugger
+ vim-endwise
+ rubycomplete Mark Guzman <segfault@hasno.info>
 
 " When hitting <;>, complete a snippet if there is one; else, insert an actual
 " <;>
@@ -44,9 +31,6 @@ endfunction
 
 " Use <c-h> for snippets
 let g:NERDSnippets_key = '<c-h>'
-
-
-map <leader>rm :BikeExtract<cr>
 
 met makeprg=python\ -m\ nose.core\ --machine-out
 

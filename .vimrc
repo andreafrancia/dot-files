@@ -179,7 +179,7 @@ let g:syntastic_auto_loc_list=0
 " NERDTree
 nnoremap <leader>f :NERDTreeToggle<CR>
 
-source ~/dot-files/refactor-support-and-utilities.vim
+source ~/refactor-support-and-utilities.vim
 
 set autoindent
 
