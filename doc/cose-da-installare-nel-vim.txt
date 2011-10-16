@@ -1,0 +1,45 @@
+Interessanti:
+ https://github.com/vim-scripts/DirDiff.vim
+ https://github.com/vim-scripts/DrawIt   <--- disegnare in Vim
+ https://github.com/vim-scripts/pytest.vim
+ http://lug.fh-swf.de/vim/vim-bash/screenshots-en.html
+ makegreen.vim
+ https://github.com/vim-scripts/Command-T
+
+Ruby:
+ conqueTerm 
+ indent-object
+ nerdcommenter
+ taglist
+ vividchalk
+ markdown
+ vim-ruby-debugger
+ vim-endwise
+ rubycomplete Mark Guzman <segfault@hasno.info>
+
+" When hitting <;>, complete a snippet if there is one; else, insert an actual
+" <;>
+function! InsertSnippetWrapper()
+    let inserted = TriggerSnippet()
+    if inserted == "\<tab>"
+        return ";"
+    else
+        return inserted
+    endif
+endfunction
+
+
+" Use <c-h> for snippets
+let g:NERDSnippets_key = '<c-h>'
+
+met makeprg=python\ -m\ nose.core\ --machine-out
+
+if &diff
+  nmap <c-h> :diffget 1<cr>
+  nmap <c-l> :diffget 3<cr>
+  nmap <c-k> [cz.
+  nmap <c-j> ]cz.
+  set nonumber
+endif
+:se
+
