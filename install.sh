@@ -27,6 +27,8 @@ main() {
     for item in "${items[@]}"; do
         ln -sfTv "$(item_abspath "$item")" ~/"$item"
     done
+
+    mkdir -p ~/.vim-tmp ~/.tmp
 }
 
 item_abspath() {
