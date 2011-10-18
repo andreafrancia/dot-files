@@ -16,7 +16,6 @@ main() {
     for item in "${items[@]}"; do
         if exists_and_is_not_a_link ~/"$item"; then
 	    files_to_remove=( "${files_to_remove[@]}" "~/$item" )
-            echo "${files_to_remove[@]}"
 	fi  
     done
 
