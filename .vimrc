@@ -2,6 +2,10 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+" For some reason crontab complains if Vim does the backups of the temporary
+" file created by "crontab -e"
+set backupskip=/tmp/crontab.*
+
 call pathogen#infect()  " Enable pathogen and all its installed bundles
 :Helptags               " enable help for pathogen bundles
 
