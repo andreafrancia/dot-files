@@ -2,39 +2,50 @@
 set errexit
 set nounset
 
-script_dir="$(dirname "$0")"
-
 main() {
+    ensure_all_files_can_be_overwritten "${items[@]}" || \
+        die "Failed: Please remove this/these file(s) before the installation: ${files_to_remove[*]}"
 
-    items=( .bash_profile .bashrc 
-            .cvsignore 
-            .git-prompt.conf .gitconfig .gitignore .gitmodules 
-            .gvimrc .vim .vimrc 
-            bin git-prompt )
-
-    files_to_remove=()
-    for item in "${items[@]}"; do
-        if exists_and_is_not_a_link ~/"$item"; then
-	    files_to_remove=( "${files_to_remove[@]}" "~/$item" )
-	fi  
-    done
-
-    if [ ${#files_to_remove[@]} -gt 0 ]; then
-	die "Failed: Please remove those files before the installation: ${files_to_remove[*]}"
-    fi
-
-    for item in "${items[@]}"; do
-        ln -sfTv "$(item_abspath "$item")" ~/"$item"
-    done
+    install_all_items "${items[@]}"
 
     mkdir -p ~/.vim-tmp ~/.tmp
 }
 
-item_abspath() {
-    local item="$1"
-    local item_relpath="$script_dir/$item"
-    local item_abspath="$(readlink -f "$item_relpath")"
-    echo "$item_abspath"
+items=( .bash_profile .bashrc 
+        .cvsignore 
+        .git-prompt.conf .gitconfig .gitignore .gitmodules 
+        .gvimrc .vim .vimrc 
+        bin git-prompt )
+
+script_dir="$(dirname "$0")"
+
+install_all_items() {
+    local item
+
+    for item in "$@"; do
+        install_file "$script_dir/$item" ~/"$item"
+    done
+}
+
+install_file() {
+    local src="$1"
+    local dst="$2"
+
+    ln -sfTv "$(abspath "$src")" "$dst"
+}
+
+abspath() {
+    readlink -f "$1"
+}
+
+ensure_all_files_can_be_overwritten() {
+    files_to_remove=()
+    for item in "$@"; do
+        if exists_and_is_not_a_link ~/"$item"; then
+	    files_to_remove=( "${files_to_remove[@]}" "~/$item" )
+	fi  
+    done
+    [ ${#files_to_remove[@]} -eq 0 ];
 }
 
 exists_and_is_not_a_link() {
