@@ -14,6 +14,7 @@ main() {
 items=( .bash_profile .bashrc 
         .cvsignore 
         .git-prompt.conf .gitconfig .gitignore .gitmodules 
+        .hgrc .global-hgignore
         .gvimrc .vim .vimrc 
         bin git-prompt )
 
