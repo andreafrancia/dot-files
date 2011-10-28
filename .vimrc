@@ -131,8 +131,8 @@ set completeopt+=preview  " Show extra information about the the current item
 
 " Configure the command line completion
 set wildchar=<Tab>        " Tab start the completion
-set wildmenu
-set wildmode=full   
+set nowildmenu
+set wildmode=list:longest
 set wildignore+=*.pyc
 set wildignorecase
 
