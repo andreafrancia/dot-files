@@ -32,4 +32,8 @@ brew install gfortran gnuplot
 # Tell svnX to not create an alias in ~/bin
 defaults write com.lachoseinteractive.svnX installSvnxTool -bool NO
 
+# Tell OSX to show full path in Finder title
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES
+killall Finder
+
 echo "Done"
