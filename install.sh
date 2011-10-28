@@ -28,6 +28,7 @@ main() {
     done
 
     mkdir -p ~/.vim-tmp ~/.tmp
+    echo "VisualHostKey yes" >> ~/.ssh/config
 }
 
 item_abspath() {
