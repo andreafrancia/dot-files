@@ -145,6 +145,7 @@ au BufRead,BufNewFile *.txt setfiletype text
 au BufRead,BufNewFile README setfiletype text
 autocmd FileType text setlocal formatoptions+=w textwidth=78  " wrap at col 78
                              \ formatoptions+=n               " numbered lists
+                             \ shiftwidt=3
 runtime macros/justify.vim  " format with _j
 
 " Python configuration
