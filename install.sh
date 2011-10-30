@@ -9,6 +9,7 @@ main() {
     install_all_items "${items[@]}"
 
     mkdir -p ~/.vim-tmp ~/.tmp
+    echo "VisualHostKey yes" >> ~/.ssh/config
 }
 
 items=( .bash_profile .bashrc 
