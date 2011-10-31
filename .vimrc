@@ -134,7 +134,6 @@ set wildchar=<Tab>        " Tab start the completion
 set nowildmenu
 set wildmode=list:longest
 set wildignore+=*.pyc
-set wildignorecase
 
 " ============================================================================
 " Specific file formats section
