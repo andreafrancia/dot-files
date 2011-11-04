@@ -1,15 +1,22 @@
 # If not running interactively ... get out of here! 
 [ -z "$PS1" ] && return
 
-shopt -s checkwinsize
-
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 source ~/.profile
 
-# prompt ---------------------------------------------------------------------
-export PS1='[\u@\h \W]\$'
+# PATH (the last inserted wins) ----------------------------------------------
+PATH="/sbin:/usr/sbin:$PATH"
+PATH="/usr/local/sbin:$PATH"
+PATH="/usr/local/bin:${PATH}" # standard homebrew location
+PATH=~/homebrew/bin:"$PATH"   # user homebrew installation
+PATH="$(brew --prefix)/sbin:$PATH"
+PATH=~/bin:"$PATH"        # user executable shared among all machines
+PATH=~/bin.local:"$PATH"  # user executable for this machine
+PATH=~/local/bin:"$PATH"  # software built with --prefix=~/local
+PATH="$(brew --prefix)/share/python:$PATH"  # python from homebrew
+export PATH
 
 # File protection aliases ----------------------------------------------------
 alias rm='rm -i'
@@ -20,17 +27,6 @@ alias mv='mv -i'
 alias kdiff3='/Applications/kdiff3.app/Contents/MacOS/kdiff3'
 alias grep='grep --color'
 alias grep-sources='grep --exclude-dir=.svn --color -r .'
-
-# PATH (the last inserted wins) ----------------------------------------------
-export PATH="/sbin:/usr/sbin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
-export PATH="/usr/local/bin:${PATH}" # standard homebrew location
-export PATH=~/homebrew/bin:"$PATH"   # user homebrew installation
-export PATH="$(brew --prefix)/sbin:$PATH"
-export PATH=~/bin:"$PATH"        # user executable shared among all machines
-export PATH=~/bin.local:"$PATH"  # user executable for this machine
-export PATH=~/local/bin:"$PATH"  # software built with --prefix=~/local
-export PATH="$(brew --prefix)/share/python:$PATH"  # python from homebrew
 
 # Colors for ls --------------------------------------------------------------
 if ls --color . >& /dev/null; then
@@ -44,21 +40,32 @@ fi
 export EDITOR=vim
 
 # "Infinite" bash history ----------------------------------------------------
-export HISTSIZE=$((1024*1024*365))
-shopt -s histappend # Don't overwrite the history at the start of every new session
+HISTSIZE=$((1024*1024*365))
 HISTCONTROL= # setting to nothing means to remember both commands with spaces and duplicages
 
+if type shopt >& /dev/null; then
+    echo "shopt found"
+    shopt -s histappend # Don't overwrite the history at the start of every new session
+    shopt -s checkwinsize
+else
+    echo "shopt not found, maybe not using bash"
+fi
+
+
 # Bash completion ------------------------------------------------------------
-prefix="$(brew --prefix || true)"
-[ -f "$prefix/etc/bash_completion" ] && source "$prefix/etc/bash_completion"
-[ -x "$(which pip)" ] && eval "`pip completion --bash`" # pip
-source "$(brew --prefix)/Library/Contributions/brew_bash_completion.sh"
-[ -x "$(which pycompletion)" ] && source "$(which pycompletion)" || \
-    echo "Use 'pip install pycompletion' if you wants bash completions for nose, fabric, virtualenv, ... and others."
+if type complete >& /dev/null; then 
+    prefix="$(brew --prefix || true)"
+    [ -f "$prefix/etc/bash_completion" ] && source "$prefix/etc/bash_completion"
+    [ -x "$(which pip)" ] && eval "`pip completion --bash`" # pip
+    source "$(brew --prefix)/Library/Contributions/brew_bash_completion.sh"
+    [ -x "$(which pycompletion)" ] && source "$(which pycompletion)" || \
+        echo "Use 'pip install pycompletion' if you wants bash completions for nose, fabric, virtualenv, ... and others."
+fi
 
 # PIP download cache
 export PIP_DOWNLOAD_CACHE=~/.pip/cache
 
-# GIT Prompt
-source ~/git-prompt/git-prompt.sh
+# GIT Prompt for bash
+# Disabled because it slow down things
+# source ~/git-prompt/git-prompt.sh
 
