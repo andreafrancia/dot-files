@@ -23,10 +23,8 @@ alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
 
-# Some aliases ---------------------------------------------------------------
-alias kdiff3='/Applications/kdiff3.app/Contents/MacOS/kdiff3'
+# Other aliases ---------------------------------------------------------------
 alias grep='grep --color'
-alias grep-sources='grep --exclude-dir=.svn --color -r .'
 
 # Colors for ls --------------------------------------------------------------
 if ls --color . >& /dev/null; then
@@ -44,7 +42,6 @@ HISTSIZE=$((1024*1024*365))
 HISTCONTROL= # setting to nothing means to remember both commands with spaces and duplicages
 
 if type shopt >& /dev/null; then
-    echo "shopt found"
     shopt -s histappend # Don't overwrite the history at the start of every new session
     shopt -s checkwinsize
 else
@@ -64,8 +61,4 @@ fi
 
 # PIP download cache
 export PIP_DOWNLOAD_CACHE=~/.pip/cache
-
-# GIT Prompt for bash
-# Disabled because it slow down things
-# source ~/git-prompt/git-prompt.sh
 
