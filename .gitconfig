@@ -12,3 +12,4 @@
 	aa = add --all
 	st = status
 	ci = commit
+	unstage = reset HEAD --
