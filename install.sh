@@ -17,6 +17,7 @@ items=( .bash_profile .bashrc
         .git-prompt.conf .gitconfig .gitignore .gitmodules 
         .hgrc .global-hgignore
         .gvimrc .vim .vimrc 
+        .zsh .zshenv .zshrc
         bin git-prompt )
 
 script_dir="$(dirname "$0")"
@@ -33,11 +34,12 @@ install_file() {
     local src="$1"
     local dst="$2"
 
-    ln -sfTv "$(abspath "$src")" "$dst"
+    rm -f "$dst"
+    ln -sfv "$(abspath "$src")" "$dst"
 }
 
 abspath() {
-    readlink -f "$1"
+    echo "$PWD/$1"
 }
 
 ensure_all_files_can_be_overwritten() {
