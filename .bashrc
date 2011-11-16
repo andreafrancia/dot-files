@@ -1,9 +1,6 @@
 # If not running interactively ... get out of here! 
 [ -z "$PS1" ] && return
 
-# make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
-
 source ~/.profile
 
 # PATH (the last inserted wins) ----------------------------------------------
@@ -17,6 +14,14 @@ PATH=~/bin.local:"$PATH"  # user executable for this machine
 PATH=~/local/bin:"$PATH"  # software built with --prefix=~/local
 PATH="$(brew --prefix)/share/python:$PATH"  # python from homebrew
 export PATH
+
+# misc environments
+export EDITOR=vim # The best editor ever
+export PIP_DOWNLOAD_CACHE=~/.pip/cache # PIP download cache
+
+# ============================================================================
+# Ineractive
+# ============================================================================
 
 # File protection aliases ----------------------------------------------------
 alias rm='rm -i'
@@ -34,20 +39,14 @@ else
     alias ls='ls -G'
 fi
 
-# Default Editor -------------------------------------------------------------
-export EDITOR=vim
-
 # "Infinite" bash history ----------------------------------------------------
 HISTSIZE=$((1024*1024*365))
-HISTCONTROL= # setting to nothing means to remember both commands with spaces and duplicages
+HISTCONTROL= # remember both commands with spaces and duplicages
 
 if type shopt >& /dev/null; then
     shopt -s histappend # Don't overwrite the history at the start of every new session
     shopt -s checkwinsize
-else
-    echo "shopt not found, maybe not using bash"
 fi
-
 
 # Bash completion ------------------------------------------------------------
 if type complete >& /dev/null; then 
@@ -59,6 +58,4 @@ if type complete >& /dev/null; then
         echo "Use 'pip install pycompletion' if you wants bash completions for nose, fabric, virtualenv, ... and others."
 fi
 
-# PIP download cache
-export PIP_DOWNLOAD_CACHE=~/.pip/cache
 
