@@ -13,6 +13,7 @@ PATH=~/bin:"$PATH"        # user executable shared among all machines
 PATH=~/bin.local:"$PATH"  # user executable for this machine
 PATH=~/local/bin:"$PATH"  # software built with --prefix=~/local
 PATH="$(brew --prefix)/share/python:$PATH"  # python from homebrew
+PATH="$HOME/.gem/ruby/1.8/bin:$PATH"
 export PATH
 
 # misc environments
