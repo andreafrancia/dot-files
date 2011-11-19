@@ -19,6 +19,10 @@ export EDITOR=vi
 
 bindkey '\e^h' delete-backward-word  # alt - backspace
 
+# caching 
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' menu select=long
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
