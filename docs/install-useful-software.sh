@@ -36,4 +36,22 @@ defaults write com.lachoseinteractive.svnX installSvnxTool -bool NO
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES
 killall Finder
 
+# Enable git color
+git config --global color.diff auto
+git config --global color.status auto
+git config --global color.branch auto
+
+# Enable zsh run-help 
+
+cd .zsh_help
+curl -ohelpfiles 'http://zsh.git.sourceforge.net/git/gitweb.cgi?p=zsh/zsh;a=blob_plain;f=Util/helpfiles;hb=HEAD'
+man zshbuiltins | colcrt - | perl zsh-4.3.12/Util/helpfiles
+
+echo "
+unalias run-help
+autoload run-help
+HELPDIR=~/.zsh_help
+" >> ~/.zshrc 
+
+
 echo "Done"
