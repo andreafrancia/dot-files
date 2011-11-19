@@ -40,3 +40,8 @@ setopt inc_append_history
 
 # Customization
 source ~/.bashrc
+
+unalias run-help
+autoload run-help
+HELPDIR=~/.zsh_help
+
