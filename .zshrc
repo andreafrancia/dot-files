@@ -1,5 +1,5 @@
-setopt promptsubst     # perform substitutions in prompt
-autoload -U promptinit; promptinit # Load the prompt theme system
+setopt promptsubst                  # perform substitutions in prompt
+autoload -U promptinit; promptinit  # Load the prompt theme system
 prompt wunjo
 
 setopt interactivecomments
@@ -35,4 +35,4 @@ setopt no_hist_ignore_space
 setopt inc_append_history
 
 # Customization
-source .bashrc
+source ~/.bashrc
