@@ -1,5 +1,5 @@
-setopt promptsubst     # perform substitutions in prompt
-autoload -U promptinit; promptinit # Load the prompt theme system
+setopt promptsubst                  # perform substitutions in prompt
+autoload -U promptinit; promptinit  # Load the prompt theme system
 prompt wunjo
 
 setopt interactivecomments
@@ -21,6 +21,10 @@ bindkey '\e^h' delete-backward-word  # alt - backspace
 bindkey "^[[3~"     delete-char
 bindkey "^[3;5~"    delete-char
 
+# caching 
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path ~/.zsh/cache
+
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' menu select=long
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
@@ -37,4 +41,9 @@ setopt no_hist_ignore_space
 setopt inc_append_history
 
 # Customization
-source .bashrc
+source ~/.bashrc
+
+unalias run-help
+autoload run-help
+HELPDIR=~/.zsh_help
+

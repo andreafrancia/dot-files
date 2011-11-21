@@ -1,0 +1,14 @@
+Run:
+
+cd .zsh_help
+
+curl -ohelpfiles 'http://zsh.git.sourceforge.net/git/gitweb.cgi?p=zsh/zsh;a=blob_plain;f=Util/helpfiles;hb=HEAD'
+man zshbuiltins | colcrt - | perl zsh-4.3.12/Util/helpfiles
+
+echo "
+unalias run-help
+autoload run-help
+HELPDIR=~/.zsh_help
+" >> ~/.zshrc 
+
+ 
