@@ -2,9 +2,6 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-" For some reason crontab complains if Vim does the backups of the temporary
-" file created by "crontab -e"
-set backupskip=/tmp/crontab.*
 
 call pathogen#infect()  " Enable pathogen and all its installed bundles
 :Helptags               " enable help for pathogen bundles
@@ -159,6 +156,8 @@ autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab
 
 " Ruby files:
 autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab textwidth=78 foldmethod=syntax
+
+au BufEnter /private/tmp/crontab.* setl backupcopy=yes
 
 " ============================================================================
 " Syntastic
