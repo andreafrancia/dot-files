@@ -18,6 +18,8 @@ bindkey -e  # Emacs key
 export EDITOR=vi
 
 bindkey '\e^h' delete-backward-word  # alt - backspace
+bindkey "^[[3~"     delete-char
+bindkey "^[3;5~"    delete-char
 
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' menu select=long
