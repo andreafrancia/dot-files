@@ -1,0 +1,3 @@
+brew install rsnapshot
+rsnapshot -c rsnapshot-dened.conf config-test
+vim rsnapshot.conf
