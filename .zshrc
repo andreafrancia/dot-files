@@ -23,6 +23,9 @@ export EDITOR=vi
 # Alt+backspace
 bindkey '\e^h' backward-kill-word
 WORDCHARS=""
+#bindkey '\e^h' delete-backward-word  # alt - backspace
+bindkey "^[[3~"     delete-char
+bindkey "^[3;5~"    delete-char
 
 # caching 
 zstyle ':completion:*' use-cache on
