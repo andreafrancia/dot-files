@@ -1,3 +1,6 @@
+# Customization
+source ~/.bashrc
+
 setopt promptsubst                  # perform substitutions in prompt
 autoload -U promptinit; promptinit  # Load the prompt theme system
 prompt wunjo
@@ -17,7 +20,9 @@ bindkey -e  # Emacs key
 
 export EDITOR=vi
 
-bindkey '\e^h' delete-backward-word  # alt - backspace
+# Alt+backspace
+bindkey '\e^h' backward-kill-word
+WORDCHARS=""
 
 # caching 
 zstyle ':completion:*' use-cache on
@@ -26,8 +31,12 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' menu select=long
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-autoload -Uz compinit
-compinit
+autoload -Uz compinit; compinit
+
+# Color in completion
+eval `dircolors`
+zstyle ':completion:*' list-colors ''
+zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
 # History 
 HISTFILE=~/.histfile
@@ -38,8 +47,6 @@ setopt hist_find_no_dups
 setopt no_hist_ignore_space
 setopt inc_append_history
 
-# Customization
-source ~/.bashrc
 
 unalias run-help
 autoload run-help
