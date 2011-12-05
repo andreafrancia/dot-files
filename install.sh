@@ -1,67 +1,47 @@
 #!/bin/bash
-set errexit
-set nounset
-
-main() {
-    ensure_all_files_can_be_overwritten "${items[@]}" || \
-        die "Failed: Please remove this/these file(s) before the installation: ${files_to_remove[*]}"
-
-    install_all_items "${items[@]}"
-
-    mkdir -p ~/.vim-tmp ~/.tmp
-    echo "VisualHostKey yes" >> ~/.ssh/config
-}
-
-items=( .bash_profile .bashrc 
-        .cvsignore 
-        .git-prompt.conf .gitconfig .gitignore .gitmodules 
-        .hgrc .global-hgignore
-        .gvimrc .vim .vimrc 
-        .zsh .zshenv .zshrc
-        bin git-prompt )
-
-script_dir="$(dirname "$0")"
-
-install_all_items() {
-    local item
-
-    for item in "$@"; do
-        install_file "$script_dir/$item" ~/"$item"
-    done
-}
-
-install_file() {
-    local src="$1"
-    local dst="$2"
-
-    rm -f "$dst"
-    ln -sfv "$(abspath "$src")" "$dst"
-}
+set -o errexit
+set -o nounset
 
 abspath() {
     echo "$PWD/$1"
 }
 
-ensure_all_files_can_be_overwritten() {
-    files_to_remove=()
-    for item in "$@"; do
-        if exists_and_is_not_a_link ~/"$item"; then
-	    files_to_remove=( "${files_to_remove[@]}" "~/$item" )
-	fi  
-    done
-    [ ${#files_to_remove[@]} -eq 0 ];
-}
-
 exists_and_is_not_a_link() {
     local path="$1"
-   
+
     [ -e "$path" -a ! -L "$path" ]
 }
 
-die() {
-    local message="$1"
-    echo "$message" >&2
-    exit 1
+install_link() {
+    local script_dir="$(dirname "$0")"
+    local item="$1"
+    local src="$script_dir/$item"
+    local dest=~/"$item"
+
+    exists_and_is_not_a_link "$dest" && { echo "Please remove this: $dest" >&2; exit 1; }
+
+    /bin/rm -f "$dest"
+    /bin/ln -sfv "$(abspath "$src")" "$dest"
+
 }
 
-main
+install_link .bash_profile 
+install_link .bashrc 
+install_link .cvsignore 
+install_link .git-prompt.conf 
+install_link .gitconfig 
+install_link .gitignore 
+install_link .gitmodules 
+install_link .hgrc 
+install_link .global-hgignore
+install_link .gvimrc 
+install_link .vim 
+install_link .vimrc 
+install_link .zsh 
+install_link .zshenv 
+install_link .zshrc
+install_link bin 
+install_link git-prompt
+
+mkdir -p ~/.vim-tmp ~/.tmp
+echo "VisualHostKey yes" >> ~/.ssh/config
