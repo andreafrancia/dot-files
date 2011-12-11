@@ -20,6 +20,10 @@ export PATH
 export EDITOR=vim # The best editor ever
 export PIP_DOWNLOAD_CACHE=~/.pip/cache # PIP download cache
 
+# Unbreak Python's error-prone .pyc file generation
+export PYTHONDONTWRITEBYTECODE=1
+
+
 # ============================================================================
 # Ineractive
 # ============================================================================
