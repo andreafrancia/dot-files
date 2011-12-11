@@ -16,11 +16,13 @@ brew linkapps
 # Python 
 brew install readline python
 "$(brew --prefix)/share/python/easy_install" pip
-"$(brew --prefix)/share/python/pip" install --upgrade distribute
-"$(brew --prefix)/share/python/pip" install Mercurial pyflakes
-"$(brew --prefix)/share/python/pip" install 'http://pypi.python.org/packages/source/r/readline/readline-6.2.1.tar.gz#md5=9604527863378512247fcaf938100797'
-"$(brew --prefix)/share/python/pip" install ipython
-
+alias pip="$(brew --prefix)/share/python/pip"
+pip install --upgrade distribute
+pip install Mercurial 
+pip install pyflakes            # needed by syntastic
+pip install readline ipython    # install them toghether in order to avoid buggy readline of OS X
+pip install nose
+easy_install nose-machineout    # as of 2011-11-02 machine-out seems not working with pip
 
 # Bash completion
 brew install bash-completion
