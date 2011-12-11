@@ -105,7 +105,10 @@ set scrolloff=3         " Keep more context when scrolling off the end of a
                         " buffer
 syntax on
 
-if has("gui_running") | set go-=T | endif  " hide the toolbar in GUI mode
+if has("gui_running") 
+    set guioptions-=T   " hide the toolbar in GUI mode
+    set columns=80      " this seems not to work
+endif 
 
 " ============================================================================
 " Not understood
@@ -154,8 +157,10 @@ autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab
                                \ omnifunc=pythoncomplete#Complete
                                \ formatoptions+=l formatoptions-=w
 
+
 " Ruby files:
-autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab textwidth=78 foldmethod=syntax
+autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab 
+                               \ textwidth=78 foldmethod=syntax
 
 au BufEnter /private/tmp/crontab.* setl backupcopy=yes
 
@@ -174,8 +179,11 @@ let g:syntastic_auto_loc_list=0
 " Key mappings
 " ============================================================================
 
+let mapleader=","
+
 " NERDTree
 nnoremap <leader>f :NERDTreeToggle<CR>
+
 
 " ============================================================================
 
