@@ -42,6 +42,7 @@ install_link .zshenv
 install_link .zshrc
 install_link bin 
 install_link git-prompt
+install_link .ackrc
 
 mkdir -p ~/.vim-tmp ~/.tmp
 echo "VisualHostKey yes" >> ~/.ssh/config
