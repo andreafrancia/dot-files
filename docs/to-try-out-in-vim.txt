@@ -1,31 +1,6 @@
 Installati:
  indentobject: select a python function with vii or vai
 
-Ctags
-=====
-
-You need ctags, they suggest to use the Exuberant Ctags version which has 
-support for many languages (and one of these is Python). The exuberant ctags 
-main page is hosted on sourceforge: http://ctgas.sf.net and you can install it 
-with brew:
-
-    brew install ctags
-
-To prepare tags:
-
-    cd <your-project-dir> 
-    ctags --python-kinds=-i --exclude=build -R .
-
-The `--python-kinds=-i` purpose is to disable the recognition of import lines 
-as definition that could be annoying.
-
-How to use it:
- - vim -t <tag name> to open vim straight on the tag
- - Ctrl+] to jump to tag when over a word
- - Ctrl+T to pop back
- - :tselect or :stselect to open
- - :tnext, :tprev to go to next/prev tag finding
-
 Interessanti:
 =============
  https://github.com/vim-scripts/DirDiff.vim
@@ -39,9 +14,7 @@ Ruby:
  nerdcommenter
  taglist
  markdown
- vim-ruby-debugger
  vim-endwise
- rubycomplete Mark Guzman <segfault@hasno.info>
 
 " When hitting <;>, complete a snippet if there is one; else, insert an actual
 " <;>
