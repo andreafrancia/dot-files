@@ -147,16 +147,16 @@ au BufRead,BufNewFile *.json setfiletype javascript
 au BufRead,BufNewFile *.txt setfiletype text
 au BufRead,BufNewFile README setfiletype text
 autocmd FileType text setlocal formatoptions+=w textwidth=78  " wrap at col 78
-                             \ formatoptions+=n               " numbered lists
-                             \ shiftwidt=3
+                             \ formatoptions+=n   " recognized numbered lists
+                             \ shiftwidth=3
 runtime macros/justify.vim  " format with _j
 
 " Python configuration
 autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab 
                                \ textwidth=78 foldmethod=indent
                                \ omnifunc=pythoncomplete#Complete
-                               \ formatoptions+=l formatoptions-=w
-
+                               \ formatoptions+=l " Do not broke long line 
+                               \ formatoptions-=t " Do not autowrap
 
 " Ruby files:
 autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab 
