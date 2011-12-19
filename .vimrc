@@ -103,6 +103,7 @@ set number
 set numberwidth=5
 set scrolloff=3         " Keep more context when scrolling off the end of a 
                         " buffer
+set nowrap
 syntax on
 
 if has("gui_running") 
@@ -158,11 +159,20 @@ autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab
                                \ formatoptions+=l " Do not broke long line 
                                \ formatoptions-=t " Do not autowrap
 
+
 " Ruby files:
 autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab 
                                \ textwidth=78 foldmethod=syntax
 
-au BufEnter /private/tmp/crontab.* setl backupcopy=yes
+au BufEnter /private/tmp/crontab.* setlocal backupcopy=yes
+" ============================================================================
+" Python unit testing
+" ============================================================================
+
+set makeprg=env/bin/nosetests\ --with-machineout
+set efm=%f:%l:\ fail:\ %m,%f:%l:\ error:\ %m
+nnoremap ,bleah :call MakeGreen()
+nnoremap ,t :call MakeGreen('%') <CR>
 
 " ============================================================================
 " Syntastic
