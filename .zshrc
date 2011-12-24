@@ -1,5 +1,11 @@
-# Customization
-source ~/.bashrc
+# If not running interactively ... get out of here! 
+[ -z "$PS1" ] && return
+
+. ~/.common-rc.sh
+
+# history
+HISTFILE=~/.histfile
+HISTSIZE=$((1024*365))
 
 setopt promptsubst                  # perform substitutions in prompt
 autoload -U promptinit; promptinit  # Load the prompt theme system
@@ -18,12 +24,15 @@ setopt notify
 
 bindkey -e  # Emacs key 
 
-export EDITOR=vi
+SAVEHIST=$HISTSIZE  # Max number of history entries
+setopt appendhistory
+setopt hist_find_no_dups
+setopt no_hist_ignore_space
+setopt inc_append_history
 
 # Alt+backspace
 bindkey '\e^h' backward-kill-word
 export WORDCHARS='*?[]~&;!$%^<>'
-#bindkey '\e^h' delete-backward-word  # alt - backspace
 bindkey "^[[3~"     delete-char
 bindkey "^[3;5~"    delete-char
 
@@ -41,25 +50,9 @@ eval `dircolors`
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
-# History 
-HISTFILE=~/.histfile
-HISTSIZE=$((1024*1024))
-SAVEHIST=$HISTSIZE  # Max number of history entries
-setopt appendhistory
-setopt hist_find_no_dups
-setopt no_hist_ignore_space
-setopt inc_append_history
-
-
 unalias run-help
 autoload run-help
 HELPDIR=~/.zsh_help
 
+[ -x "$(which pip)" ] && eval "`pip completion --zsh`" # pip
 
-activate_virtualenv() {
-    if [ -f env/bin/activate ]; then . env/bin/activate;
-    elif [ -f ../env/bin/activate ]; then . ../env/bin/activate;
-    elif [ -f ../../env/bin/activate ]; then . ../../env/bin/activate;
-    elif [ -f ../../../env/bin/activate ]; then . ../../../env/bin/activate;
-    fi
-}
