@@ -29,6 +29,7 @@ install_link() {
 
 install_link .bash_profile 
 install_link .bashrc 
+install_link .common-rc.sh
 install_link .cvsignore 
 install_link .git-prompt.conf 
 install_link .gitconfig 
@@ -44,6 +45,7 @@ install_link .zshenv
 install_link .zshrc
 install_link bin 
 install_link git-prompt
+install_link .ackrc
 
 mkdir -p ~/.vim-tmp ~/.tmp
 mkdir --mode=0700 ~/.ssh

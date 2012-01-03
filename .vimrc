@@ -2,7 +2,6 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
-
 call pathogen#infect()  " Enable pathogen and all its installed bundles
 :Helptags               " enable help for pathogen bundles
 
@@ -29,6 +28,9 @@ set backup		" keep a backup file
 " Store temporary files in a central spot : 
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp  " where to put backups
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp  " where to put swapfile
+
+set undofile
+au FocusLost * :wa  "save on focus lost
 
 filetype plugin indent on          " Enable file type detection.
 
@@ -86,7 +88,7 @@ set ignorecase
 set smartcase
 
 " Andrea: show tabs and spaces:
-set listchars=tab:>-,trail:·
+set listchars=tab:▸\ ,trail:·,eol:¬
 
 " GRB: clear the search buffer when hitting comma then return
 nnoremap ,<CR> :nohlsearch<CR>
@@ -103,6 +105,7 @@ set number
 set numberwidth=5
 set scrolloff=3         " Keep more context when scrolling off the end of a 
                         " buffer
+set nowrap
 syntax on
 
 if has("gui_running") 
@@ -140,29 +143,44 @@ set wildignore+=*.pyc
 " ============================================================================
 
 " Javascript files 
-au BufRead,BufNewFile Jakefile setfiletype javascript
-au BufRead,BufNewFile *.json setfiletype javascript
+autocmd BufRead,BufNewFile Jakefile setfiletype javascript
+autocmd BufRead,BufNewFile *.json setfiletype javascript
 
 " Text files configuration
-au BufRead,BufNewFile *.txt setfiletype text
-au BufRead,BufNewFile README setfiletype text
+autocmd BufRead,BufNewFile *.txt setfiletype text
+autocmd BufRead,BufNewFile README setfiletype text
 autocmd FileType text setlocal formatoptions+=w textwidth=78  " wrap at col 78
-                             \ formatoptions+=n               " numbered lists
-                             \ shiftwidt=3
+                             \ formatoptions+=n   " recognized numbered lists
+                             \ shiftwidth=3
 runtime macros/justify.vim  " format with _j
 
 " Python configuration
 autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab 
                                \ textwidth=78 foldmethod=indent
                                \ omnifunc=pythoncomplete#Complete
-                               \ formatoptions+=l formatoptions-=w
+                               \ formatoptions+=l " Do not broke long line 
+                               \ formatoptions-=t " Do not autowrap
 
 
 " Ruby files:
 autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab 
                                \ textwidth=78 foldmethod=syntax
 
-au BufEnter /private/tmp/crontab.* setl backupcopy=yes
+autocmd BufEnter /private/tmp/crontab.* setlocal backupcopy=yes
+
+" ============================================================================
+" Python unit testing
+" ============================================================================
+
+set makeprg=env/bin/nosetests\ --with-machineout
+set efm=%f:%l:\ fail:\ %m,%f:%l:\ error:\ %m
+nnoremap ,bleah :call MakeGreen()
+nnoremap ,t :call MakeGreen('') <CR>
+nnoremap <c-j> :cprevious <CR>
+nnoremap <c-k> :cnext <CR>
+
+hi GreenBar term=reverse ctermfg=black ctermbg=lightgreen guifg=white guibg=green
+hi RedBar   term=reverse ctermfg=black ctermbg=lightred   guifg=white guibg=red
 
 " ============================================================================
 " Syntastic
@@ -184,9 +202,8 @@ let mapleader=","
 " NERDTree
 nnoremap <leader>f :NERDTreeToggle<CR>
 
-
 " ============================================================================
-
+"
 " Map ,e and ,v to open files in the same directory as the current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
