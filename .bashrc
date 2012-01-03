@@ -1,7 +1,7 @@
 # If not running interactively ... get out of here! 
 [ -z "$PS1" ] && return
 
-source ~/.profile
+#source ~/.profile
 
 # PATH (the last inserted wins) ----------------------------------------------
 PATH="/sbin:/usr/sbin:$PATH"
