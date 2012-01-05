@@ -54,5 +54,18 @@ unalias run-help
 autoload run-help
 HELPDIR=~/.zsh_help
 
-[ -x "$(which pip)" ] && eval "`pip completion --zsh`" # pip
+activate_virtualenv() {
+    if [ -f env/bin/activate ]; then . env/bin/activate;
+    elif [ -f ../env/bin/activate ]; then . ../env/bin/activate;
+    elif [ -f ../../env/bin/activate ]; then . ../../env/bin/activate;
+    elif [ -f ../../../env/bin/activate ]; then . ../../../env/bin/activate;
+    fi
+}
 
+# Linux specific configuration {{{
+if grep -q 'Linux' /proc/version; then
+    alias open=xdg-open
+fi
+# }}}
+
+[ -x "$(which pip)" ] && eval "`pip completion --zsh`" # pip

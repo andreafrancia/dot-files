@@ -18,7 +18,9 @@ install_link() {
     local src="$script_dir/$item"
     local dest=~/"$item"
 
-    exists_and_is_not_a_link "$dest" && { echo "Please remove this: $dest" >&2; exit 1; }
+    if exists_and_is_not_a_link "$dest"; then
+        mv -v "$dest" "$dest.backup"
+    fi
 
     /bin/rm -f "$dest"
     /bin/ln -sfv "$(abspath "$src")" "$dest"
@@ -46,4 +48,5 @@ install_link git-prompt
 install_link .ackrc
 
 mkdir -p ~/.vim-tmp ~/.tmp
+mkdir --mode=0700 ~/.ssh
 echo "VisualHostKey yes" >> ~/.ssh/config
