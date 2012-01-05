@@ -1,0 +1,1 @@
+/Users/andreafrancia/homebrew/Library/Contributions/brew_zsh_completion.zsh

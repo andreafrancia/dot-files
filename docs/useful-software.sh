@@ -2,10 +2,31 @@ set -o errexit
 cd ~
 git clone git@github.com:andreafrancia/homebrew.git
 
-brew install coreutils findutils --default-names
-brew install ctags lftp ncftp wget ack unrar watch git subversion \
-             a2ps bash colordiff duff markdown nmap grep curl \
-             ctags iftop dos2unix w3m par htop
+brew install findutils --default-names
+brew install coreutils --default-names
+brew install ctags 
+brew install lftp
+brew install ncftp
+brew install wget 
+brew install ack
+brew install unrar
+brew install watch
+brew install git
+brew install subversion
+brew install a2ps
+brew install bash
+brew install colordiff
+brew install duff
+brew install markdown
+brew install nmap
+brew install grep
+brew install curl
+brew install ctags
+brew install iftop
+brew install dos2unix
+brew install w3m
+brew install par
+brew install htop
 
 # MacVim
 brew install macvim --enable-cscope --enable-clipboard \
