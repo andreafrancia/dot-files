@@ -30,7 +30,7 @@ set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp  " where to put backups
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp  " where to put swapfile
 
 set undofile
-au FocusLost * :wa  "save on focus lost
+autocmd FocusLost * :wa  "save on focus lost
 
 filetype plugin indent on          " Enable file type detection.
 
@@ -97,14 +97,14 @@ nnoremap ,<CR> :nohlsearch<CR>
 " Visualisation
 " ============================================================================
 
-colorscheme xoria256    " Andrea: my colorschme
+colorscheme xoria256 " Andrea: my colorschme
 set cursorline       " Andrea: highlight the line containing the cursor
-set ruler		" show the cursor position all the time
-set showcmd		" display incomplete commands
+set ruler            " show the cursor position all the time
+set showcmd          " display incomplete commands
 set number
 set numberwidth=5
-set scrolloff=3         " Keep more context when scrolling off the end of a 
-                        " buffer
+set scrolloff=4      " Keep more context when scrolling off the end of a
+                     " buffer
 set nowrap
 syntax on
 
@@ -112,6 +112,17 @@ if has("gui_running")
     set guioptions-=T   " hide the toolbar in GUI mode
     set columns=80      " this seems not to work
 endif 
+
+highlight Folded guibg=white guifg=blue
+set foldtext=MyFoldText()
+function MyFoldText()
+  let line = getline(v:foldstart)
+  let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
+  return v:folddashes . sub
+endfunction
+
+" Andrea: remove trailing spaces from line
+nnoremap ,d $gelD
 
 " ============================================================================
 " Not understood
@@ -130,7 +141,7 @@ set completeopt=
 set completeopt+=menu     " Show menu
 set completeopt+=menuone  " Show menu also when there is only one item
 set completeopt+=longest  " Complete with the longest match available
-set completeopt+=preview  " Show extra information about the the current item
+"set completeopt+=preview  " Show extra information about the the current item
 
 " Configure the command line completion
 set wildchar=<Tab>        " Tab start the completion
@@ -155,6 +166,7 @@ autocmd FileType text setlocal formatoptions+=w textwidth=78  " wrap at col 78
 runtime macros/justify.vim  " format with _j
 
 " Python configuration
+let python_space_error_highlight = 1
 autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab 
                                \ textwidth=78 foldmethod=indent
                                \ omnifunc=pythoncomplete#Complete
@@ -172,10 +184,12 @@ autocmd BufEnter /private/tmp/crontab.* setlocal backupcopy=yes
 " Python unit testing
 " ============================================================================
 
-set makeprg=env/bin/nosetests\ --with-machineout
+set makeprg=clear;\ env/bin/nosetests\ --with-machineout\ --stop
 set efm=%f:%l:\ fail:\ %m,%f:%l:\ error:\ %m
-nnoremap ,bleah :call MakeGreen()
-nnoremap ,t :call MakeGreen('') <CR>
+
+" Test all
+nnoremap ,t :call MakeGreen('')<CR>
+
 nnoremap <c-j> :cprevious <CR>
 nnoremap <c-k> :cnext <CR>
 
@@ -190,8 +204,13 @@ hi RedBar   term=reverse ctermfg=black ctermbg=lightred   guifg=white guibg=red
 "set statusline+=%#warningmsg#
 "set statusline+=%{SyntasticStatuslineFlag()}
 "set statusline+=%*
-let g:syntastic_enable_signs=0
-let g:syntastic_auto_loc_list=0
+let g:syntastic_enable_signs=1
+
+" Error list automatic opening: 
+" 0 - manual
+" 1 - auto open and close
+" 2 - auto open manual close
+let g:syntastic_auto_loc_list=2
 
 " ============================================================================
 " Key mappings

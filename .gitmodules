@@ -31,6 +31,3 @@
 [submodule ".vim/bundle/indent-object"]
 	path = .vim/bundle/indent-object
 	url = https://github.com/michaeljsmith/vim-indent-object.git
-[submodule ".vim/bundle/makegreen"]
-	path = .vim/bundle/makegreen
-	url = https://github.com/reinh/vim-makegreen.git
