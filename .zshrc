@@ -4,7 +4,7 @@
 . ~/.common-rc.sh
 
 # history
-HISTFILE=~/.histfile
+HISTFILE=~/.zsh_history
 HISTSIZE=$((1024*365))
 
 setopt promptsubst                  # perform substitutions in prompt
