@@ -1,0 +1,2 @@
+# Re-enable the Desktop files on gnome3
+gsettings set org.gnome.desktop.background show-desktop-icons true
