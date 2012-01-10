@@ -13,9 +13,13 @@ shopt -s histappend
 
 shopt -s checkwinsize
 
-prefix="$(brew --prefix || true)"
-[ -f "$prefix/etc/bash_completion" ] && source "$prefix/etc/bash_completion"
+if [ -x "$(which brew)" ]; then
+    prefix="$(brew --prefix)";
+else
+    prefix="/"
+fi
 
-[ -x "$(which pip)" ] && eval "`pip completion --bash`" # pip
-source "$brew_prefix/Library/Contributions/brew_bash_completion.sh"
+[ -f "$prefix/etc/bash_completion" ] && source "$prefix/etc/bash_completion"
+[ -x "$(which pip)"  ] && eval "`pip completion --bash`"
+[ -x "$(which brew)" ] && source "$brew_prefix/Library/Contributions/brew_bash_completion.sh"
 
