@@ -2,29 +2,24 @@
 set -o errexit
 set -o nounset
 
-abspath() {
-    echo "$PWD/$1"
+install_link() {
+    local item="$1"
+    local src="${PWD##$HOME/}/$item"
+    local dest="$HOME/$item"
+
+    make_backup_if_necessary "$dest"
+    /bin/rm -f "$dest"
+    /bin/ln -sfv "$src" "$dest"
 }
 
-exists_and_is_not_a_link() {
+make_backup_if_necessary() {
     local path="$1"
 
-    [ -e "$path" -a ! -L "$path" ]
-}
-
-install_link() {
-    local script_dir="$(dirname "$0")"
-    local item="$1"
-    local src="$script_dir/$item"
-    local dest=~/"$item"
-
-    if exists_and_is_not_a_link "$dest"; then
-        mv -v "$dest" "$dest.backup"
+    # if exists and is not a link 
+    if [ -e "$path" -a ! -L "$path" ]; then
+        # it deserve a backup
+        mv -v "$path" "$path.backup"
     fi
-
-    /bin/rm -f "$dest"
-    /bin/ln -sfv "$(abspath "$src")" "$dest"
-
 }
 
 install_link .bash_profile 
