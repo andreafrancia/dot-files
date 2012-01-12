@@ -63,7 +63,7 @@ activate_virtualenv() {
 }
 
 # Linux specific configuration {{{
-if grep -q 'Linux' /proc/version; then
+if grep -q 'Linux' /proc/version >& /dev/null; then
     alias open=xdg-open
 fi
 # }}}
