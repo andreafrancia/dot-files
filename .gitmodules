@@ -31,3 +31,6 @@
 [submodule ".vim/bundle/indent-object"]
 	path = .vim/bundle/indent-object
 	url = https://github.com/michaeljsmith/vim-indent-object.git
+[submodule ".vim/bundle/colors-molokai"]
+	path = .vim/bundle/colors-molokai
+	url = https://github.com/vim-scripts/molokai.git
