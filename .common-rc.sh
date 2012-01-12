@@ -1,16 +1,19 @@
-# PATH (the last inserted wins) ----------------------------------------------
+# PATH -----------------------------------------------------------------------
 brew_prefix=~/homebrew                  # user homebrew installation
-PATH="/sbin:/usr/sbin:$PATH"
-PATH="/usr/local/bin:$PATH"             # standard homebrew location
-PATH="/usr/local/sbin:$PATH"
-PATH="$brew_prefix/bin:$PATH"
-PATH="$brew_prefix/sbin:$PATH"
-PATH=~/bin:"$PATH"                      # user executable shared among all machines
-PATH=~/bin.local:"$PATH"                # user executable for this machine
-PATH=~/local/bin:"$PATH"                # software built with --prefix=~/local
-PATH="$brew_prefix/share/python3:$PATH" # python from homebrew
-PATH="$brew_prefix/share/python:$PATH"  # python from homebrew
-PATH="$HOME/.gem/ruby/1.8/bin:$PATH"
+PATH="\
+$HOME/.gem/ruby/1.8/bin:\
+$brew_prefix/share/python:\
+$brew_prefix/share/python3:\
+$HOME/local/bin:\
+$HOME/bin.local:\
+$HOME/bin:\
+$brew_prefix/sbin:\
+$brew_prefix/bin:\
+/usr/local/sbin:\
+/usr/local/bin:\
+/sbin:\
+/usr/sbin:\
+$PATH"
 export PATH
 
 export EDITOR=vim
