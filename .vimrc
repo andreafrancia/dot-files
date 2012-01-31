@@ -29,7 +29,10 @@ set backup		" keep a backup file
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp  " where to put backups
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp  " where to put swapfile
 
-set undofile
+if has("persistent_undo")
+    set undofile
+endif
+
 autocmd FocusLost * :wa  "save on focus lost
 
 filetype plugin indent on          " Enable file type detection.
