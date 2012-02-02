@@ -28,3 +28,6 @@
 [submodule ".vim/bundle/indent-object"]
 	path = .vim/bundle/indent-object
 	url = https://github.com/michaeljsmith/vim-indent-object.git
+[submodule ".vim/bundle/copy-as-rtf"]
+	path = .vim/bundle/copy-as-rtf
+	url = git@github.com:andreafrancia/vim-copy-as-rtf.git
