@@ -24,7 +24,7 @@ make_backup_if_necessary() {
 
 install_link .bash_profile 
 install_link .bashrc 
-install_link .common-rc.sh
+install_link .common-shrc.sh
 install_link .cvsignore 
 install_link .git-prompt.conf 
 install_link .gitconfig 

@@ -1,7 +1,7 @@
 # If not running interactively ... get out of here! 
 [ -z "$PS1" ] && return
 
-. ~/.common-rc.sh
+. ~/.common-shrc.sh
 
 # history
 HISTFILE=~/.zsh_history
