@@ -3,7 +3,6 @@ cd ~
 git clone git@github.com:andreafrancia/homebrew.git
 
 install-package () {
-    brew uninstall "$1"
     brew install "$@"
 }
 
@@ -14,8 +13,9 @@ install-macvim() {
     brew linkapps
 }
 
-install-package findutils --default-names
-install-package coreutils --default-names
+install-package findutils 
+install-package xz
+install-package coreutils
 install-package a2ps
 install-package ack
 install-package bash
@@ -54,9 +54,6 @@ curl http://worksintheory.org/files/misc/bash_completion_svn -o "$(brew --prefix
 # Software Elisa
 brew install gfortran gnuplot 
 
-# Tell svnX to not create an alias in ~/bin
-defaults write com.lachoseinteractive.svnX installSvnxTool -bool NO
-
 # Tell OSX to show full path in Finder title
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES
 killall Finder
@@ -67,7 +64,6 @@ git config --global color.status auto
 git config --global color.branch auto
 
 # Enable zsh run-help 
-
 cd .zsh_help
 curl -ohelpfiles 'http://zsh.git.sourceforge.net/git/gitweb.cgi?p=zsh/zsh;a=blob_plain;f=Util/helpfiles;hb=HEAD'
 man zshbuiltins | colcrt - | perl zsh-4.3.12/Util/helpfiles
@@ -77,6 +73,5 @@ unalias run-help
 autoload run-help
 HELPDIR=~/.zsh_help
 " >> ~/.zshrc 
-
 
 echo "Done"
