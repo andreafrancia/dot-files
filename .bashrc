@@ -1,7 +1,7 @@
 # If not running interactively ... get out of here! 
 [ -z "$PS1" ] && return
 
-. "$(dirname "$BASH_SOURCE")/.common-shrc.sh"
+. "$(dirname "$BASH_SOURCE")/.shrc"
 
 # history
 HISTFILE=~/.bash_history
