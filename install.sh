@@ -43,5 +43,5 @@ install_link git-prompt
 install_link .ackrc
 
 mkdir -p ~/.vim-tmp ~/.tmp
-mkdir --mode=0700 ~/.ssh
+mkdir -m 0700 ~/.ssh
 echo "VisualHostKey yes" >> ~/.ssh/config
