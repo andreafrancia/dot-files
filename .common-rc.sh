@@ -1,22 +1,20 @@
 # PATH -----------------------------------------------------------------------
-brew_prefix=~/homebrew                  # user homebrew installation
+brew_prefix=/usr/local
 GEM_PATH=~/.gems
 PATH="\
 $brew_prefix/Cellar/ruby/1.9.3-p0/bin:\
 $HOME/.gem/ruby/1.8/bin:\
 $brew_prefix/share/python:\
 $brew_prefix/share/python3:\
-$HOME/local/bin:\
-$HOME/bin.local:\
 $HOME/bin:\
 $brew_prefix/sbin:\
 $brew_prefix/bin:\
-/usr/local/sbin:\
-/usr/local/bin:\
 /sbin:\
 /usr/sbin:\
 $PATH"
 export PATH
+
+brew --prefix coreutils >& /dev/null && PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
 
 export EDITOR=vim
 export PIP_DOWNLOAD_CACHE=~/.pip/cache # PIP download cache
