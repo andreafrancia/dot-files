@@ -1,6 +1,8 @@
 # PATH -----------------------------------------------------------------------
 brew_prefix=~/homebrew                  # user homebrew installation
+GEM_PATH=~/.gems
 PATH="\
+$brew_prefix/Cellar/ruby/1.9.3-p0/bin:\
 $HOME/.gem/ruby/1.8/bin:\
 $brew_prefix/share/python:\
 $brew_prefix/share/python3:\
@@ -32,10 +34,10 @@ alias grep='grep --color'
 
 # Colors for ls --------------------------------------------------------------
 if ls --color . >& /dev/null; then
-    alias ls='ls --color'
+    alias ls='ls -h --color'
 else
     echo "Using the lame \`ls' of BSD"
-    alias ls='ls -G'
+    alias ls='ls -h -G'
 fi
 
 # PyCompletion
