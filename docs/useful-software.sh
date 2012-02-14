@@ -37,15 +37,20 @@ install-macvim
 
 
 # Python 
-brew install readline python
-"$(brew --prefix)/share/python/easy_install" pip
-alias pip="$(brew --prefix)/share/python/pip"
-pip install --upgrade distribute
-pip install Mercurial 
-pip install pyflakes            # needed by syntastic
-pip install readline ipython    # install them toghether in order to avoid buggy readline of OS X
-pip install nose
-easy_install nose-machineout    # as of 2011-11-02 machine-out seems not working with pip
+install-python-for-development()
+{
+    brew install python
+    "$(brew --prefix)/share/python/easy_install" pip
+    alias pip="$(brew --prefix)/share/python/pip"
+    pip install --upgrade distribute
+    pip install pyflakes            # needed by syntastic
+    pip install readline ipython    # install them toghether in order to avoid buggy readline of OS X
+    pip install nose
+    easy_install nose-machineout    # as of 2011-11-02 machine-out seems not working with pip
+    #pip install Mercurial 
+}
+
+install-python-for-development
 
 # Bash completion
 brew install bash-completion
@@ -57,21 +62,5 @@ brew install gfortran gnuplot
 # Tell OSX to show full path in Finder title
 defaults write com.apple.finder _FXShowPosixPathInTitle -bool YES
 killall Finder
-
-# Enable git color
-git config --global color.diff auto
-git config --global color.status auto
-git config --global color.branch auto
-
-# Enable zsh run-help 
-cd .zsh_help
-curl -ohelpfiles 'http://zsh.git.sourceforge.net/git/gitweb.cgi?p=zsh/zsh;a=blob_plain;f=Util/helpfiles;hb=HEAD'
-man zshbuiltins | colcrt - | perl zsh-4.3.12/Util/helpfiles
-
-echo "
-unalias run-help
-autoload run-help
-HELPDIR=~/.zsh_help
-" >> ~/.zshrc 
 
 echo "Done"

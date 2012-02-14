@@ -1,0 +1,5 @@
+# Enable colors in diff
+
+    git config --global color.diff auto
+    git config --global color.status auto
+    git config --global color.branch auto
