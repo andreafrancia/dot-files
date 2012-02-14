@@ -1,0 +1,19 @@
+#!/bin/zsh
+
+mkdir -p ~/.zsh_help
+cd ~/.zsh_help
+curl -ohelpfiles 'http://zsh.git.sourceforge.net/git/gitweb.cgi?p=zsh/zsh;a=blob_plain;f=Util/helpfiles;hb=HEAD'
+man zshbuiltins | colcrt - | perl helpfiles
+
+cat << EOF
+You may want make sure your .zshrc have the following line for finishing the
+installation:
+
+    unalias run-help
+    autoload run-help
+    HELPDIR=~/.zsh_help
+
+Test the installation typing whence and then pressing ALT+H.
+
+EOF
+
