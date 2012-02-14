@@ -4,9 +4,6 @@
 [submodule ".vim/bundle/pythoncomplete"]
 	path = .vim/bundle/pythoncomplete
 	url = https://github.com/vim-scripts/pythoncomplete.git
-[submodule ".vim/bundle/copy-as-rtf"]
-	path = .vim/bundle/copy-as-rtf
-	url = https://github.com/vim-scripts/copy-as-rtf.git
 [submodule ".vim/bundle/xoria256"]
 	path = .vim/bundle/xoria256
 	url = https://github.com/vim-scripts/xoria256.vim.git
@@ -25,3 +22,15 @@
 [submodule ".vim/bundle/Align"]
 	path = .vim/bundle/Align
 	url = https://github.com/vim-scripts/Align.git
+[submodule "git-prompt"]
+	path = git-prompt
+	url = git://github.com/lvv/git-prompt.git
+[submodule ".vim/bundle/indent-object"]
+	path = .vim/bundle/indent-object
+	url = https://github.com/michaeljsmith/vim-indent-object.git
+[submodule ".vim/bundle/colors-molokai"]
+	path = .vim/bundle/colors-molokai
+	url = https://github.com/vim-scripts/molokai.git
+[submodule ".vim/bundle/copy-as-rtf"]
+	path = .vim/bundle/copy-as-rtf
+	url = git@github.com:andreafrancia/vim-copy-as-rtf.git

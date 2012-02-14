@@ -1,14 +1,15 @@
 [user]
-    name = Andrea Francia
-    email = andrea@andreafrancia.it
+	name = Andrea Francia
+	email = me@andreafrancia.it
 [core]
-    excludesfile = ~/.cvsignore
+	excludesfile = ~/.cvsignore
 [color]
-    ui = auto
-    diff = auto
-    status = auto
-    branch = auto
+	ui = auto
+	diff = auto
+	status = auto
+	branch = auto
 [alias]
-    aa = add --all
-    st = status
-    ci = commit
+	aa = add --all
+	st = status
+	ci = commit
+	unstage = reset HEAD --

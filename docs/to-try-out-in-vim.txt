@@ -1,34 +1,20 @@
+Installati:
+ indentobject: select a python function with vii or vai
+
 Interessanti:
+=============
  https://github.com/vim-scripts/DirDiff.vim
  https://github.com/vim-scripts/DrawIt   <--- disegnare in Vim
  https://github.com/vim-scripts/pytest.vim
- http://lug.fh-swf.de/vim/vim-bash/screenshots-en.html
  makegreen.vim
  https://github.com/vim-scripts/Command-T
+ conqueTerm 
 
 Ruby:
-conqueTerm 
-vim-git
-indent-object
-nerdtree
-nerdcommenter
-taglist
-vividchalk
-markdown
-syntastic
-command_t
-
-Cose ruby:
-==========
-vim-ruby-debugger
-vim-endwise
-rubycomplete Mark Guzman <segfault@hasno.info>
-
-Minor:
-vim-tcomment
-
-getmail
-
+ nerdcommenter
+ taglist
+ markdown
+ vim-endwise
 
 " When hitting <;>, complete a snippet if there is one; else, insert an actual
 " <;>
@@ -44,9 +30,6 @@ endfunction
 
 " Use <c-h> for snippets
 let g:NERDSnippets_key = '<c-h>'
-
-
-map <leader>rm :BikeExtract<cr>
 
 met makeprg=python\ -m\ nose.core\ --machine-out
 

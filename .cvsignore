@@ -5,3 +5,5 @@ mac-commands
 .DS_Store
 Thumbs.db
 tags
+*.un~
+*~
