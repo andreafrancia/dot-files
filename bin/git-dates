@@ -1,11 +1,18 @@
 #!/bin/bash
 
+# Copyright 2012 of Andrea Francia, via Baini, 31 Trivolzio, PV, Italy
+
+# This software is distributed as tweet-ware, you can use, modify, adapt it,
+# pretend it is written by you ... but ... in the case you find that is (or it
+# seems useful) you should consider to send a tweet about it. Please remember
+# to put putting @andreafrancia in the message, so I will be notified and
+# became happy.
+
 set -o errexit
 set -o nounset
 
 cat << PROLOGUE
 #!/bin/bash
-
 # A script for chaning commit dates
 
 # WARNING: the usage of this script will changes SHA1 hashes of your commits, 
