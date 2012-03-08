@@ -1,0 +1,29 @@
+#!/bin/bash
+
+set -o errexit
+set -o nounset
+
+cat << PROLOGUE
+#!/bin/bash
+
+# A script for chaning commit dates
+
+# WARNING: the usage of this script will changes SHA1 hashes of your commits, 
+# that may result in a data loss. Do not use it if you don't fully understand
+# the implications of that.
+
+git filter-branch -f --env-filter \\
+'
+    case "\$GIT_COMMIT" in
+PROLOGUE
+
+git log --pretty=format:'        %H) date="%cd";;' 
+
+cat << EPILOGUE
+    esac
+    echo \$GIT_COMMIT "-->" "\$date"
+    export GIT_AUTHOR_DATE="\$date"
+    export GIT_COMMITTER_DATE="\$date"
+'
+EPILOGUE
+
