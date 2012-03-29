@@ -1,0 +1,15 @@
+export http_proxy=http://192.168.56.1:8123/
+
+# start polipo
+polipo \
+    diskCacheRoot=~/.polipo-cache \
+    maxDiskCacheEntrySize=-1 \
+    cacheIsShared=false \
+    proxyAddress=192.168.56.1
+
+    #relaxTransparency=true \
+    #proxyOffline=true \
+
+# connect to the virtual box
+ssh root@192.168.56.101
+
