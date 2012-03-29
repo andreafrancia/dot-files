@@ -1,9 +1,45 @@
 #!/bin/zsh
 
+# Zsh as-is does not provide a simple way to display a contextual help for its
+# builtin commmands. This script enable you to access to builtin help simply
+# writing the plugin name and pressing ALT+H or ESC+H (both shortcuts works).
+
+# The directory ~/.zsh_help will contain the help description for each builtin
+# command.
+
 mkdir -p ~/.zsh_help
 cd ~/.zsh_help
+
+# Building the commands helps files.
+#
+# In the system a manpage that contains the manual for *all* Zsh builtins
+# commands already exists.
+
+manpage=zshbuiltins
+
+# The contents of that manpage has to be splitted-out in individual files, one
+# file for each builtin. This can be accomplished with
+
+splitting_command="man $manpage | colcrt - | perl helpfiles"
+
+# Where:
+#   - `colcrt` is a standard BSD utility that strip out screen control
+#     characters (like those that make text brighter or underlined)
+#   - `helpfiles` is a perl script that does the splitting.
+
+# The `helpfile` script is distributed with the Zsh sources, but homebrew will
+# not install it, so we have to download it:
+
 curl -ohelpfiles 'http://zsh.git.sourceforge.net/git/gitweb.cgi?p=zsh/zsh;a=blob_plain;f=Util/helpfiles;hb=HEAD'
-man zshbuiltins | colcrt - | perl helpfiles
+
+# once downloaded we can finally run the afore-defined splitting command:
+
+$splitting_command
+
+# At this point we should have created several files under .zsh_help one for
+# each Zsh builtin.
+
+# Now we tell to the user how to finalize the configuration. 
 
 cat << EOF
 You may want make sure your .zshrc have the following line for finishing the
@@ -16,4 +52,3 @@ installation:
 Test the installation typing whence and then pressing ALT+H.
 
 EOF
-
