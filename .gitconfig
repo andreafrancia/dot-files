@@ -13,3 +13,5 @@
 	st = status
 	ci = commit
 	unstage = reset HEAD --
+[difftool]
+	prompt = false
