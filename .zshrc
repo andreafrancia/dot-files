@@ -13,7 +13,6 @@ prompt wunjo
 
 setopt interactivecomments
 setopt auto_cd         # Type ".." instead of "cd ..", "/usr/" instead of "cd /usr/".
-setopt auto_pushd      # This makes cd=pushd
 setopt rm_star_wait    # 10 second wait if you do something that will delete everything
 setopt no_flow_control # Disable ctrl+s
 setopt no_case_glob    # Case insensitive globbing
