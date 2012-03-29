@@ -35,6 +35,10 @@ install-package wget
 
 install-macvim
 
+# OSX already ships the GNU grep, the version it provides is 2.5.1. The
+# essential option --ignore-dir has been introduced in 2.5.1a.
+brew install https://raw.github.com/adamv/homebrew-alt/master/duplicates/grep.rb
+
 
 # Python 
 install-python-for-development()
