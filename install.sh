@@ -41,6 +41,7 @@ install_link .zshrc
 install_link bin 
 install_link git-prompt
 install_link .ackrc
+install_link .dircolors
 
 mkdir -p ~/.vim-tmp ~/.tmp
 mkdir -m 0700 ~/.ssh

@@ -34,3 +34,6 @@
 [submodule ".vim/bundle/copy-as-rtf"]
 	path = .vim/bundle/copy-as-rtf
 	url = git@github.com:andreafrancia/vim-copy-as-rtf.git
+[submodule ".vim/bundle/colors-solarized"]
+	path = .vim/bundle/colors-solarized
+	url = https://github.com/altercation/vim-colors-solarized.git

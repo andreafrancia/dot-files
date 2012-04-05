@@ -67,4 +67,4 @@ if grep -q 'Linux' /proc/version >& /dev/null; then
 fi
 # }}}
 
-[ -x "$(which pip)" ] && eval "`pip completion --zsh`" # pip
+# [ -x "$(which pip)" ] && eval "`pip completion --zsh`" # pip

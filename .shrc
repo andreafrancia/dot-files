@@ -33,6 +33,7 @@ alias grep='grep --color'
 
 # Colors for ls --------------------------------------------------------------
 if ls --color . >& /dev/null; then
+    eval "$(dircolors ~/.dircolors)"
     alias ls='ls -h --color'
 else
     echo "Using the lame \`ls' of BSD"

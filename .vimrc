@@ -96,7 +96,9 @@ nnoremap ,<CR> :nohlsearch<CR>
 " Visualisation
 " ============================================================================
 
-colorscheme xoria256 " Andrea: my colorschme
+set background=dark
+colorscheme solarized
+
 set cursorline       " Andrea: highlight the line containing the cursor
 set ruler            " show the cursor position all the time
 set showcmd          " display incomplete commands
@@ -171,6 +173,8 @@ autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab
                                \ omnifunc=pythoncomplete#Complete
                                \ formatoptions+=l " Do not broke long line 
                                \ formatoptions-=t " Do not autowrap
+                               \ indentkeys-=:
+
 
 
 " Ruby files:
