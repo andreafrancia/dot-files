@@ -32,6 +32,7 @@ install-package subversion
 install-package unrar
 install-package watch
 install-package wget 
+brew install bash-completion
 
 install-macvim
 
