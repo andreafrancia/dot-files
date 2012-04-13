@@ -1,3 +1,5 @@
+# rc common to Bash and Zsh
+#
 # PATH -----------------------------------------------------------------------
 brew_prefix=/usr/local
 GEM_PATH=~/.gems
@@ -53,3 +55,4 @@ activate_virtualenv() {
     fi
 }
 
+# vim: set ft=sh:
