@@ -37,3 +37,15 @@
 [submodule ".vim/bundle/colors-solarized"]
 	path = .vim/bundle/colors-solarized
 	url = https://github.com/altercation/vim-colors-solarized.git
+[submodule ".vim/bundle/vim-surround"]
+	path = .vim/bundle/vim-surround
+	url = git://github.com/tpope/vim-surround.git
+[submodule ".vim/bundle/vim-speeddating"]
+	path = .vim/bundle/vim-speeddating
+	url = https://github.com/tpope/vim-speeddating.git
+[submodule ".vim/bundle/eunuch"]
+	path = .vim/bundle/eunuch
+	url = https://github.com/tpope/vim-eunuch.git
+[submodule ".vim/bundle/unimpaired"]
+	path = .vim/bundle/unimpaired
+	url = https://github.com/tpope/vim-unimpaired.git
