@@ -45,7 +45,6 @@ zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p
 autoload -Uz compinit; compinit
 
 # Color in completion
-eval `dircolors`
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 
