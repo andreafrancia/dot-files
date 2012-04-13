@@ -97,7 +97,7 @@ nnoremap ,<CR> :nohlsearch<CR>
 " ============================================================================
 
 set background=dark
-colorscheme solarized
+colorscheme xoria256
 
 set cursorline       " Andrea: highlight the line containing the cursor
 set ruler            " show the cursor position all the time
