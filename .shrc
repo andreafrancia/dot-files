@@ -4,7 +4,7 @@
 brew_prefix=/usr/local
 GEM_PATH=~/.gems
 PATH="\
-$brew_prefix/Cellar/ruby/1.9.3-p0/bin:\
+$brew_prefix/Cellar/php/5.3.10/lib/php:\
 $HOME/.gem/ruby/1.8/bin:\
 $brew_prefix/share/python:\
 $brew_prefix/share/python3:\
@@ -32,6 +32,7 @@ alias mv='mv -i'
 
 # Other aliases ---------------------------------------------------------------
 alias grep='grep --color'
+alias find='gfind'
 
 # Colors for ls --------------------------------------------------------------
 if ls --color . >& /dev/null; then
