@@ -1,0 +1,19 @@
+Plugin e modifiche per Vim:
+ - python-mode
+ - pythoncomplete
+ - various snippet in .vimrc (most from grb)
+
+pymode_lint_checker=pyflakes
+pymode_lint_onfly=yes
+
+pymode_folding
+
+pymode_virtualenv ?
+
+pymode_syntax
+
+pymod_motion
+
+
+
+
