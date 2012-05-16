@@ -56,4 +56,6 @@ activate_virtualenv() {
     fi
 }
 
+[ -f ~/.shrc.local ] && source .shrc.local
+
 # vim: set ft=sh:
