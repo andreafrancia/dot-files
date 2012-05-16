@@ -215,32 +215,28 @@ let g:syntastic_enable_signs=1
 let g:syntastic_auto_loc_list=2
 
 " }}}
-" NERDTree {{{
-nnoremap <leader>f :NERDTreeToggle<CR>
-" }}}
 
-" }}}
-
-
-" ============================================================================
-" Key mappings
-" ============================================================================
-
+" Key mappings {{{
+"
 let mapleader=","
 
+" Map ,f to toggle NERDTree
+nnoremap <leader>f :NERDTreeToggle<CR> 
 
-" ============================================================================
-"
 " Map ,e and ,v to open files in the same directory as the current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
 map <leader>v :view %%
-" Map \n to rename file
+
+" Map ,n to rename file
 map <leader>n :call RenameFile()<cr>
+
 " Refactoring
 vnoremap <leader>rv :call ExtractVariable()<cr>
 nnoremap <leader>ri :call InlineVariable()<cr>
 map <leader>rm :BikeExtract<cr>
+
+" }}}
 
 " ============================================================================
 " Function definitions
