@@ -130,9 +130,7 @@ nnoremap ,d $gelD
 " ============================================================================
 set switchbuf=useopen
 
-" ============================================================================
-" Completion
-" ============================================================================
+" Completion {{{
 "
 " Completion fall-back for non supported languages
 set omnifunc=syntaxcomplete#Complete
@@ -150,36 +148,40 @@ set nowildmenu
 set wildmode=list:longest
 set wildignore+=*.pyc
 
-" ============================================================================
-" Specific file formats section
-" ============================================================================
+" }}}
 
-" Javascript files 
+" Specific file formats section {{{
+
+" Javascript files {{{
 autocmd BufRead,BufNewFile Jakefile setfiletype javascript
 autocmd BufRead,BufNewFile *.json setfiletype javascript
-
-" Text files configuration
+" }}}
+" Text files {{{
 autocmd BufRead,BufNewFile *.txt setfiletype text
 autocmd BufRead,BufNewFile README setfiletype text
 autocmd FileType text setlocal formatoptions+=w textwidth=78  " wrap at col 78
                              \ formatoptions+=n   " recognized numbered lists
                              \ shiftwidth=3
 runtime macros/justify.vim  " format with _j
+" }}}
+" Python files {{{
 
-" Python configuration
+let g:pymode_lint_checker = "pyflakes"
 let python_space_error_highlight = 1
+
 autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab 
                                \ textwidth=78 foldmethod=indent
                                \ omnifunc=pythoncomplete#Complete
                                \ formatoptions+=l " Do not broke long line 
                                \ formatoptions-=t " Do not autowrap
                                \ indentkeys-=:
-
-
-
-" Ruby files:
+" }}}
+" Ruby files {{{
 autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab 
                                \ textwidth=78 foldmethod=syntax
+" }}}
+
+" }}}
 
 autocmd BufEnter /private/tmp/crontab.* setlocal backupcopy=yes
 
@@ -190,18 +192,15 @@ autocmd BufEnter /private/tmp/crontab.* setlocal backupcopy=yes
 set makeprg=clear;\ env/bin/nosetests\ --with-machineout\ --stop
 set efm=%f:%l:\ fail:\ %m,%f:%l:\ error:\ %m
 
-" Test all
-nnoremap ,t :call MakeGreen('')<CR>
-
 nnoremap <c-j> :cprevious <CR>
 nnoremap <c-k> :cnext <CR>
 
 hi GreenBar term=reverse ctermfg=black ctermbg=lightgreen guifg=white guibg=green
 hi RedBar   term=reverse ctermfg=black ctermbg=lightred   guifg=white guibg=red
 
-" ============================================================================
-" Syntastic
-" ============================================================================
+" Plugins Configuratons {{{ 
+
+" Syntastic {{{
 
 " Syntastic for python
 "set statusline+=%#warningmsg#
@@ -215,14 +214,20 @@ let g:syntastic_enable_signs=1
 " 2 - auto open manual close
 let g:syntastic_auto_loc_list=2
 
+" }}}
+" NERDTree {{{
+nnoremap <leader>f :NERDTreeToggle<CR>
+" }}}
+
+" }}}
+
+
 " ============================================================================
 " Key mappings
 " ============================================================================
 
 let mapleader=","
 
-" NERDTree
-nnoremap <leader>f :NERDTreeToggle<CR>
 
 " ============================================================================
 "
