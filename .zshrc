@@ -7,7 +7,8 @@
 HISTFILE=~/.zsh_history
 HISTSIZE=$((1024*365))
 
-setopt promptsubst                  # perform substitutions in prompt
+# prompt
+setopt prompt_subst
 autoload -U promptinit; promptinit  # Load the prompt theme system
 prompt wunjo
 
@@ -20,8 +21,6 @@ setopt numeric_glob_sort
 setopt no_clobber
 setopt beep
 setopt notify
-
-bindkey -e  # Emacs key 
 
 SAVEHIST=$HISTSIZE  # Max number of history entries
 setopt appendhistory
@@ -51,19 +50,3 @@ zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
 unalias run-help
 autoload run-help
 HELPDIR=~/.zsh_help
-
-activate_virtualenv() {
-    if [ -f env/bin/activate ]; then . env/bin/activate;
-    elif [ -f ../env/bin/activate ]; then . ../env/bin/activate;
-    elif [ -f ../../env/bin/activate ]; then . ../../env/bin/activate;
-    elif [ -f ../../../env/bin/activate ]; then . ../../../env/bin/activate;
-    fi
-}
-
-# Linux specific configuration {{{
-if grep -q 'Linux' /proc/version >& /dev/null; then
-    alias open=xdg-open
-fi
-# }}}
-
-# [ -x "$(which pip)" ] && eval "`pip completion --zsh`" # pip

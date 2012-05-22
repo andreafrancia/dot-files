@@ -5,7 +5,7 @@
 
 # history
 HISTFILE=~/.bash_history
-HISTSIZE=$((1024*365)) # how many history line to be saved on exit
+HISTSIZE=$((128*365)) # how many history line to be saved on exit
 
 HISTCONTROL= # remember both commands with spaces and duplicages
 # Don't overwrite the history at the start of every new session
@@ -13,7 +13,7 @@ shopt -s histappend
 
 shopt -s checkwinsize
 
-[ -x "$(which pip)"  ] && eval "`pip completion --bash`"
+# [ -x "$(which pip)"  ] && eval "`pip completion --bash`"
 
 load-bash-completion() {
     local prefix="$(brew --prefix)"
