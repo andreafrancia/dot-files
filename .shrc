@@ -1,16 +1,15 @@
 # rc common to Bash and Zsh
 #
 # PATH -----------------------------------------------------------------------
-brew_prefix=/usr/local
 GEM_PATH=~/.gems
 PATH="\
-$brew_prefix/Cellar/php/5.3.10/lib/php:\
-$HOME/.gem/ruby/1.8/bin:\
-$brew_prefix/share/python:\
-$brew_prefix/share/python3:\
+/usr/local/Cellar/php/5.3.10/lib/php:\
+/usr/local/share/python:\
+/usr/local/share/python3:\
+/usr/local/Cellar/ruby/1.9.3-p125/bin:\
 $HOME/bin:\
-$brew_prefix/sbin:\
-$brew_prefix/bin:\
+/usr/local/sbin:\
+/usr/local/bin:\
 /sbin:\
 /usr/sbin:\
 $PATH"
@@ -56,6 +55,6 @@ activate_virtualenv() {
     fi
 }
 
-[ -f ~/.shrc.local ] && source .shrc.local
+[ -f ~/.shrc.local ] && source ~/.shrc.local
 
 # vim: set ft=sh:
