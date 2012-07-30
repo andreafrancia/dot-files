@@ -28,7 +28,7 @@ alias cp='cp -i'
 alias mv='mv -i'
 
 # Unbreak Python's error-prone .pyc file generation
-#export PYTHONDONTWRITEBYTECODE=1
+export PYTHONDONTWRITEBYTECODE=1
 
 # Other aliases ---------------------------------------------------------------
 alias grep='grep --color'
