@@ -1,0 +1,15 @@
+# Use the following command::
+
+    git submodule add <repository-url> .vim/bundle/chosen-name
+
+# For example:
+
+    git submodule add https://github.com/vim-scripts/VST.git .vim/bundle/VST
+
+# Probably this may work:
+
+    url=https://github.com/vim-scripts/VST.git
+    name_with_git=${url##*/}
+    name=${name_with_git%%.git}
+    git submodule add $url $name
+
