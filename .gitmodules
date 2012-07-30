@@ -16,9 +16,6 @@
 [submodule ".vim/bundle/Align"]
 	path = .vim/bundle/Align
 	url = https://github.com/vim-scripts/Align.git
-[submodule "git-prompt"]
-	path = git-prompt
-	url = git://github.com/lvv/git-prompt.git
 [submodule ".vim/bundle/indent-object"]
 	path = .vim/bundle/indent-object
 	url = https://github.com/michaeljsmith/vim-indent-object.git

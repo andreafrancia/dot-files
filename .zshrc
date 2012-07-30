@@ -6,11 +6,22 @@
 # history
 HISTFILE=~/.zsh_history
 HISTSIZE=$((1024*365))
+SAVEHIST=$((1024*365))
 
-# prompt
 setopt prompt_subst
-autoload -U promptinit; promptinit  # Load the prompt theme system
-prompt wunjo
+
+# Prompt inspired by Ben Hoskings
+tilde_or_pwd() {
+  echo $PWD | sed -e "s/\/Users\/$USER/~/"
+}
+
+arrow=$'%{\e[0;%(?.32.31)m%}>%{\e[0m%}'
+user_at_host=$'%{\e[0;90m%}%n@%{\e[0;30;47m%}%M%{\e[0m%}'
+cur_dir=$'%{\e[0;90m%}$(tilde_or_pwd)%{\e[0m%}'
+git_info='$(git_cwd_info)'
+export PROMPT="$arrow "
+export RPROMPT="$cur_dir $git_info"
+
 
 setopt interactivecomments
 setopt auto_cd         # Type ".." instead of "cd ..", "/usr/" instead of "cd /usr/".
