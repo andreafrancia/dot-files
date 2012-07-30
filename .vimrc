@@ -48,7 +48,7 @@ set hlsearch     " highlight found word after search
 set ignorecase 
 set smartcase
 " }}}
-" Visualisation {{{1
+" Visualisation {{{
 
 set t_Co=256 " Andrea: enable 256 colors
 set foldlevelstart=20 " Andrea: Should open all (almost) level
@@ -81,14 +81,14 @@ highlight Folded guibg=white guifg=blue
 set foldtext=AFMyFoldText()
 function AFMyFoldText()
   let line = getline(v:foldstart)
-  let sub = substitute(line, '/\*\|\*/\|{{{\d\=', '', 'g')
+  let sub = substitute(line, '/\*\|\*/\|{'.'{{\d\=', '', 'g')
   return v:folddashes . sub
 endfunction
 
 " Andrea: remove trailing spaces from line
 nnoremap ,d $gelD
 
-" }}}1
+" }}}
 " Completion {{{
 "
 " Completion fall-back for non supported languages
