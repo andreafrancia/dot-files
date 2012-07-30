@@ -1,6 +1,6 @@
 [user]
 	name = Andrea Francia
-	email = me@andreafrancia.it
+	email = andrea@andreafrancia.it
 [core]
 	excludesfile = ~/.cvsignore
 [color]
