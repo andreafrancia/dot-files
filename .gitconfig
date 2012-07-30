@@ -10,6 +10,7 @@
 	branch = auto
 [alias]
 	aa = add --all
+        l = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
 	st = status
 	ci = commit
 	unstage = reset HEAD --
