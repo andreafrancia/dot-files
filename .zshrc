@@ -1,6 +1,7 @@
 # If not running interactively ... get out of here! 
 [ -z "$PS1" ] && return
 
+bindkey -e
 . ~/.shrc
 
 # history
@@ -8,9 +9,8 @@ HISTFILE=~/.zsh_history
 HISTSIZE=$((1024*365))
 SAVEHIST=$((1024*365))
 
+# Git-aware fancy prompt {{{
 setopt prompt_subst
-
-# Prompt inspired by Ben Hoskings
 tilde_or_pwd() {
   echo $PWD | sed -e "s/\/Users\/$USER/~/"
 }
@@ -21,7 +21,25 @@ cur_dir=$'%{\e[0;90m%}$(tilde_or_pwd)%{\e[0m%}'
 git_info='$(git_cwd_info)'
 export PROMPT="$arrow "
 export RPROMPT="$cur_dir $git_info"
+# }}}
 
+# Bash-like Ctrl+W and Alt+Backspace{{{
+
+# Ctrl+W
+unix-word-rubout() {
+    local WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
+    zle backward-kill-word
+}
+zle -N unix-word-rubout
+bindkey '^W' unix-word-rubout
+
+# Alt+backspace
+WORDCHARS='*?[]~&;!$%^<>'
+bindkey '\e^h' backward-kill-word
+
+# }}}
+bindkey "^[[3~"     delete-char
+bindkey "^[3;5~"    delete-char
 
 setopt interactivecomments
 setopt auto_cd         # Type ".." instead of "cd ..", "/usr/" instead of "cd /usr/".
@@ -39,12 +57,6 @@ setopt hist_find_no_dups
 setopt no_hist_ignore_space
 setopt inc_append_history
 
-# Alt+backspace
-bindkey '\e^h' backward-kill-word
-export WORDCHARS='*?[]~&;!$%^<>'
-bindkey "^[[3~"     delete-char
-bindkey "^[3;5~"    delete-char
-
 # caching 
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
@@ -57,6 +69,11 @@ autoload -Uz compinit; compinit
 # Color in completion
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+function rmdir() {
+    rm -f "$1/.DS_Store">/dev/null
+    "$(which -p rmdir)" "$@"
+}
 
 unalias run-help
 autoload run-help
