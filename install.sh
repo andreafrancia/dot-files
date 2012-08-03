@@ -39,7 +39,6 @@ install_link .zsh
 install_link .zshenv 
 install_link .zshrc
 install_link bin 
-install_link git-prompt
 install_link .ackrc
 install_link .dircolors
 
