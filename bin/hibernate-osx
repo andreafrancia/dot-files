@@ -1,0 +1,18 @@
+#/bin/bash -p
+# Put the Mac in safe sleep (hibernate)
+# Modified from: http://hints.macworld.com/article.php?story=20051114140328545
+# Andrea Francia 2012
+
+# Require a password
+/usr/bin/sudo -v 
+
+# tell battery to go to sleep
+(
+    /usr/bin/sudo /usr/bin/pmset force -a hibernatemode 1
+    /bin/sleep 16
+    /usr/bin/sudo /usr/bin/pmset force -a hibernatemode 3
+) &
+
+# tell User Interface to go to sleep
+/usr/bin/osascript -e 'tell application "Finder" to sleep';
+
