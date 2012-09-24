@@ -43,22 +43,19 @@ inoremap <silent> <C-U> <C-\><C-O>d0
 set showmatch
 set incsearch
 set hlsearch     " highlight found word after search
+set noignorecase  "make searches case-sensitive
 
-" Make searches case-sensitive only if they contain upper-case characters
-set ignorecase 
+" clear the search highlight on normal clear
+nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
+
 set smartcase
 " }}}
 " Visualisation {{{
-
 set t_Co=256 " Andrea: enable 256 colors
 set foldlevelstart=20 " Andrea: Should open all (almost) level
 set listchars=tab:▸\ ,trail:·,eol:¬ " Andrea: show tabs and spaces:
 " Andrea: Draw a red line on column (one char after the textwidth value)
 if exists('+colorcolumn') | set colorcolumn=+1 | endif
-
-" GRB: clear the search buffer when hitting comma then return
-nnoremap ,<CR> :nohlsearch<CR>
-
 set background=dark
 colorscheme xoria256
 
@@ -120,23 +117,35 @@ autocmd BufRead,BufNewFile *.json setfiletype javascript
 " Text files {{{
 autocmd BufRead,BufNewFile *.txt setfiletype text
 autocmd BufRead,BufNewFile README setfiletype text
+
 autocmd FileType text setlocal formatoptions+=w textwidth=78  " wrap at col 78
-                             \ formatoptions+=n   " recognized numbered lists
-                             \ shiftwidth=3
+autocmd FileType text setlocal formatoptions+=t   " autowrap
+autocmd FileType text setlocal formatoptions+=n   " recognize numbered lists
+autocmd FileType text setlocal shiftwidth=2
+autocmd FileType text setlocal softtabstop=2
+
 runtime macros/justify.vim  " format with _j
 " }}}
 
 " Python files {{{
 
-let g:pymode_lint_checker = "pyflakes"
-let python_space_error_highlight = 1
 
 autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab 
-                               \ textwidth=78 foldmethod=indent
-                               \ omnifunc=pythoncomplete#Complete
-                               \ formatoptions+=l " Do not broke long line 
-                               \ formatoptions-=t " Do not autowrap
-                               \ indentkeys-=:
+autocmd FileType python setlocal textwidth=78 foldmethod=indent
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType python setlocal formatoptions+=l " Do not broke long line 
+autocmd FileType python setlocal formatoptions-=t " Do not autowrap
+autocmd FileType python setlocal indentkeys-=:
+
+let g:pymode_lint_checker = "pyflakes"
+let python_space_error_highlight = 1
+let pymode_rope_extended_complete = 1
+let pymode_rope_guess_project = 1
+let pymode_rope_enable_autoimport = 1
+let pymode_lint_cwindow = 0
+autocmd FileType python RopeOpenProject
+let g:pymode_rope_autoimport_modules = ['os', 'shutil', 'nose', 'nose.tools',
+            \ 'trashcli.trash'] 
 " }}}
 
 " Ruby files {{{
