@@ -27,7 +27,7 @@ export RPROMPT="$cur_dir $git_info"
 
 # Ctrl+W
 unix-word-rubout() {
-    local WORDCHARS='*?_-.[]~=/&;!#$%^(){}<>'
+    local WORDCHARS='*?_-.[]~=&;!#$%^(){}<>'
     zle backward-kill-word
 }
 zle -N unix-word-rubout
