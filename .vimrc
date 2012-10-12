@@ -137,15 +137,7 @@ autocmd FileType python setlocal formatoptions+=l " Do not broke long line
 autocmd FileType python setlocal formatoptions-=t " Do not autowrap
 autocmd FileType python setlocal indentkeys-=:
 
-let g:pymode_lint_checker = "pyflakes"
 let python_space_error_highlight = 1
-let pymode_rope_extended_complete = 1
-let pymode_rope_guess_project = 1
-let pymode_rope_enable_autoimport = 1
-let pymode_lint_cwindow = 0
-autocmd FileType python RopeOpenProject
-let g:pymode_rope_autoimport_modules = ['os', 'shutil', 'nose', 'nose.tools',
-            \ 'trashcli.trash'] 
 " }}}
 
 " Ruby files {{{
