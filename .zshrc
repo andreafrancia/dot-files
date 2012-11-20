@@ -78,3 +78,8 @@ function rmdir() {
 unalias run-help
 autoload run-help
 HELPDIR=~/.zsh_help
+
+source ~/.rvm/scripts/rvm
+
+### Added by the Heroku Toolbelt
+#export PATH="/usr/local/heroku/bin:$PATH"
