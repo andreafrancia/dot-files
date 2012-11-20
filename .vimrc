@@ -7,8 +7,9 @@ call pathogen#infect()  " Enable pathogen and all its installed bundles
 :Helptags               " enable help for pathogen bundles
 " }}}
 " Behaviour {{{
-set history=65535    " I want a big history (the default is only 20 commands)
-set hidden              " Allow backgrounding buffers without writing them
+set history=65535   " I want a big history (the default is only 20 commands)
+set hidden          " Allow backgrounding buffers, even unsaved ones
+
 " When editing a file, always jump to the last known cursor position.
 " Don't do it when the position is invalid or when inside an event handler
 " (happens when dropping a file on gvim).
@@ -22,12 +23,12 @@ set backspace=indent,eol,start    " allow backspacing over everything in
                                   " insert mode
 set autoindent
 set expandtab
-set tabstop=8
+set tabstop=8                     " Real TABs stops at 8 period.
 set shiftwidth=4
 set softtabstop=4   
-set smarttab         " Tab insert blanks and backspace eat blanks
-set laststatus=2     " show statusline always
-set formatoptions-=t " Do not autowrap by default
+set smarttab                      " Tab insert blanks and backspace eat blanks
+set laststatus=2                  " show statusline always
+set formatoptions-=t              " Do not autowrap by default
 
 " Undo for Ctrl+W and Ctrl+U {{{
 " Use:
@@ -128,8 +129,6 @@ runtime macros/justify.vim  " format with _j
 " }}}
 
 " Python files {{{
-
-
 autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab 
 autocmd FileType python setlocal textwidth=78 foldmethod=indent
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
