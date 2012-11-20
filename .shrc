@@ -3,6 +3,7 @@
 # PATH -----------------------------------------------------------------------
 GEM_PATH=~/.gems
 PATH="\
+$HOME/.rvm/bin:\
 /usr/local/Cellar/php/5.3.10/lib/php:\
 /usr/local/share/python:\
 /usr/local/share/python3:\
