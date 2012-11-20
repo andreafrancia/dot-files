@@ -1,0 +1,4 @@
+#!/bin/bash
+pmset -a hibernatemode 25
+shutdown -s now
+pmset -a hibernatemode 3
