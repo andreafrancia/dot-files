@@ -17,7 +17,8 @@ $HOME/bin.local:\
 $PATH"
 export PATH
 
-brew --prefix coreutils >& /dev/null && PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+# Add GNU's ls, cp, mv, etc. to PATH
+PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
 
 export EDITOR=vim
 export LC_CTYPE=en_US.UTF-8
