@@ -54,4 +54,8 @@ activate_virtualenv() {
     fi
 }
 
+activate_rvm() {
+    source ~/.rvm/scripts/rvm
+}
+
 # vim: set ft=sh:

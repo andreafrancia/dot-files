@@ -38,6 +38,7 @@ WORDCHARS='*?[]~&;!$%^<>'
 bindkey '\e^h' backward-kill-word
 
 # }}}
+
 bindkey "^[[3~"     delete-char
 bindkey "^[3;5~"    delete-char
 
@@ -47,7 +48,7 @@ setopt rm_star_wait    # 10 second wait if you do something that will delete eve
 setopt no_flow_control # Disable ctrl+s
 setopt no_case_glob    # Case insensitive globbing
 setopt numeric_glob_sort 
-setopt no_clobber
+setopt no_clobber      # Fail when > existent
 setopt beep
 setopt notify
 
@@ -57,6 +58,9 @@ setopt hist_find_no_dups
 setopt no_hist_ignore_space
 setopt inc_append_history
 
+# Completion
+autoload -Uz compinit
+
 # caching 
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path ~/.zsh/cache
@@ -64,11 +68,17 @@ zstyle ':completion:*' cache-path ~/.zsh/cache
 zstyle ':completion:*' list-colors ''
 zstyle ':completion:*' menu select=long
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-autoload -Uz compinit; compinit
 
 # Color in completion
-zstyle ':completion:*' list-colors ''
 zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
+
+function load_compinit_at_first_tab_press() {
+    compinit
+    bindkey '^I' expand-or-complete
+    zle expand-or-complete
+}
+zle -N load_compinit_at_first_tab_press
+bindkey '^I' load_compinit_at_first_tab_press
 
 function rmdir() {
     rm -f "$1/.DS_Store">/dev/null
@@ -79,7 +89,5 @@ unalias run-help
 autoload run-help
 HELPDIR=~/.zsh_help
 
-source ~/.rvm/scripts/rvm
-
 ### Added by the Heroku Toolbelt
-#export PATH="/usr/local/heroku/bin:$PATH"
+export PATH="/usr/local/heroku/bin:$PATH"
