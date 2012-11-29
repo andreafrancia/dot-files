@@ -1,0 +1,5 @@
+#!/bin/sh
+progname="$(basename "$0")"
+[ -z "$1" ] && { echo "Usage:\n  $progname FILENAME" 1>&2; exit 1; }
+
+sed -i .bak -E "s/[[:space:]]*$//" "$@"
