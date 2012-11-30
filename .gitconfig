@@ -17,3 +17,5 @@
         undo-last-commit = reset --soft HEAD~1
 [difftool]
 	prompt = false
+[push]
+	default = simple
