@@ -17,12 +17,26 @@ $HOME/bin.local:\
 $PATH"
 export PATH
 
-# Add GNU's ls, cp, mv, etc. to PATH
-PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
-
 export EDITOR=vim
 export LC_CTYPE=en_US.UTF-8
 export PIP_DOWNLOAD_CACHE=~/.pip/cache # PIP download cache
+
+# prefer GNU version for some programs, when found in path
+for cmd in ls rm cp mv find grep; do
+    if type "g$cmd" >& /dev/null; then
+        # creates a function like:
+        #       ls() { gls "$@"; }
+        eval "$cmd() { g$cmd \"\$@\"; }"
+        # Note: We use function because...
+        # 1. it is better than adding the gnubin directory to the PATH, e.g.
+        #       PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+        #    because functions are not propagated to the scripts invoked by
+        #    the shell
+        # 2. it is better than using aliases (e.g. alias mv='gmv', because
+        #    using aliases at this point would be overridden by further
+        #    aliases, e.g. alias mv='mv -i'
+    fi
+done
 
 # File protection aliases ----------------------------------------------------
 alias rm='rm -i'
@@ -34,7 +48,6 @@ export PYTHONDONTWRITEBYTECODE=1
 
 # Other aliases ---------------------------------------------------------------
 alias grep='grep --color'
-alias find='gfind'
 
 # Colors for ls --------------------------------------------------------------
 if ls --color . >& /dev/null; then
