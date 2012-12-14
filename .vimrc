@@ -30,6 +30,9 @@ set smarttab                      " Tab insert blanks and backspace eat blanks
 set laststatus=2                  " show statusline always
 set formatoptions-=t              " Do not autowrap by default
 
+nnoremap <Leader>u :GundoToggle<CR>
+set undofile
+
 " Undo for Ctrl+W and Ctrl+U {{{
 " Use:
 "  - Ctrl-W to delete the previous word,
