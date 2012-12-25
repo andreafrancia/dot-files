@@ -8,7 +8,6 @@ brew install ctags
 brew install curl
 brew install dos2unix
 brew install git
-brew install grep
 brew install htop
 brew install nmap
 brew install par
@@ -20,6 +19,8 @@ brew install python
 brew install bash
 brew install bash-completion
 brew install grep
+brew install openssh
+brew install ssh-copy-id
 
 # boost bash completion
 curl http://worksintheory.org/files/misc/bash_completion_svn -o "$(brew --prefix)/etc/bash_completion.d/bash_completion_svn"
