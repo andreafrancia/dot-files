@@ -27,7 +27,7 @@ for cmd in ls rm cp mv find grep; do
         # creates a function like:
         #       ls() { gls "$@"; }
         eval "$cmd() { g$cmd \"\$@\"; }"
-        # Note: We use function because...
+        # Note: We use functions because...
         # 1. it is better than adding the gnubin directory to the PATH, e.g.
         #       PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
         #    because functions are not propagated to the scripts invoked by
