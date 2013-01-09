@@ -88,7 +88,10 @@ function AFMyFoldText()
 endfunction
 
 " Andrea: remove trailing spaces from line
-nnoremap ,d $gelD
+nnoremap <leader>d :s/\s\+$//<CR>
+vnoremap <leader>d :s/\s\+$//<CR>
+
+
 
 " }}}
 " Completion {{{
@@ -158,9 +161,15 @@ set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp  " where to put backups
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp  " where to put swapfile
 autocmd FocusLost * :wa  "save on focus lost
 " }}}
+
+" QuickFix {{{
+set makeprg=make
+nnoremap ,t :wa \| :make<CR>
+set switchbuf=useopen
+" }}}
 " Python unit testing {{{
 
-set makeprg=clear;\ env/bin/nosetests\ --with-machineout\ --stop
+"set makeprg=clear;\ env/bin/nosetests\ --with-machineout\ --stop
 set efm=%f:%l:\ fail:\ %m,%f:%l:\ error:\ %m
 
 nnoremap <c-j> :cprevious <CR>
