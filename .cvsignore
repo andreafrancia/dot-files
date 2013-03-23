@@ -8,4 +8,5 @@ Thumbs.db
 tags
 *.un~
 *~
+*.bak
 .ropeproject/
