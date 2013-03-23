@@ -90,9 +90,6 @@ endfunction
 " Andrea: remove trailing spaces from line
 nnoremap <leader>d :s/\s\+$//<CR>
 vnoremap <leader>d :s/\s\+$//<CR>
-
-
-
 " }}}
 " Completion {{{
 "
@@ -166,26 +163,14 @@ autocmd FocusLost * :wa  "save on focus lost
 set makeprg=make
 nnoremap <leader>t :wa \| :make<CR>
 set switchbuf=useopen
-" }}}
-" Python unit testing {{{
-
-"set makeprg=clear;\ env/bin/nosetests\ --with-machineout\ --stop
-set efm=%f:%l:\ fail:\ %m,%f:%l:\ error:\ %m
-
 nnoremap <c-j> :cprevious <CR>
 nnoremap <c-k> :cnext <CR>
-
-hi GreenBar term=reverse ctermfg=black ctermbg=lightgreen guifg=white guibg=green
-hi RedBar   term=reverse ctermfg=black ctermbg=lightred   guifg=white guibg=red
 " }}}
 " Plugins Configuratons {{{ 
 
 " Syntastic {{{
 
 " Syntastic for python
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
 let g:syntastic_enable_signs=1
 
 " Error list automatic opening: 
