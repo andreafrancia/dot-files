@@ -15,12 +15,24 @@ tilde_or_pwd() {
   echo $PWD | sed -e "s/\/Users\/$USER/~/"
 }
 
-arrow=$'%{\e[0;%(?.32.31)m%}>%{\e[0m%}'
-user_at_host=$'%{\e[0;90m%}%n@%{\e[0;30;47m%}%M%{\e[0m%}'
-cur_dir=$'%{\e[0;90m%}$(tilde_or_pwd)%{\e[0m%}'
-git_info='$(git_cwd_info)'
-export PROMPT="$arrow "
-export RPROMPT="$cur_dir $git_info"
+red-on-error() {
+    red_on_error=$'%{\e[0;%(?.32.31)m%}'
+    no_color=$'%{\e[0m%}'
+    echo "$red_on_error$@$no_color"
+}
+prompt-normal() {
+    arrow="$(red-on-error ">")"
+    git_info='$(git_cwd_info)'
+    cur_dir=$'%{\e[0;90m%}$(tilde_or_pwd)%{\e[0m%}'
+    export PROMPT="$arrow "
+    export RPROMPT="$cur_dir $git_info"
+}
+prompt-simple() {
+    dollar="$(red-on-error "\$")"
+    export PROMPT="$dollar "
+    export RPROMPT=
+}
+prompt-normal
 # }}}
 
 # Bash-like Ctrl+W and Alt+Backspace{{{
@@ -91,3 +103,7 @@ HELPDIR=~/.zsh_help
 
 ### Added by the Heroku Toolbelt
 export PATH="/usr/local/heroku/bin:$PATH"
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+# zsh completion
+fpath=(/usr/local/share/zsh-completions $fpath)

@@ -22,9 +22,7 @@ brew install grep
 brew install openssh
 brew install ssh-copy-id
 brew install md5sha1sum
-
-# boost bash completion
-curl http://worksintheory.org/files/misc/bash_completion_svn -o "$(brew --prefix)/etc/bash_completion.d/bash_completion_svn"
+brew install zsh-completions
 
 # Install MacVim
 brew install macvim --enable-cscope --enable-clipboard \
