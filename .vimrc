@@ -164,7 +164,7 @@ autocmd FocusLost * :wa  "save on focus lost
 
 " QuickFix {{{
 set makeprg=make
-nnoremap ,t :wa \| :make<CR>
+nnoremap <leader>t :wa \| :make<CR>
 set switchbuf=useopen
 " }}}
 " Python unit testing {{{
