@@ -42,6 +42,7 @@ install_link bin
 install_link .ackrc
 install_link .dircolors
 install_link .gemrc
+install_link .irbrc
 
 mkdir -p ~/.vim-tmp ~/.tmp
 mkdir -m 0700 ~/.ssh
