@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+numbers = []
+ARGF.each_line do |line| 
+  numbers << line.to_f
+end
+print "Sum: #{numbers.inject 0, :+}\n"
