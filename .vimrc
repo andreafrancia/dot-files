@@ -4,7 +4,7 @@ set nocompatible
 
 " Load plugins {{{
 call pathogen#infect()  " Enable pathogen and all its installed bundles
-:Helptags               " enable help for pathogen bundles
+" :Helptags               " enable help for pathogen bundles
 " }}}
 let g:Powerline_symbols = 'fancy'
 " Behaviour {{{
@@ -101,8 +101,10 @@ set completeopt=
 set completeopt+=menu     " Show menu
 set completeopt+=menuone  " Show menu also when there is only one item
 set completeopt+=longest  " Complete with the longest match available
-"set completeopt+=preview  " Show extra information about the the current item
-
+set completeopt+=preview  " Show extra information about the the current item
+set complete-=t
+set complete-=i
+"
 " Configure the command line completion
 set wildchar=<Tab>        " Tab start the completion
 set nowildmenu
@@ -160,8 +162,8 @@ autocmd FocusLost * :wa  "save on focus lost
 " }}}
 
 " QuickFix {{{
-set makeprg=make
-nnoremap <leader>t :wa \| :make<CR>
+nnoremap ,t :wa \| :make<CR>
+nnoremap ,l :wa \| :lmake<CR>
 set switchbuf=useopen
 nnoremap <c-j> :cprevious <CR>
 nnoremap <c-k> :cnext <CR>
