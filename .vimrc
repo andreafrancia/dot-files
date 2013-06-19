@@ -6,6 +6,7 @@ set nocompatible
 call pathogen#infect()  " Enable pathogen and all its installed bundles
 " :Helptags               " enable help for pathogen bundles
 " }}}
+set clipboard=unnamed,unnamedplus,autoselect
 let g:Powerline_symbols = 'fancy'
 " Behaviour {{{
 set history=65535   " I want a big history (the default is only 20 commands)
@@ -128,7 +129,7 @@ autocmd BufRead,BufNewFile README setfiletype text
 autocmd FileType text setlocal formatoptions+=w textwidth=78  " wrap at col 78
 autocmd FileType text setlocal formatoptions+=t   " autowrap
 autocmd FileType text setlocal formatoptions+=n   " recognize numbered lists
-autocmd FileType text setlocal shiftwidth=2
+autocmd FileType text setlocal shiftwidth=3
 autocmd FileType text setlocal softtabstop=2
 
 runtime macros/justify.vim  " format with _j
@@ -148,6 +149,7 @@ let python_space_error_highlight = 1
 " Ruby files {{{
 autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab 
                                \ textwidth=78 foldmethod=syntax
+autocmd BufRead,BufNewFile *_spec.rb compiler rspec
 " }}}
 
 autocmd BufEnter /private/tmp/crontab.* setlocal backupcopy=yes
