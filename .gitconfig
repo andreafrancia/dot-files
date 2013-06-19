@@ -3,11 +3,9 @@
 	email = andrea@andreafrancia.it
 [core]
 	excludesfile = ~/.cvsignore
+	editor = vim
 [color]
 	ui = auto
-	diff = auto
-	status = auto
-	branch = auto
 [alias]
 	aa = add --all
         l = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
@@ -15,7 +13,11 @@
 	ci = commit
 	unstage = reset HEAD --
         undo-last-commit = reset --soft HEAD~1
+	commit = commit -v
+	co = checkout
 [difftool]
 	prompt = false
 [push]
 	default = simple
+[aliases]
+	commit = commit -v
