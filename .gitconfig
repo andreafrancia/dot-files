@@ -8,16 +8,14 @@
 	ui = auto
 [alias]
 	aa = add --all
-        l = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
+	l = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
 	st = status --short
 	ci = commit
 	unstage = reset HEAD --
-        undo-last-commit = reset --soft HEAD~1
+	undo-last-commit = reset --soft HEAD~1
 	commit = commit -v
 	co = checkout
 [difftool]
 	prompt = false
 [push]
 	default = simple
-[aliases]
-	commit = commit -v
