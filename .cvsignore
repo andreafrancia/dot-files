@@ -2,11 +2,9 @@
 *.swo
 *.pyc
 .vim/.netrwhist
-mac-commands
 .DS_Store
 Thumbs.db
 tags
 *.un~
 *~
 *.bak
-.ropeproject/
