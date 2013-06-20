@@ -18,7 +18,7 @@ brew install wget
 brew install python
 brew install bash
 brew install bash-completion
-brew install grep
+brew install homebrew/dupes/grep
 brew install openssh
 brew install ssh-copy-id
 brew install md5sha1sum
