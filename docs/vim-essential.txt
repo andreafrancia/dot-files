@@ -1,0 +1,25 @@
+set nocompatible 
+set autoindent 
+set hidden
+
+set expandtab 
+set smarttab 
+set tabstop=8 
+set shiftwidth=4 
+set softtabstop=4
+
+set incsearch 
+set hlsearch
+
+set textwidth=78 
+
+if exists('+colorcolumn') 
+   set colorcolumn=+1 
+endif
+
+" Integration
+set clipboard=unnamed,unnamedplus,autoselect
+
+set history=65535
+
+syntax on

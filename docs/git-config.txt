@@ -1,0 +1,19 @@
+git config --global user.name "Andrea Francia"
+git config --global user.email andrea@andreafrancia.it
+
+git config --global core.excludesfile "~/.cvsignore"
+git config --global core.editor vim
+git config --global color.ui auto
+git config --global alias.aa "add --all"
+git config --global alias.l "log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'"
+git config --global alias.st "status --short"
+git config --global alias.ci commit
+git config --global alias.unstage "reset HEAD --"
+git config --global alias.undo-last-commit "reset --soft HEAD~1"
+git config --global alias.commit "commit -v"
+git config --global alias.co "checkout"
+git config --global difftool.prompt false
+
+# need git v1.7.11
+git config --global push.default simple
+
