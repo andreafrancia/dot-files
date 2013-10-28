@@ -21,7 +21,7 @@ red-on-error() {
     echo "$red_on_error$@$no_color"
 }
 prompt-normal() {
-    arrow="$(red-on-error ">")"
+    arrow="$(red-on-error "\$")"
     git_info='$(git_cwd_info)'
     cur_dir=$'%{\e[0;90m%}$(tilde_or_pwd)%{\e[0m%}'
     export PROMPT="$arrow "
