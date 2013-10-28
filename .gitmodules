@@ -10,33 +10,15 @@
 [submodule ".vim/bundle/nerdtree"]
 	path = .vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
-[submodule ".vim/bundle/syntastic"]
-	path = .vim/bundle/syntastic
-	url = https://github.com/scrooloose/syntastic.git
 [submodule ".vim/bundle/Align"]
 	path = .vim/bundle/Align
 	url = https://github.com/vim-scripts/Align.git
-[submodule ".vim/bundle/indent-object"]
-	path = .vim/bundle/indent-object
-	url = https://github.com/michaeljsmith/vim-indent-object.git
-[submodule ".vim/bundle/colors-solarized"]
-	path = .vim/bundle/colors-solarized
-	url = https://github.com/altercation/vim-colors-solarized.git
 [submodule ".vim/bundle/vim-surround"]
 	path = .vim/bundle/vim-surround
 	url = git://github.com/tpope/vim-surround.git
-[submodule ".vim/bundle/eunuch"]
-	path = .vim/bundle/eunuch
-	url = https://github.com/tpope/vim-eunuch.git
 [submodule ".vim/bundle/unimpaired"]
 	path = .vim/bundle/unimpaired
 	url = https://github.com/tpope/vim-unimpaired.git
-[submodule ".vim/bundle/taglist"]
-	path = .vim/bundle/taglist
-	url = https://github.com/vim-scripts/taglist.vim.git
-[submodule ".vim/bundle/vundle"]
-	path = .vim/bundle/vundle
-	url = https://github.com/gmarik/vundle.git
 [submodule ".vim/bundle/vim-repeat"]
 	path = .vim/bundle/vim-repeat
 	url = git@github.com:tpope/vim-repeat.git
@@ -46,15 +28,6 @@
 [submodule ".vim/bundle/vim-eunuch"]
 	path = .vim/bundle/vim-eunuch
 	url = git://github.com/tpope/vim-eunuch.git
-[submodule ".vim/bundle/vim-rake"]
-	path = .vim/bundle/vim-rake
-	url = git://github.com/tpope/vim-rake.git
-[submodule ".vim/bundle/vim-bundler"]
-	path = .vim/bundle/vim-bundler
-	url = git://github.com/tpope/vim-bundler.git
-[submodule ".vim/bundle/vim-rails"]
-	path = .vim/bundle/vim-rails
-	url = git://github.com/tpope/vim-rails.git
 [submodule ".vim/bundle/gundo"]
 	path = .vim/bundle/gundo
 	url = http://github.com/sjl/gundo.vim.git
@@ -64,9 +37,3 @@
 [submodule ".vim/bundle/vim-ruby"]
 	path = .vim/bundle/vim-ruby
 	url = https://github.com/vim-ruby/vim-ruby.git
-[submodule ".vim/bundle/vim-scripts-matchit"]
-	path = .vim/bundle/vim-scripts-matchit
-	url = https://github.com/vim-scripts/matchit.zip.git
-[submodule ".vim/bundle/ecomba-vim-ruby-refactoring"]
-	path = .vim/bundle/ecomba-vim-ruby-refactoring
-	url = https://github.com/ecomba/vim-ruby-refactoring.git
