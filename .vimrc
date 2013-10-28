@@ -6,7 +6,6 @@ set nocompatible
 call pathogen#infect()  " Enable pathogen and all its installed bundles
 " :Helptags               " enable help for pathogen bundles
 " }}}
-set clipboard=unnamed,unnamedplus,autoselect
 let g:Powerline_symbols = 'fancy'
 " Behaviour {{{
 set history=65535   " I want a big history (the default is only 20 commands)
@@ -21,13 +20,13 @@ autocmd BufReadPost *
 \ endif
 " }}}
 " Editing {{{
-set backspace=indent,eol,start    " allow backspacing over everything in 
+set backspace=indent,eol,start    " allow backspacing over everything in
                                   " insert mode
 set autoindent
 set expandtab
 set tabstop=8                     " Real TABs stops at 8 period.
 set shiftwidth=4
-set softtabstop=4   
+set softtabstop=4
 set smarttab                      " Tab insert blanks and backspace eat blanks
 set laststatus=2                  " show statusline always
 set formatoptions-=t              " Do not autowrap by default
@@ -75,10 +74,10 @@ set scrolloff=4      " Keep more context when scrolling off the end of a
 set nowrap
 syntax on
 
-if has("gui_running") 
+if has("gui_running")
     set guioptions-=T   " hide the toolbar in GUI mode
     set columns=80      " this seems not to work
-endif 
+endif
 
 highlight Folded guibg=white guifg=blue
 set foldtext=AFMyFoldText()
@@ -136,18 +135,24 @@ runtime macros/justify.vim  " format with _j
 " }}}
 
 " Python files {{{
-autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab 
+autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab
 autocmd FileType python setlocal textwidth=78 foldmethod=indent
 autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType python setlocal formatoptions+=l " Do not broke long line 
+autocmd FileType python setlocal formatoptions+=l " Do not broke long line
 autocmd FileType python setlocal formatoptions-=t " Do not autowrap
 autocmd FileType python setlocal indentkeys-=:
 
 let python_space_error_highlight = 1
 " }}}
 
+" Markdown {{{
+autocmd BufRead,BufNewFile *.md set filetype=markdown
+autocmd FileType markdown setlocal shiftwidth=4 softtabstop=4 expandtab
+                               \ textwidth=78
+" }}}
+
 " Ruby files {{{
-autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab 
+autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab
                                \ textwidth=78 foldmethod=syntax
 autocmd BufRead,BufNewFile *_spec.rb compiler rspec
 autocmd BufRead,BufNewFile setlocal errorformat=
@@ -165,7 +170,7 @@ autocmd BufEnter /private/tmp/crontab.* setlocal backupcopy=yes
 " }}}
 " Directory for swap files and backups {{{
 set backup		" keep a backup file
-" Store temporary files in a central spot : 
+" Store temporary files in a central spot :
 set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp  " where to put backups
 set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp  " where to put swapfile
 autocmd FocusLost * :wa  "save on focus lost
@@ -178,14 +183,14 @@ set switchbuf=useopen
 nnoremap <c-j> :cprevious <CR>
 nnoremap <c-k> :cnext <CR>
 " }}}
-" Plugins Configuratons {{{ 
+" Plugins Configuratons {{{
 
 " Syntastic {{{
 
 " Syntastic for python
 let g:syntastic_enable_signs=1
 
-" Error list automatic opening: 
+" Error list automatic opening:
 " 0 - manual
 " 1 - auto open and close
 " 2 - auto open manual close
@@ -198,7 +203,7 @@ let g:syntastic_auto_loc_list=2
 let mapleader=","
 
 " Map ,f to toggle NERDTree
-nnoremap <leader>f :NERDTreeToggle<CR> 
+nnoremap <leader>f :NERDTreeToggle<CR>
 
 " Map ,e and ,v to open files in the same directory as the current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
