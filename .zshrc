@@ -97,6 +97,10 @@ function rmdir() {
     "$(which -p rmdir)" "$@"
 }
 
+function show-evil-whitespaces() {
+    ack -k " +$" $(git diff --cached --name-only ) "$@"
+}
+
 unalias run-help
 autoload run-help
 HELPDIR=~/.zsh_help
