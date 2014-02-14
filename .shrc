@@ -6,6 +6,7 @@ PATH="\
 $HOME/.rvm/bin:\
 /usr/local/Cellar/php/5.3.10/lib/php:\
 /usr/local/Cellar/ruby/1.9.3-p125/bin:\
+/usr/local/share/python:\
 $HOME/bin:\
 $HOME/bin.local:\
 /usr/local/sbin:\
