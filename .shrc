@@ -1,8 +1,0 @@
-# rc common to Bash and Zsh
-#
-# PATH -----------------------------------------------------------------------
-
-export LC_CTYPE=en_US.UTF-8
-export PIP_DOWNLOAD_CACHE=~/.pip/cache
-
-# vim: set ft=sh:

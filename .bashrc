@@ -1,8 +1,6 @@
 # If not running interactively ... get out of here! 
 [ -z "$PS1" ] && return
 
-. "$(dirname "$BASH_SOURCE")/.shrc"
-
 # history
 HISTFILE=~/.bash_history
 HISTSIZE=$((128*365)) # how many history line to be saved on exit

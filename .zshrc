@@ -19,7 +19,6 @@ export EDITOR=vim
 export LC_CTYPE=en_US.UTF-8
 
 bindkey -e
-. ~/.shrc
 
 # history
 HISTFILE=~/.zsh_history
@@ -164,3 +163,7 @@ done
 
 # Unbreak Python's error-prone .pyc file generation
 export PYTHONDONTWRITEBYTECODE=1
+
+# This will make pip use the same download cache for all virtualenvs
+export PIP_DOWNLOAD_CACHE=~/.pip/cache
+# vim: set ft=sh:
