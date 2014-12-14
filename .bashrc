@@ -21,3 +21,5 @@ alias mv='mv -i'
 
 # Unbreak Python's error-prone .pyc file generation
 export PYTHONDONTWRITEBYTECODE=1
+export EDITOR=vim
+export LC_CTYPE=en_US.UTF-8

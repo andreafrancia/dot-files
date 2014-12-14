@@ -1,6 +1,23 @@
 # If not running interactively ... get out of here! 
 [ -z "$PS1" ] && return
 
+GEM_PATH=~/.gems
+PATH="\
+$HOME/.rvm/bin:\
+$HOME/bin:\
+$HOME/bin.local:\
+/usr/local/sbin:\
+/usr/local/bin:\
+/sbin:\
+/usr/sbin:\
+$PATH"
+export PATH
+
+export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
+
+export EDITOR=vim
+export LC_CTYPE=en_US.UTF-8
+
 bindkey -e
 . ~/.shrc
 

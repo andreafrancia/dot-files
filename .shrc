@@ -1,21 +1,7 @@
 # rc common to Bash and Zsh
 #
 # PATH -----------------------------------------------------------------------
-GEM_PATH=~/.gems
-PATH="\
-$HOME/.rvm/bin:\
-$HOME/bin:\
-$HOME/bin.local:\
-/usr/local/sbin:\
-/usr/local/bin:\
-/sbin:\
-/usr/sbin:\
-$PATH"
-export PATH
 
-export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
-
-export EDITOR=vim
 export LC_CTYPE=en_US.UTF-8
 export PIP_DOWNLOAD_CACHE=~/.pip/cache
 
