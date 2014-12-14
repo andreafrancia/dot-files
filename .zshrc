@@ -111,3 +111,39 @@ export PATH="/usr/local/heroku/bin:$PATH"
 
 # zsh completion
 fpath=(/usr/local/share/zsh-completions $fpath)
+
+# File protection aliases ----------------------------------------------------
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# Other aliases ---------------------------------------------------------------
+alias grep='grep --color'
+
+# Colors for ls --------------------------------------------------------------
+if ls --color . >& /dev/null; then
+    alias ls='ls -h --color'
+else
+    echo "Using the lame \`ls' of BSD"
+    alias ls='ls -h -G'
+fi
+
+# prefer GNU version for some programs, when found in path
+for cmd in ls rm cp mv find grep; do
+    if type "g$cmd" >& /dev/null; then
+        # creates a function like:
+        #       ls() { gls "$@"; }
+        eval "$cmd() { g$cmd \"\$@\"; }"
+        # Note: We use functions because...
+        # 1. it is better than adding the gnubin directory to the PATH, e.g.
+        #       PATH="/usr/local/opt/coreutils/libexec/gnubin:$PATH"
+        #    because functions are not propagated to the scripts invoked by
+        #    the shell
+        # 2. it is better than using aliases (e.g. alias mv='gmv', because
+        #    using aliases at this point would be overridden by further
+        #    aliases, e.g. alias mv='mv -i'
+    fi
+done
+
+# Unbreak Python's error-prone .pyc file generation
+export PYTHONDONTWRITEBYTECODE=1

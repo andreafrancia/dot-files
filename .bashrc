@@ -13,3 +13,11 @@ HISTCONTROL= # remember both commands with spaces and duplicages
 shopt -s histappend 
 
 shopt -s checkwinsize
+
+# File protection aliases ----------------------------------------------------
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# Unbreak Python's error-prone .pyc file generation
+export PYTHONDONTWRITEBYTECODE=1
