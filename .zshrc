@@ -32,19 +32,19 @@ tilde_or_pwd() {
 }
 
 red-on-error() {
-    red_on_error=$'%{\e[0;%(?.32.31)m%}'
-    no_color=$'%{\e[0m%}'
+    local red_on_error=$'%{\e[0;%(?.32.31)m%}'
+    local no_color=$'%{\e[0m%}'
     echo "$red_on_error$@$no_color"
 }
 prompt-normal() {
-    arrow="$(red-on-error "\$")"
-    git_info='$(git_cwd_info)'
-    cur_dir=$'%{\e[0;90m%}$(tilde_or_pwd)%{\e[0m%}'
+    local arrow="$(red-on-error "\$")"
+    local git_info='$(git_cwd_info)'
+    local cur_dir=$'%{\e[0;90m%}$(tilde_or_pwd)%{\e[0m%}'
     export PROMPT="$arrow "
     export RPROMPT="$cur_dir $git_info"
 }
 prompt-simple() {
-    dollar="$(red-on-error "\$")"
+    local dollar="$(red-on-error "\$")"
     export PROMPT="$dollar "
     export RPROMPT=
 }
