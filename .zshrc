@@ -38,10 +38,9 @@ red-on-error() {
 }
 prompt-normal() {
     local dollar="$(red-on-error "\$")"
-    local git_info='$(git_cwd_info)'
     local cur_dir=$'%{\e[0;90m%}$(tilde_or_pwd)%{\e[0m%}'
     export PROMPT="$dollar "
-    export RPROMPT="$cur_dir $git_info"
+    export RPROMPT="$cur_dir "'$(git_cwd_info)'
 }
 prompt-simple() {
     local dollar="$(red-on-error "\$")"
