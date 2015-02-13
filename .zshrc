@@ -37,10 +37,10 @@ red-on-error() {
     echo "$red_on_error$@$no_color"
 }
 prompt-normal() {
-    local arrow="$(red-on-error "\$")"
+    local dollar="$(red-on-error "\$")"
     local git_info='$(git_cwd_info)'
     local cur_dir=$'%{\e[0;90m%}$(tilde_or_pwd)%{\e[0m%}'
-    export PROMPT="$arrow "
+    export PROMPT="$dollar "
     export RPROMPT="$cur_dir $git_info"
 }
 prompt-simple() {
