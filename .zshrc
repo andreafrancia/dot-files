@@ -28,7 +28,7 @@ SAVEHIST=$((1024*365))
 # Git-aware fancy prompt {{{
 setopt prompt_subst
 tilde_or_pwd() {
-  echo $PWD | sed -e "s/\/Users\/$USER/~/"
+  echo "$PWD" | sed -e "s/\/Users\/$USER/~/"
 }
 
 red-on-error() {
