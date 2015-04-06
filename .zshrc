@@ -40,7 +40,7 @@ prompt-normal() {
     local dollar="$(red-on-error "\$")"
     local cur_dir=$'%{\e[0;90m%}$(tilde_or_pwd)%{\e[0m%}'
     export PROMPT="$dollar "
-    export RPROMPT="$cur_dir "'$(git_cwd_info)'
+    export RPROMPT="$cur_dir "'$(~/ticky/bin/ticky display)'" "'$(git_cwd_info)'
 }
 prompt-simple() {
     local dollar="$(red-on-error "\$")"
