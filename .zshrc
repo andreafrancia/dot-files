@@ -163,6 +163,4 @@ fi
 # Unbreak Python's error-prone .pyc file generation
 export PYTHONDONTWRITEBYTECODE=1
 
-# This will make pip use the same download cache for all virtualenvs
-export PIP_DOWNLOAD_CACHE=~/.pip/cache
 # vim: set ft=sh:
