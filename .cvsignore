@@ -8,3 +8,5 @@ tags
 *.un~
 *~
 *.bak
+/*.xcodeproj/xcuserdata/
+/.idea/
