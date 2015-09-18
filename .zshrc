@@ -107,8 +107,8 @@ function load_compinit_at_first_tab_press() {
 zle -N load_compinit_at_first_tab_press
 bindkey '^I' load_compinit_at_first_tab_press
 
-function rmdir() {
-    rm -f "$1/.DS_Store">/dev/null
+function 'rmdir!'() {
+    rm -fv "$1/.DS_Store">/dev/null
     "$(which -p rmdir)" "$@"
 }
 
