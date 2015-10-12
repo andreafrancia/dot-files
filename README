@@ -1,3 +1,7 @@
+# startup
 git clone --recursive git@github.com:andreafrancia/dot-files.git
 cd dot-files
 bash install.sh
+
+# bin.local
+ln -s ~/Dropbox/wiki/bin.local ~/bin.local
