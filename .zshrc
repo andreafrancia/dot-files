@@ -158,4 +158,6 @@ else
     alias ls='ls -h -G'
 fi
 
+[ -s ~/.zshrc.local ] && source ~/.zshrc.local
+
 # vim: set ft=sh:
