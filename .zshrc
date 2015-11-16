@@ -70,7 +70,6 @@ bindkey "^[[3~"     delete-char
 bindkey "^[3;5~"    delete-char
 
 setopt interactivecomments
-setopt auto_cd         # Type ".." instead of "cd ..", "/usr/" instead of "cd /usr/".
 setopt rm_star_wait    # 10 second wait if you do something that will delete everything
 setopt no_flow_control # Disable ctrl+s
 setopt no_case_glob    # Case insensitive globbing
