@@ -160,7 +160,4 @@ else
     alias ls='ls -h -G'
 fi
 
-# Unbreak Python's error-prone .pyc file generation
-export PYTHONDONTWRITEBYTECODE=1
-
 # vim: set ft=sh:
