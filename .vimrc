@@ -147,7 +147,7 @@ let python_space_error_highlight = 1
 " Markdown {{{
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd FileType markdown setlocal shiftwidth=4 softtabstop=4 expandtab
-                               \ textwidth=78 formatoptions-=t
+                                 \ formatoptions-=t
 " }}}
 
 " Ruby files {{{
