@@ -125,7 +125,6 @@ autocmd BufRead,BufNewFile *.json setfiletype javascript
 autocmd BufRead,BufNewFile *.txt setfiletype text
 autocmd BufRead,BufNewFile README setfiletype text
 
-autocmd FileType text setlocal formatoptions+=w textwidth=78  " wrap at col 78
 autocmd FileType text setlocal formatoptions-=t   " dont autowrap
 autocmd FileType text setlocal formatoptions+=n   " recognize numbered lists
 autocmd FileType text setlocal shiftwidth=3
