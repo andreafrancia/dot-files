@@ -8,7 +8,7 @@ call pathogen#infect()  " Enable pathogen and all its installed bundles
 " }}}
 let g:Powerline_symbols = 'fancy'
 " Behaviour {{{
-set history=65535   " I want a big history (the default is only 20 commands)
+set history=10000   " I want a big history (the default is only 50 commands)
 set hidden          " Allow backgrounding buffers, even unsaved ones
 
 " When editing a file, always jump to the last known cursor position.
