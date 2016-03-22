@@ -5,8 +5,4 @@
 .DS_Store
 Thumbs.db
 tags
-*.un~
 *~
-*.bak
-/*.xcodeproj/xcuserdata/
-/.idea/
