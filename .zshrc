@@ -42,6 +42,13 @@ prompt-normal() {
     export PROMPT="$dollar "
     export RPROMPT="$cur_dir "'$(git_cwd_info)'
 }
+prompt-testing() {
+    local green_or_red=$'%{\e[0;%(?.32.31)m%}'
+    local pass_or_fail=$'%(?.OK.KO)'
+    local dollar="\$"
+    local no_color=$'%{\e[0m%}'
+    export PROMPT="$green_or_red$pass_or_fail $dollar$no_color "
+}
 prompt-simple() {
     local dollar="$(red-on-error "\$")"
     export PROMPT="$dollar "
