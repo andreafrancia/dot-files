@@ -165,3 +165,5 @@ fi
 [ -s ~/.zshrc.local ] && source ~/.zshrc.local
 
 # vim: set ft=sh:
+
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
