@@ -126,9 +126,6 @@ unalias run-help
 autoload run-help
 HELPDIR=~/.zsh_help
 
-### Added by the Heroku Toolbelt
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
 # zsh completion
 fpath=(/usr/local/share/zsh-completions $fpath)
 
