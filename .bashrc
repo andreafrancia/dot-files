@@ -21,17 +21,23 @@ export EDITOR=vim
 export LC_CTYPE=en_US.UTF-8
 
 # Trucco del dollaro
-PROMPT_COMMAND=__testing_prompt
+GIT_PS1_SHOWCOLORHINTS=true
+GIT_PS1_SHOWDIRTYSTATE=true
+PROMPT_COMMAND='__git_ps1 "\w" "$(__dollar_trick) "'
 
-function __testing_prompt() {
+function __dollar_trick() {
     local exit_code="$?"
     local red='\[\e[0;31m\]'
     local green='\[\e[0;32m\]'
     local reset_colors='\[\e[0m\]'
 
     if [[ $exit_code == 0 ]]; then
-        PS1="$green\$$reset_colors "
+        echo "$green\$$reset_colors"
     else
-        PS1="$red\$$reset_colors "
+        echo "$red\$$reset_colors"
     fi
 }
+
+if [ -f "$(brew --prefix git)/etc/bash_completion.d/git-prompt.sh" ]; then
+    source "$(brew --prefix git)/etc/bash_completion.d/git-prompt.sh"
+fi
