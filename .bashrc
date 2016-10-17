@@ -41,3 +41,7 @@ function __dollar_trick() {
 if [ -f "$(brew --prefix git)/etc/bash_completion.d/git-prompt.sh" ]; then
     source "$(brew --prefix git)/etc/bash_completion.d/git-prompt.sh"
 fi
+
+if [ -f "$(brew --prefix git)/etc/bash_completion.d/git-completion.bash" ]; then
+    source "$(brew --prefix git)/etc/bash_completion.d/git-completion.bash"
+fi
