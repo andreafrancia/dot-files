@@ -19,29 +19,3 @@ alias mv='mv -i'
 
 export EDITOR=vim
 export LC_CTYPE=en_US.UTF-8
-
-# Trucco del dollaro
-GIT_PS1_SHOWCOLORHINTS=true
-GIT_PS1_SHOWDIRTYSTATE=true
-PROMPT_COMMAND='__git_ps1 "\w" "$(__dollar_trick) "'
-
-function __dollar_trick() {
-    local exit_code="$?"
-    local red='\[\e[0;31m\]'
-    local green='\[\e[0;32m\]'
-    local reset_colors='\[\e[0m\]'
-
-    if [[ $exit_code == 0 ]]; then
-        echo "$green\$$reset_colors"
-    else
-        echo "$red\$$reset_colors"
-    fi
-}
-
-if [ -f "$(brew --prefix git)/etc/bash_completion.d/git-prompt.sh" ]; then
-    source "$(brew --prefix git)/etc/bash_completion.d/git-prompt.sh"
-fi
-
-if [ -f "$(brew --prefix git)/etc/bash_completion.d/git-completion.bash" ]; then
-    source "$(brew --prefix git)/etc/bash_completion.d/git-completion.bash"
-fi
