@@ -16,6 +16,7 @@ shopt -s checkwinsize
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
+alias ls='gls --color'
 
 export EDITOR=vim
 export LC_CTYPE=en_US.UTF-8
