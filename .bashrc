@@ -20,3 +20,8 @@ alias ls='gls --color'
 
 export EDITOR=vim
 export LC_CTYPE=en_US.UTF-8
+
+# source bash completion
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    . $(brew --prefix)/etc/bash_completion
+fi
