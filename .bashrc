@@ -25,3 +25,5 @@ export LC_CTYPE=en_US.UTF-8
 if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
+
+[ -s ~/.bashrc.local ] && source ~/.bashrc.local
