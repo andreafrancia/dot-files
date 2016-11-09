@@ -11,3 +11,4 @@ SCM_CHECK=true
 # Load Bash It (it needs BASH_IT environment variabile to be set)
 BASH_IT=~/.bash_it
 source $BASH_IT/bash_it.sh
+export PATH="/usr/local/sbin:$PATH"
