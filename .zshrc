@@ -162,8 +162,10 @@ else
     alias ls='ls -h -G'
 fi
 
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
 [ -s ~/.zshrc.local ] && source ~/.zshrc.local
+[ -s ~/.sh.aliases ] && source ~/.sh.aliases
 
 # vim: set ft=sh:
 
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"

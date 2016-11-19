@@ -31,3 +31,4 @@ fi
 
 # load local aliases
 [ -s ~/.bashrc.local ] && source ~/.bashrc.local
+[ -s ~/.sh.aliases ] && source ~/.sh.aliases
