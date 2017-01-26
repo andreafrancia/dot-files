@@ -2,6 +2,12 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+nnoremap ]c :cnext<CR>
+nnoremap ,, :wa \| :make<CR>
+nnoremap [c :cprev<CR>
+set efm=\ \ File\ \"%f\"\\,\ line\ %l%.%#
+set makeprg=nosetests
+
 " Vundle {{{
 filetype off " required by Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
