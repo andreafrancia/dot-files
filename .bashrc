@@ -32,3 +32,6 @@ fi
 # load local aliases
 [ -s ~/.bashrc.local ] && source ~/.bashrc.local
 [ -s ~/.sh.aliases ] && source ~/.sh.aliases
+
+# reload conf
+alias reload-bashrc-local='source ~/.bashrc.local'
