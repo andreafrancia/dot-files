@@ -18,6 +18,8 @@ export LC_CTYPE=en_US.UTF-8
 
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
+alias reload-zshrc-local='source ~/.zshrc.local'
+
 bindkey -e
 
 # history
