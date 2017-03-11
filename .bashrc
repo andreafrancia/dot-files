@@ -29,9 +29,11 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
 
-# load local aliases
+# load local conf
 [ -s ~/.bashrc.local ] && source ~/.bashrc.local
-[ -s ~/.sh.aliases ] && source ~/.sh.aliases
+
+# load aliases
+[ -s ~/.aliases.sh ] && source ~/.aliases.sh
 
 # reload conf
-alias reload-bashrc-local='source ~/.bashrc.local'
+alias reload-bashrc='source ~/.bashrc'

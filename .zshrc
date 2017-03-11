@@ -18,8 +18,6 @@ export LC_CTYPE=en_US.UTF-8
 
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 
-alias reload-zshrc-local='source ~/.zshrc.local'
-
 bindkey -e
 
 # history
@@ -166,8 +164,13 @@ fi
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
+# load local conf
 [ -s ~/.zshrc.local ] && source ~/.zshrc.local
-[ -s ~/.sh.aliases ] && source ~/.sh.aliases
+
+# load aliases
+[ -s ~/.aliases.sh ] && source ~/.aliases.sh
+
+# reload conf
+alias reload-zshrc='source ~/.zshrc'
 
 # vim: set ft=sh:
-
