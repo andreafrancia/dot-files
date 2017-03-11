@@ -122,7 +122,7 @@ function show-evil-whitespaces() {
     ack -k " +$" $(git diff --cached --name-only ) "$@"
 }
 
-unalias run-help
+alias run-help >/dev/null && unalias run-help
 autoload run-help
 HELPDIR=~/.zsh_help
 
