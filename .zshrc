@@ -3,7 +3,6 @@
 
 GEM_PATH=~/.gems
 PATH="\
-$HOME/.rvm/bin:\
 $HOME/bin:\
 $HOME/bin.local:\
 /usr/local/sbin:\
@@ -174,3 +173,5 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 alias reload-zshrc='source ~/.zshrc'
 
 # vim: set ft=sh:
+export PATH="$HOME/.rbenv/bin:$PATH"
+eval "$(rbenv init -)"
