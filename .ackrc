@@ -2,3 +2,4 @@
 --ignore-dir=cover
 --ignore-dir=_quarantine
 --ignore-dir=build
+--ignore-file=is:tags
