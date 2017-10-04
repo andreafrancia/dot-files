@@ -62,7 +62,7 @@ nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 set smartcase
 " }}}
 " Visualisation {{{
-set t_Co=256 " Andrea: enable 256 colors
+set t_Co=256          " Andrea: enable 256 colors
 set foldlevelstart=20 " Andrea: Should open all (almost) level
 set listchars=tab:▸\ ,trail:·,eol:¬ " Andrea: show tabs and spaces:
 " Andrea: Draw a red line on column (one char after the textwidth value)
@@ -74,6 +74,7 @@ set cursorline       " Andrea: highlight the line containing the cursor
 set ruler            " show the cursor position all the time
 set showcmd          " display incomplete commands
 set number
+set relativenumber
 set numberwidth=5
 set scrolloff=4      " Keep more context when scrolling off the end of a
                      " buffer
@@ -122,11 +123,6 @@ set wildignore+=*.pyc
 
 filetype plugin indent on          " Enable file type detection.
 
-" Javascript files {{{
-autocmd BufRead,BufNewFile Jakefile setfiletype javascript
-autocmd BufRead,BufNewFile *.json setfiletype javascript
-" }}}
-
 " Text files {{{
 autocmd BufRead,BufNewFile *.txt setfiletype text
 autocmd BufRead,BufNewFile README setfiletype text
@@ -139,35 +135,10 @@ autocmd FileType text setlocal softtabstop=2
 runtime macros/justify.vim  " format with _j
 " }}}
 
-" Python files {{{
-autocmd FileType python setlocal shiftwidth=4 softtabstop=4 expandtab
-autocmd FileType python setlocal textwidth=78 foldmethod=indent
-autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-autocmd FileType python setlocal formatoptions+=l " Do not broke long line
-autocmd FileType python setlocal formatoptions-=t " Do not autowrap
-autocmd FileType python setlocal indentkeys-=:
-
-let python_space_error_highlight = 1
-" }}}
-
 " Markdown {{{
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd FileType markdown setlocal shiftwidth=4 softtabstop=4 expandtab
                                  \ formatoptions-=t
-" }}}
-
-" Ruby files {{{
-autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab
-                               \ textwidth=78 foldmethod=syntax
-autocmd BufRead,BufNewFile *_spec.rb compiler rspec
-autocmd BufRead,BufNewFile setlocal errorformat=
-    \%f:%l:\ %tarning:\ %m,
-    \%E%.%#:in\ `load':\ %f:%l:%m,
-    \%E%f:%l:in\ `%*[^']':\ %m,
-    \%E\ \ \ \ \ \#\ %f:%l:%.%#,
-    \%E\ \ %\\d%\\+)%.%#,
-    \%C\ \ \ \ \ %m,
-    \%-G%.%#
 " }}}
 
 autocmd BufEnter /private/tmp/crontab.* setlocal backupcopy=yes
@@ -192,16 +163,6 @@ nnoremap <c-k> :cnext <CR>
 
 " Syntastic {{{
 
-" Syntastic for python
-let g:syntastic_enable_signs=1
-
-" Error list automatic opening:
-" 0 - manual
-" 1 - auto open and close
-" 2 - auto open manual close
-let g:syntastic_auto_loc_list=2
-
-" }}}
 
 " Key mappings {{{
 "
@@ -221,7 +182,6 @@ map <leader>n :call RenameFile()<cr>
 " Refactoring
 vnoremap <leader>rv :call ExtractVariable()<cr>
 nnoremap <leader>ri :call InlineVariable()<cr>
-map <leader>rm :BikeExtract<cr>
 
 " }}}
 
