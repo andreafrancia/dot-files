@@ -8,16 +8,6 @@ nnoremap [c :cprev<CR>
 set efm=\ \ File\ \"%f\"\\,\ line\ %l%.%#
 set makeprg=nosetests
 
-" Vundle {{{
-filetype off " required by Vundle
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
-Plugin 'VundleVim/Vundle.vim'
-Plugin 'kien/ctrlp.vim'
-call vundle#end()
-" :PluginInstall
-" }}}
-
 " Load plugins {{{
 call pathogen#infect()  " Enable pathogen and all its installed bundles
 " :Helptags               " enable help for pathogen bundles
