@@ -13,7 +13,9 @@ filetype off " required by Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'VundleVim/Vundle.vim'
+Plugin 'kien/ctrlp.vim'
 call vundle#end()
+" :PluginInstall
 " }}}
 
 " Load plugins {{{
