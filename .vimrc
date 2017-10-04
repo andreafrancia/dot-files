@@ -87,7 +87,7 @@ endif
 
 highlight Folded guibg=white guifg=blue
 set foldtext=AFMyFoldText()
-function AFMyFoldText()
+function! AFMyFoldText()
   let line = getline(v:foldstart)
   let sub = substitute(line, '/\*\|\*/\|{'.'{{\d\=', '', 'g')
   return v:folddashes . sub
