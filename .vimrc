@@ -9,9 +9,20 @@ set efm=\ \ File\ \"%f\"\\,\ line\ %l%.%#
 set makeprg=nosetests
 
 " Load plugins {{{
-call pathogen#infect()  " Enable pathogen and all its installed bundles
-" :Helptags               " enable help for pathogen bundles
+call plug#begin('~/.vim/plugged')
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-surround'
+Plug 'Lokaltog/vim-powerline'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-repeat'
+Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-unimpaired'
+Plug 'vim-ruby/vim-ruby'
+Plug 'vim-scripts/ack.vim'
+Plug 'vim-scripts/xoria256.vim'
+call plug#end()
 " }}}
+
 let g:Powerline_symbols = 'fancy'
 " Behaviour {{{
 set history=10000   " I want a big history (the default is only 50 commands)
