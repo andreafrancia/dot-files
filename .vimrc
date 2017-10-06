@@ -10,13 +10,14 @@ set makeprg=nosetests
 
 " Load plugins {{{
 call plug#begin('~/.vim/plugged')
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-surround'
 Plug 'Lokaltog/vim-powerline'
-Plug 'tpope/vim-endwise'
-Plug 'tpope/vim-repeat'
 Plug 'scrooloose/nerdtree'
+Plug 'tpope/vim-endwise'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
+Plug 'tpope/vim-abolish'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/ack.vim'
 Plug 'vim-scripts/xoria256.vim'
