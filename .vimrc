@@ -49,8 +49,18 @@ set smarttab                      " Tab insert blanks and backspace eat blanks
 set laststatus=2                  " show statusline always
 set formatoptions-=t              " Do not autowrap by default
 
-nnoremap <Leader>u :GundoToggle<CR>
-set undofile
+" Undo {{
+if has('persistent_undo')
+    " Keep undo history across sessions by storing it in a file
+    set undofile
+    " don't pollute working dirs with vim undo files
+    " the double slash at the end // tell vim to build undo file names from
+    " complete path of the edited file
+    set undodir=~/.vim/undo//
+    " Vim wont create the directory for you 
+    silent call system('mkdir -pv ' . &undodir)
+endif
+" }}
 
 " Undo for Ctrl+W and Ctrl+U {{{
 " Use:
