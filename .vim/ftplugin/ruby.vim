@@ -1,3 +1,5 @@
+" Tell ruby syntax to highlight trailing whitespaces (:help ruby_space_errors)
+let ruby_space_errors = 1
 function! Automate()
     let line = getline('.')
     let word = expand("<cword>")
