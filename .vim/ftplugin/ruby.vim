@@ -1,16 +1,25 @@
 function! Automate()
     let line = getline('.')
-    let class_name = expand("<cword>")
-    if line =~ 'describe.*'
-        call WriteClass(class_name)
-    elseif class_name =~ '[A-Z][a-zA-Z]*'
-        call WriteClass(class_name)
+    let word = expand("<cword>")
+    if word =~ '[A-Z][a-zA-Z]*'
+        call WriteClass(word)
+    elseif word =~ 'new'
+        call WriteInitialize()
     else
-        echom "dont know: ".line
+        echom "dont know what to do with: ". word . ", in ". line
     endif
 endfunction
+
 function! WriteClass(class_name)
     execute "normal! Oclass ".a:class_name."\<cr>end"
+endfunction
+
+function! WriteInitialize()
+    normal yy
+    normal P
+    s/.\{-}new/def initialize
+    normal ==
+    normal oend
 endfunction
 nnoremap <leader>a :call Automate()<CR>
 
