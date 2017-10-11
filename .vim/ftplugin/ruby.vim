@@ -1,5 +1,12 @@
 " Tell ruby syntax to highlight trailing whitespaces (:help ruby_space_errors)
 let ruby_space_errors = 1
+
+" Make gf working for requires filenames
+
+set path+=lib
+set path+=spec
+compiler rspec
+
 function! Automate()
     let line = getline('.')
     let word = expand("<cword>")

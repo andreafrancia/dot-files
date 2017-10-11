@@ -5,8 +5,6 @@ set nocompatible
 nnoremap ]c :cnext<CR>
 nnoremap ,, :wa \| :make<CR>
 nnoremap [c :cprev<CR>
-set efm=\ \ File\ \"%f\"\\,\ line\ %l%.%#
-set makeprg=nosetests
 
 " Load plugins {{{
 call plug#begin('~/.vim/plugged')
@@ -18,6 +16,8 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-fugitive'
+Plug 'kien/ctrlp.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/ack.vim'
 Plug 'vim-scripts/xoria256.vim'

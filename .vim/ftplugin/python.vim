@@ -14,3 +14,5 @@ setlocal omnifunc=pythoncomplete#Complete
 setlocal formatoptions+=l " Do not broke long line
 setlocal formatoptions-=t " Do not autowrap
 setlocal indentkeys-=:
+set efm=\ \ File\ \"%f\"\\,\ line\ %l%.%#
+set makeprg=nosetests
