@@ -96,7 +96,6 @@ set cursorline       " Andrea: highlight the line containing the cursor
 set ruler            " show the cursor position all the time
 set showcmd          " display incomplete commands
 set number
-set relativenumber
 set numberwidth=5
 set scrolloff=4      " Keep more context when scrolling off the end of a
                      " buffer
@@ -238,14 +237,17 @@ function! RenameFile()
     endif
 endfunction
 
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" INLINE VARIABLE (SKETCHY)
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! InlineVariable()
     " Copy the variable under the cursor into the 'a' register
-    " XXX: How do I copy into a variable so I don't pollute the registers?
+    :let l:tmp_a = @a
     :normal "ayiw
-    " It takes 4 diws to get the variable, equal sign, and surrounding
-    " whitespace. I'm not sure why. diw is different from dw in this respect.
-    :normal 4diw
+    " Delete variable and equals sign
+    :normal 2daW
     " Delete the expression into the 'b' register
+    :let l:tmp_b = @b
     :normal "bd$
     " Delete the remnants of the line
     :normal dd
@@ -256,8 +258,11 @@ function! InlineVariable()
     " Find the next occurence of the variable
     exec '/\<' . @a . '\>'
     " Replace that occurence with the text we yanked
-    exec ':.s/\<' . @a . '\>/' . @b
+    exec ':.s/\<' . @a . '\>/' . escape(@b, "/")
+    :let @a = l:tmp_a
+    :let @b = l:tmp_b
 endfunction
+nnoremap <leader>ri :call InlineVariable()<cr>
 
 function! InsertTabWrapper()
     let col = col('.') - 1
