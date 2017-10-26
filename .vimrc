@@ -32,6 +32,8 @@ nnoremap <leader>ri :call InlineVariable()<cr>
 " Andrea: remove trailing spaces from line
 nnoremap <leader>d :s/\s\+$//<CR>
 
+nnoremap ,k :Rg<CR>
+nnoremap ,rg :Rg ""<Left>
 nnoremap ,t :wa \| :make<CR>
 nnoremap ,l :wa \| :lmake<CR>
 set switchbuf=useopen
@@ -96,6 +98,7 @@ Plug 'kien/ctrlp.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/ack.vim'
 Plug 'vim-scripts/xoria256.vim'
+Plug 'jremmen/vim-ripgrep'
 call plug#end()
 " }}}
 
