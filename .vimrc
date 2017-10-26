@@ -2,6 +2,7 @@
 " This must be first, because it changes other options as a side effect.
 set nocompatible
 
+" Key mappings {{{
 nnoremap ]c :cnext<CR>
 nnoremap ,, :wa \| :!clear && rspec<CR>
 nnoremap [c :cprev<CR>
@@ -11,6 +12,39 @@ command! EatArgument :call EatArgument()
 map <leader>make :call MakeClass<cr>
 map <leader>dou :call PromoteToDouble()<cr>
 map <leader>eat :EatArgument<cr>
+map <leader>let :call PromoteToLet()<cr>
+let mapleader=","
+
+nnoremap <leader>f :NERDTreeToggle<CR>
+
+" Map ,e and ,v to open files in the same directory as the current file
+cnoremap %% <C-R>=expand('%:h').'/'<cr>
+map <leader>e :edit %%
+map <leader>v :view %%
+
+" Map ,n to rename file
+map <leader>n :call RenameFile()<cr>
+
+" Refactoring
+vnoremap <leader>rv :call ExtractVariable()<cr>
+nnoremap <leader>ri :call InlineVariable()<cr>
+
+" Andrea: remove trailing spaces from line
+nnoremap <leader>d :s/\s\+$//<CR>
+
+nnoremap ,t :wa \| :make<CR>
+nnoremap ,l :wa \| :lmake<CR>
+set switchbuf=useopen
+nnoremap <c-j> :cprevious <CR>
+nnoremap <c-k> :cnext <CR>
+" From GRB: Seriously, guys. It's not like :W is bound to anything anyway.
+command! W :w
+" From GRB:
+" Remap the tab key to do autocompletion or indentation depending on the
+" context (from http://www.vim.org/tips/tip.php?tip_id=102)
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
+" }}}
 
 function! EatArgument()
   let save_cursor = getpos('.')
@@ -98,7 +132,7 @@ if has('persistent_undo')
     " the double slash at the end // tell vim to build undo file names from
     " complete path of the edited file
     set undodir=~/.vim/undo//
-    " Vim wont create the directory for you 
+    " Vim wont create the directory for you
     silent call system('mkdir -pv ' . &undodir)
 endif
 " }}
@@ -156,9 +190,6 @@ function! AFMyFoldText()
   return v:folddashes . sub
 endfunction
 
-" Andrea: remove trailing spaces from line
-nnoremap <leader>d :s/\s\+$//<CR>
-vnoremap <leader>d :s/\s\+$//<CR>
 " }}}
 " Completion {{{
 "
@@ -214,43 +245,11 @@ set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp  " where to put swapfile
 autocmd FocusLost * :wa  "save on focus lost
 " }}}
 
-" QuickFix {{{
-nnoremap ,t :wa \| :make<CR>
-nnoremap ,l :wa \| :lmake<CR>
-set switchbuf=useopen
-nnoremap <c-j> :cprevious <CR>
-nnoremap <c-k> :cnext <CR>
-" }}}
 " Plugins Configuratons {{{
-
-" Syntastic {{{
-
-
-" Key mappings {{{
-"
-let mapleader=","
-
-" Map ,f to toggle NERDTree
-nnoremap <leader>f :NERDTreeToggle<CR>
-
-" Map ,e and ,v to open files in the same directory as the current file
-cnoremap %% <C-R>=expand('%:h').'/'<cr>
-map <leader>e :edit %%
-map <leader>v :view %%
-
-" Map ,n to rename file
-map <leader>n :call RenameFile()<cr>
-
-" Refactoring
-vnoremap <leader>rv :call ExtractVariable()<cr>
-nnoremap <leader>ri :call InlineVariable()<cr>
-
-" }}}
 
 " ============================================================================
 " Function definitions
 " ============================================================================
-
 function! ExtractVariable()
     let name = input("Variable name: ")
     if name == ''
@@ -313,16 +312,4 @@ function! InsertTabWrapper()
         return "\<c-p>"
     endif
 endfunction
-" }}}
-" Some commands {{{
-" From GRB: Seriously, guys. It's not like :W is bound to anything anyway.
-command! W :w
-command! KillWhitespace :normal :%s/ *$//g<cr><c-o><cr>
-" Andrea: formatting
-map Q gq
-" From GRB:
-" Remap the tab key to do autocompletion or indentation depending on the
-" context (from http://www.vim.org/tips/tip.php?tip_id=102)
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-n>
 " }}}
