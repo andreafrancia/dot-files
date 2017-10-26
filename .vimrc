@@ -302,7 +302,6 @@ function! InlineVariable()
     :let @a = l:tmp_a
     :let @b = l:tmp_b
 endfunction
-nnoremap <leader>ri :call InlineVariable()<cr>
 
 function! InsertTabWrapper()
     let col = col('.') - 1
