@@ -175,3 +175,5 @@ alias reload-zshrc='source ~/.zshrc'
 # vim: set ft=sh:
 export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
+
+mkdir_cd () { mkdir -p "$1" && cd "$1"; }
