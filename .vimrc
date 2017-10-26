@@ -13,6 +13,7 @@ map <leader>make :call MakeClass<cr>
 map <leader>dou :call PromoteToDouble()<cr>
 map <leader>eat :EatArgument<cr>
 map <leader>let :call PromoteToLet()<cr>
+map <leader>req :call WriteRequire()<cr>
 let mapleader=","
 
 nnoremap <leader>f :NERDTreeToggle<CR>
@@ -48,6 +49,19 @@ inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 " }}}
 
+function! WriteRequire()
+    let class_name = expand('<cword>')
+    let filename = Snakecase(class_name)
+    execute 'normal Orequire ''' . filename . ''''
+endfunction
+function! Snakecase(word)
+  let word = substitute(a:word,'::','/','g')
+  let word = substitute(word,'\(\u\+\)\(\u\l\)','\1_\2','g')
+  let word = substitute(word,'\(\l\|\d\)\(\u\)','\1_\2','g')
+  let word = substitute(word,'[.-]','_','g')
+  let word = tolower(word)
+  return word
+endfunction
 function! EatArgument()
   let save_cursor = getpos('.')
   let param = expand("<cword>")
