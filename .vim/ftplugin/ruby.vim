@@ -3,8 +3,8 @@ let ruby_space_errors = 1
 
 " Make gf working for requires filenames
 
-set path+=lib
-set path+=spec
+set path^=spec
+set path^=lib
 compiler rspec
 
 function! Automate()
@@ -15,7 +15,8 @@ function! Automate()
     elseif word =~ 'new'
         call WriteInitialize()
     else
-        echom "dont know what to do with: ". word . ", in ". line
+        echomsg 'make method'
+        call MakeMethod()
     endif
 endfunction
 
@@ -30,7 +31,16 @@ function! WriteInitialize()
     normal ==
     normal oend
 endfunction
-nnoremap <leader>a :call Automate()<CR>
+
+function! MakeMethod()
+    normal yyPidef 
+    normal oend
+endfunction
+
+function! AddExpectTo()
+  let word = expand('<cword>')
+  execute 'normal ciwexpect('.word.').to'
+endfunction
 
 setlocal shiftwidth=2 softtabstop=2 expandtab
                                \ textwidth=78 foldmethod=syntax

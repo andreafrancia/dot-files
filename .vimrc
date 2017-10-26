@@ -3,8 +3,10 @@
 set nocompatible
 
 nnoremap ]c :cnext<CR>
-nnoremap ,, :wa \| :make<CR>
+nnoremap ,, :wa \| :!clear && rspec<CR>
 nnoremap [c :cprev<CR>
+nnoremap <leader>a :call Automate()<CR>
+nnoremap <leader>xp :call AddExpectTo()<CR>
 
 " Load plugins {{{
 call plug#begin('~/.vim/plugged')
