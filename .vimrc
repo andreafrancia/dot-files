@@ -7,6 +7,45 @@ nnoremap ,, :wa \| :!clear && rspec<CR>
 nnoremap [c :cprev<CR>
 nnoremap <leader>a :call Automate()<CR>
 nnoremap <leader>xp :call AddExpectTo()<CR>
+command! EatArgument :call EatArgument()
+map <leader>make :call MakeClass<cr>
+map <leader>dou :call PromoteToDouble()<cr>
+map <leader>eat :EatArgument<cr>
+
+function! EatArgument()
+  let save_cursor = getpos('.')
+  let param = expand("<cword>")
+  :execute "normal o"."@".param." = ".param."\<esc>=="
+  call setpos('.', save_cursor)
+endfunction
+function! MakeClass()
+    :normal! yy
+    :normal! P
+    :execute "normal Iclass "
+    :s/.new/\rdef initialize/
+    :normal ==
+    :execute "normal oend"
+    :execute "normal oend"
+endfunction
+function! PromoteToDouble()
+  let save_cursor = getpos('.')
+  let param = expand("<cword>")
+  :execute "normal O".param." = double :".param."\<esc>=="
+  call setpos('.', save_cursor)
+endfunction
+" Promote a variable to an rspec let statement.
+"
+" Convert lines that look like `x = y` to lines that look like
+" `let(:x){ y }`.
+"
+" From: https://raw.githubusercontent.com/panthomakos/dotfiles/master/.vim/plugin/promote-to-let.vim
+function! PromoteToLet()
+  :normal! dd
+  " :exec '?^\s*it\>'
+  :normal! P
+  :.s/\(\w\+\) = \(.*\)$/let(:\1){ \2 }/
+  :normal ==
+endfunction
 
 " Load plugins {{{
 call plug#begin('~/.vim/plugged')
