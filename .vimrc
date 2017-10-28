@@ -115,7 +115,6 @@ Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-fugitive'
 Plug 'kien/ctrlp.vim'
 Plug 'vim-ruby/vim-ruby'
-Plug 'vim-scripts/ack.vim'
 Plug 'vim-scripts/xoria256.vim'
 Plug 'jremmen/vim-ripgrep'
 call plug#end()
