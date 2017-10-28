@@ -3,18 +3,23 @@
 set nocompatible
 
 " Key mappings {{{
+let mapleader=","
 nnoremap ]c :cnext<CR>
 nnoremap ,, :wa \| :!clear && rspec<CR>
 nnoremap [c :cprev<CR>
 nnoremap <leader>a :call Automate()<CR>
 nnoremap <leader>xp :call AddExpectTo()<CR>
 command! EatArgument :call EatArgument()
-map <leader>make :call MakeClass<cr>
+map <leader>make :call MakeClass()<cr>
 map <leader>dou :call PromoteToDouble()<cr>
 map <leader>eat :EatArgument<cr>
 map <leader>let :call PromoteToLet()<cr>
-map <leader>req :call WriteRequire()<cr>
-let mapleader=","
+nnoremap <leader>req :call WriteRequire()<cr>
+nnoremap <leader>gf :call OpenRequire()<cr>
+function! OpenRequire()
+    let file = 'lib/' . expand('<cfile>') . '.rb'
+    execute ":edit " . file
+endfunction
 
 nnoremap <leader>f :NERDTreeToggle<CR>
 
