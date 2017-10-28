@@ -105,7 +105,7 @@ endfunction
 " Load plugins {{{
 call plug#begin('~/.vim/plugged')
 Plug 'Lokaltog/vim-powerline'
-Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
 Plug 'tpope/vim-repeat'
