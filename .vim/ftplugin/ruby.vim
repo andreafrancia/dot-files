@@ -2,11 +2,10 @@
 let ruby_space_errors = 1
 
 " Make gf working for requires filenames
-
 set path^=spec
 set path^=lib
-compiler rspec
 
+compiler rspec
 
 setlocal shiftwidth=2 softtabstop=2 expandtab
                                \ textwidth=78 foldmethod=syntax
