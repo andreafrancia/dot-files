@@ -5,29 +5,22 @@ set nocompatible
 " Key mappings {{{
 let mapleader=","
 nnoremap ]c :cnext<CR>
-nnoremap ,, :wa \| :!clear && rspec<CR>
 nnoremap [c :cprev<CR>
+nnoremap <c-j> :cprevious <CR>
+nnoremap <c-k> :cnext <CR>
+nnoremap <leader><leader> :wa \| :!clear && rspec<CR>
 nnoremap <leader>a :call Automate()<CR>
 nnoremap <leader>xp :call AddExpectTo()<CR>
-command! EatArgument :call EatArgument()
-map <leader>make :call MakeClass()<cr>
-map <leader>dou :call PromoteToDouble()<cr>
-map <leader>eat :EatArgument<cr>
-map <leader>let :call PromoteToLet()<cr>
+nnoremap <leader>dou :call PromoteToDouble()<cr>
+nnoremap <leader>eat :call EatArgument()<cr>
+nnoremap <leader>let :call PromoteToLet()<cr>
 nnoremap <leader>req :call WriteRequire()<cr>
 nnoremap <leader>gf :call OpenRequire()<cr>
-function! OpenRequire()
-    let file = 'lib/' . expand('<cfile>') . '.rb'
-    execute ":edit " . file
-endfunction
-
 nnoremap <leader>f :NERDTreeToggle<CR>
-
 " Map ,e and ,v to open files in the same directory as the current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
 map <leader>v :view %%
-
 " Map ,n to rename file
 map <leader>n :call RenameFile()<cr>
 
@@ -43,8 +36,6 @@ nnoremap ,rg :Rg ""<Left>
 nnoremap ,t :wa \| :make<CR>
 nnoremap ,l :wa \| :lmake<CR>
 set switchbuf=useopen
-nnoremap <c-j> :cprevious <CR>
-nnoremap <c-k> :cnext <CR>
 " From GRB: Seriously, guys. It's not like :W is bound to anything anyway.
 command! W :w
 " From GRB:
@@ -52,12 +43,72 @@ command! W :w
 " context (from http://www.vim.org/tips/tip.php?tip_id=102)
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
-" }}}
+map *   <Plug>(asterisk-*)
+map #   <Plug>(asterisk-#)
+map g*  <Plug>(asterisk-g*)
+map g#  <Plug>(asterisk-g#)
+map z*  <Plug>(asterisk-z*)
+map gz* <Plug>(asterisk-gz*)
+map z#  <Plug>(asterisk-z#)
+map gz# <Plug>(asterisk-gz#)
 
-function! WriteRequire()
-    let class_name = expand('<cword>')
-    let filename = Snakecase(class_name)
-    execute 'normal Orequire ''' . filename . ''''
+function! GetVisual()
+    " From http://stackoverflow.com/a/6271254/794380
+    let [lnum1, col1] = getpos("'<")[1:2]
+    let [lnum2, col2] = getpos("'>")[1:2]
+    let lines = getline(lnum1, lnum2)
+    let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
+    let lines[0] = lines[0][col1 - 1:]
+    return join(lines, "\n")
+endfunction
+function! OpenRequire()
+    let file = 'lib/' . expand('<cfile>') . '.rb'
+    execute ":edit " . file
+endfunction
+function! Automate()
+    let line = getline('.')
+    let word = expand("<cword>")
+    let seems_a_class = (word =~ '[a-z][a-za-z]*')
+    if seems_a_class && line =~ word . '::'
+        call WriteModule(word)
+    elseif seems_a_class
+        call WriteClass(word)
+    elseif word =~ 'new'
+        call WriteInitialize()
+    else
+        call MakeMethod()
+    endif
+endfunction
+function! WriteModule(module_name)
+    execute "normal! Omodule ".a:module_name."\<cr>end"
+endfunction
+function! WriteClass(class_name)
+    execute "normal! Oclass ".a:class_name."\<cr>end"
+endfunction
+function! WriteInitialize()
+    normal yy
+    normal P
+    s/.\{-}new/def initialize
+    normal ==
+    normal oend
+endfunction
+function! MakeMethod()
+    normal yyPidef 
+    normal oend
+endfunction
+function! AddExpectTo()
+  let word = expand('<cword>')
+  execute 'normal ciwexpect('.word.').to'
+endfunction
+function! WriteAboreARequireForClassDeclaredInCurrentLine()
+    let class_name = ExtractClassName(getline('.'))
+    let require_name = Snakecase(class_name)
+    execute "normal Orequire '". require_name . "'"
+endfunction
+function! ExtractClassName(line)
+    let current_line = a:line
+    let class_name = matchstr(current_line, '\(class\|module\)\( \)*\zs\(.*\)')
+    return class_name
 endfunction
 function! Snakecase(word)
   let word = substitute(a:word,'::','/','g')
@@ -72,15 +123,6 @@ function! EatArgument()
   let param = expand("<cword>")
   :execute "normal o"."@".param." = ".param."\<esc>=="
   call setpos('.', save_cursor)
-endfunction
-function! MakeClass()
-    :normal! yy
-    :normal! P
-    :execute "normal Iclass "
-    :s/.new/\rdef initialize/
-    :normal ==
-    :execute "normal oend"
-    :execute "normal oend"
 endfunction
 function! PromoteToDouble()
   let save_cursor = getpos('.')
@@ -113,10 +155,14 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-bundler'
 Plug 'kien/ctrlp.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/xoria256.vim'
 Plug 'jremmen/vim-ripgrep'
+Plug 'haya14busa/vim-asterisk'
+Plug 'LucHermitte/lh-vim-lib'
+Plug 'LucHermitte/vim-UT'
 call plug#end()
 " }}}
 
