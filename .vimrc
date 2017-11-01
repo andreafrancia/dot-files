@@ -9,40 +9,28 @@ nnoremap [c :cprev<CR>
 nnoremap <c-j> :cprevious <CR>
 nnoremap <c-k> :cnext <CR>
 nnoremap <leader><leader> :wa \| :!clear && rspec<CR>
-nnoremap <leader>a :call Automate()<CR>
-nnoremap <leader>xp :call AddExpectTo()<CR>
+nnoremap <leader>a   :call Automate()<CR>
+nnoremap <leader>xp  :call AddExpectTo()<CR>
 nnoremap <leader>dou :call PromoteToDouble()<cr>
 nnoremap <leader>eat :call EatArgument()<cr>
 nnoremap <leader>let :call PromoteToLet()<cr>
 nnoremap <leader>req :call WriteRequire()<cr>
-nnoremap <leader>gf :call OpenRequire()<cr>
-nnoremap <leader>f :NERDTreeToggle<CR>
+nnoremap <leader>gf  :call OpenRequire()<cr>
+vnoremap <leader>rv  :call ExtractVariable()<cr>
+nnoremap <leader>ri  :call InlineVariable()<cr>
+nnoremap <leader>f   :NERDTreeToggle<CR>
+nnoremap <leader>k :Rg<CR>
+nnoremap <leader>rg :Rg ""<Left>
+nnoremap <leader>t :wa \| :make<CR>
 " Map ,e and ,v to open files in the same directory as the current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
 map <leader>v :view %%
 " Map ,n to rename file
 map <leader>n :call RenameFile()<cr>
-
-" Refactoring
-vnoremap <leader>rv :call ExtractVariable()<cr>
-nnoremap <leader>ri :call InlineVariable()<cr>
-
 " Andrea: remove trailing spaces from line
 nnoremap <leader>d :s/\s\+$//<CR>
-
-nnoremap ,k :Rg<CR>
-nnoremap ,rg :Rg ""<Left>
-nnoremap ,t :wa \| :make<CR>
-nnoremap ,l :wa \| :lmake<CR>
-set switchbuf=useopen
-" From GRB: Seriously, guys. It's not like :W is bound to anything anyway.
-command! W :w
-" From GRB:
-" Remap the tab key to do autocompletion or indentation depending on the
-" context (from http://www.vim.org/tips/tip.php?tip_id=102)
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-n>
+" Asterisk
 map *   <Plug>(asterisk-*)
 map #   <Plug>(asterisk-#)
 map g*  <Plug>(asterisk-g*)
@@ -51,6 +39,15 @@ map z*  <Plug>(asterisk-z*)
 map gz* <Plug>(asterisk-gz*)
 map z#  <Plug>(asterisk-z#)
 map gz# <Plug>(asterisk-gz#)
+
+set switchbuf=useopen
+" From GRB: Seriously, guys. It's not like :W is bound to anything anyway.
+command! W :w
+" From GRB:
+" Remap the tab key to do autocompletion or indentation depending on the
+" context (from http://www.vim.org/tips/tip.php?tip_id=102)
+inoremap <tab> <c-r>=InsertTabWrapper()<cr>
+inoremap <s-tab> <c-n>
 
 function! GetVisual()
     " From http://stackoverflow.com/a/6271254/794380
