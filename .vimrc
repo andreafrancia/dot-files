@@ -65,7 +65,7 @@ endfunction
 function! Automate()
     let line = getline('.')
     let word = expand("<cword>")
-    let seems_a_class = (word =~ '[a-z][a-za-z]*')
+    let seems_a_class = (word =~ '[A-Z][a-za-z]*')
     if seems_a_class && line =~ word . '::'
         call WriteModule(word)
     elseif seems_a_class
@@ -141,8 +141,13 @@ function! PromoteToLet()
   :normal ==
 endfunction
 
+
+runtime macros/matchit.vim  " required by nelstrom/vim-textobj-rubyblock
 " Load plugins {{{
 call plug#begin('~/.vim/plugged')
+Plug 'nelstrom/vim-textobj-rubyblock'
+Plug 'kana/vim-textobj-user'
+Plug 'thinca/vim-themis'
 Plug 'Lokaltog/vim-powerline'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-endwise'
