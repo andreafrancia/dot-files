@@ -83,11 +83,35 @@ function! WriteClass(class_name)
     execute "normal! Oclass ".a:class_name."\<cr>end"
 endfunction
 function! WriteInitialize()
-    normal yy
-    normal P
-    s/.\{-}new/def initialize
-    normal ==
-    normal oend
+    let line = getline('.')
+    let params = ExtractParamsFromNewCall(line)
+    execute "normal O".join(["def initialize",join(params, ', ')], ' '). "\<esc>=="
+    call WriteEatLineForAllParams(params)
+    execute "normal o"."end". "\<esc>=="
+    normal j
+endfunction
+function! WriteEatLineForAllParams(params)
+    for param in a:params
+        execute "normal o"."@".param." = ".param."\<esc>=="
+    endfor
+endfunction
+function! ExtractParamsFromNewCall(line)
+    let params_part = substitute(a:line, '.\{-}new ', '', '') 
+    let params = []
+    for p in split(params_part, ',')
+        let stripped = Strip(p)
+        call add(params, stripped)
+    endfor
+    return params
+endfunction
+function! Strip(input_string)
+    return substitute(a:input_string, '^\s*\(.\{-}\)\s*$', '\1', '')
+endfunction
+
+function! EatAllArguments()
+    let line = getline('.')
+    let split = split(line)
+    echo split
 endfunction
 function! MakeMethod()
     normal yyPidef 
