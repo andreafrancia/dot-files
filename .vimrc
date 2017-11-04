@@ -177,10 +177,12 @@ function! PromoteToLet()
   :normal ==
 endfunction
 
-
-runtime macros/matchit.vim  " required by nelstrom/vim-textobj-rubyblock
+" matchit required by nelstrom/vim-textobj-rubyblock
+" matchit required by ecomba/vim-ruby-refactoring
+runtime macros/matchit.vim
 " Load plugins {{{
 call plug#begin('~/.vim/plugged')
+Plug 'ecomba/vim-ruby-refactoring'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'kana/vim-textobj-user'
 Plug 'thinca/vim-themis'
