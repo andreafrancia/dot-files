@@ -72,6 +72,8 @@ function! Automate()
         call WriteClass(word)
     elseif word =~ 'new'
         call WriteInitialize()
+    elseif line =~ 'initialize'
+        call EatInitalizeArguments()
     else
         call MakeMethod()
     endif
@@ -81,6 +83,11 @@ function! WriteModule(module_name)
 endfunction
 function! WriteClass(class_name)
     execute "normal! Oclass ".a:class_name."\<cr>end"
+endfunction
+function! EatInitalizeArguments() 
+    let line = getline('.')
+    let params = ExtractParamsFromInitializeDef(line)
+    call WriteEatLineForAllParams(params)
 endfunction
 function! WriteInitialize()
     let line = getline('.')
@@ -95,19 +102,25 @@ function! WriteEatLineForAllParams(params)
         execute "normal o"."@".param." = ".param."\<esc>=="
     endfor
 endfunction
-function! ExtractParamsFromNewCall(line)
-    let params_part = substitute(a:line, '.\{-}new ', '', '') 
+function! ExtractParamsFromInitializeDef(line)
+    let params_part = substitute(a:line, '.\{-}initialize ', '', '') 
+    return ExtractParamsFromParamsPart(params_part)
+endfunction
+function! ExtractParamsFromParamsPart(params_part)
     let params = []
-    for p in split(params_part, ',')
+    for p in split(a:params_part, ',')
         let stripped = Strip(p)
         call add(params, stripped)
     endfor
     return params
 endfunction
+function! ExtractParamsFromNewCall(line)
+    let params_part = substitute(a:line, '.\{-}new ', '', '') 
+    return ExtractParamsFromParamsPart(params_part)
+endfunction
 function! Strip(input_string)
     return substitute(a:input_string, '^\s*\(.\{-}\)\s*$', '\1', '')
 endfunction
-
 function! EatAllArguments()
     let line = getline('.')
     let split = split(line)
