@@ -25,7 +25,6 @@ nnoremap <leader>t :wa \| :make<CR>
 " Map ,e and ,v to open files in the same directory as the current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
-map <leader>v :view %%
 " Map ,n to rename file
 map <leader>n :call RenameFile()<cr>
 " Andrea: remove trailing spaces from line
