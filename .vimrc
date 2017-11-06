@@ -12,6 +12,7 @@ nnoremap <leader><leader> :wa \| :!clear && rspec<CR>
 nnoremap <leader>a   :call Automate()<CR>
 nnoremap <leader>xp  :call AddExpectTo()<CR>
 nnoremap <leader>dou :call PromoteToDouble()<cr>
+nnoremap <leader>d   :call <SID>StripTrailingWhitespaces()<CR>
 nnoremap <leader>eat :call EatArgument()<cr>
 nnoremap <leader>let :call PromoteToLet()<cr>
 nnoremap <leader>req :call WriteRequire()<cr>
@@ -27,8 +28,6 @@ cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
 " Map ,n to rename file
 map <leader>n :call RenameFile()<cr>
-" Andrea: remove trailing spaces from line
-nnoremap <leader>d :s/\s\+$//<CR>
 " Asterisk
 map *   <Plug>(asterisk-*)
 map #   <Plug>(asterisk-#)
@@ -38,6 +37,10 @@ map z*  <Plug>(asterisk-z*)
 map gz* <Plug>(asterisk-gz*)
 map z#  <Plug>(asterisk-z#)
 map gz# <Plug>(asterisk-gz#)
+" Ruby Refactoring
+let g:ruby_refactoring_map_keys = 0 "0 disables plugin auto mapping
+nnoremap <leader>rel  :RExtractLet<cr>
+vnoremap <leader>rem  :RExtractMethod<cr>
 
 set switchbuf=useopen
 " From GRB: Seriously, guys. It's not like :W is bound to anything anyway.
@@ -48,6 +51,18 @@ command! W :w
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
 
+function! <SID>StripTrailingWhitespaces()
+    " from http://vimcasts.org/episodes/tidying-whitespace/
+    " Preparation: save last search, and cursor position.
+    let _s=@/
+    let l = line(".")
+    let c = col(".")
+    " Do the business:
+    %s/\s\+$//e
+    " Clean up: restore previous search history, and cursor position
+    let @/=_s
+    call cursor(l, c)
+endfunction
 function! GetVisual()
     " From http://stackoverflow.com/a/6271254/794380
     let [lnum1, col1] = getpos("'<")[1:2]

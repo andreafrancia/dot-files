@@ -2,14 +2,10 @@
 [ -z "$PS1" ] && return
 
 GEM_PATH=~/.gems
-PATH="\
-$HOME/bin:\
-$HOME/bin.local:\
-/usr/local/sbin:\
-/usr/local/bin:\
-/sbin:\
-/usr/sbin:\
-$PATH"
+PATH="$HOME/bin:$PATH"
+PATH="$HOME/bin.local:$PATH"
+PATH="/usr/local/bin:$PATH"
+PATH="/usr/local/sbin:$PATH"
 export PATH
 
 export EDITOR=vim
@@ -177,3 +173,6 @@ export PATH="$HOME/.rbenv/bin:$PATH"
 eval "$(rbenv init -)"
 
 mkdir_cd () { mkdir -p "$1" && cd "$1"; }
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
