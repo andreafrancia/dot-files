@@ -15,10 +15,11 @@ nnoremap <leader>dou :call PromoteToDouble()<cr>
 nnoremap <leader>d   :call <SID>StripTrailingWhitespaces()<CR>
 nnoremap <leader>eat :call EatArgument()<cr>
 nnoremap <leader>let :call PromoteToLet()<cr>
-nnoremap <leader>req :call WriteRequire()<cr>
+nnoremap <leader>mr  :call MakeRequire()<cr>
 nnoremap <leader>gf  :call OpenRequire()<cr>
 vnoremap <leader>rv  :call ExtractVariable()<cr>
 nnoremap <leader>ri  :call InlineVariable()<cr>
+nnoremap <leader>mm  :call MakeMethod()<cr>
 nnoremap <leader>f   :NERDTreeToggle<CR>
 nnoremap <leader>k :Rg<CR>
 nnoremap <leader>rg :Rg ""<Left>
@@ -141,8 +142,12 @@ function! EatAllArguments()
     echo split
 endfunction
 function! MakeMethod()
-    normal yyPidef 
-    normal oend
+    let save_cursor = getcurpos()
+    let method_name = expand('<cword>')
+    execute "normal! Odef ". method_name
+    execute "normal! oend"
+    call setpos('.', save_cursor)
+    execute "normal! jj"
 endfunction
 function! AddExpectTo()
   let word = expand('<cword>')
@@ -218,6 +223,7 @@ Plug 'jremmen/vim-ripgrep'
 Plug 'haya14busa/vim-asterisk'
 Plug 'LucHermitte/lh-vim-lib'
 Plug 'LucHermitte/vim-UT'
+Plug '~/vim-automate'
 call plug#end()
 " }}}
 
@@ -240,8 +246,6 @@ set backspace=indent,eol,start    " allow backspacing over everything in
 set autoindent
 set expandtab
 set tabstop=8                     " Real TABs stops at 8 period.
-set shiftwidth=4
-set softtabstop=4
 set smarttab                      " Tab insert blanks and backspace eat blanks
 set laststatus=2                  " show statusline always
 set formatoptions-=t              " Do not autowrap by default
