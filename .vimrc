@@ -4,10 +4,6 @@ set nocompatible
 
 " Key mappings {{{
 let mapleader=","
-nnoremap ]c :cnext<CR>
-nnoremap [c :cprev<CR>
-nnoremap <c-j> :cprevious <CR>
-nnoremap <c-k> :cnext <CR>
 nnoremap <leader><leader> :wa \| :!clear && rspec<CR>
 nnoremap <leader>a   :call Automate()<CR>
 nnoremap <leader>xp  :call AddExpectTo()<CR>
