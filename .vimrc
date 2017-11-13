@@ -14,7 +14,7 @@ nnoremap <leader>xp  :call AddExpectTo()<CR>
 nnoremap <leader>dou :call PromoteToDouble()<cr>
 nnoremap <leader>d   :call <SID>StripTrailingWhitespaces()<CR>
 nnoremap <leader>eat :call EatArgument()<cr>
-nnoremap <leader>let :call PromoteToLet()<cr>
+nnoremap <leader>let :call ExtractIntoRspecLet()<cr>
 nnoremap <leader>mr  :call MakeRequire()<cr>
 nnoremap <leader>gf  :call OpenRequire()<cr>
 vnoremap <leader>rv  :call ExtractVariable()<cr>
@@ -182,19 +182,6 @@ function! PromoteToDouble()
   let param = expand("<cword>")
   :execute "normal O".param." = double :".param."\<esc>=="
   call setpos('.', save_cursor)
-endfunction
-" Promote a variable to an rspec let statement.
-"
-" Convert lines that look like `x = y` to lines that look like
-" `let(:x){ y }`.
-"
-" From: https://raw.githubusercontent.com/panthomakos/dotfiles/master/.vim/plugin/promote-to-let.vim
-function! PromoteToLet()
-  :normal! dd
-  " :exec '?^\s*it\>'
-  :normal! P
-  :.s/\(\w\+\) = \(.*\)$/let(:\1){ \2 }/
-  :normal ==
 endfunction
 
 " matchit required by nelstrom/vim-textobj-rubyblock
