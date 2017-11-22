@@ -321,6 +321,10 @@ set wildignore+=*.pyc
 
 filetype plugin indent on          " Enable file type detection.
 
+" VimScript files {{{
+autocmd FileType vim setlocal shiftwidth=2 softtabstop=2 expandtab
+" }}}
+
 " Text files {{{
 autocmd BufRead,BufNewFile *.txt setfiletype text
 autocmd BufRead,BufNewFile README setfiletype text
