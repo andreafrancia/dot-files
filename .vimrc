@@ -4,6 +4,7 @@ set nocompatible
 
 " Key mappings {{{
 let mapleader=","
+let g:ruby_refactoring_map_keys = 0 "0 disables plugin auto mapping
 nnoremap <leader><leader> :wa \| :!clear && rspec<CR>
 nnoremap <leader>a   :call Automate()<CR>
 nnoremap <leader>xp  :call AddExpectTo()<CR>
@@ -13,6 +14,8 @@ nnoremap <leader>eat :call EatArgument()<cr>
 nnoremap <leader>let :call ExtractIntoRspecLet()<cr>
 nnoremap <leader>mr  :call MakeRequire()<cr>
 nnoremap <leader>gf  :call OpenRequire()<cr>
+nnoremap <leader>rel  :RExtractLet<cr>
+vnoremap <leader>rem  :RExtractMethod<cr>
 vnoremap <leader>rv  :call ExtractVariable()<cr>
 nnoremap <leader>ri  :call InlineVariable()<cr>
 nnoremap <leader>mm  :call MakeMethod()<cr>
@@ -34,10 +37,6 @@ map z*  <Plug>(asterisk-z*)
 map gz* <Plug>(asterisk-gz*)
 map z#  <Plug>(asterisk-z#)
 map gz# <Plug>(asterisk-gz#)
-" Ruby Refactoring
-let g:ruby_refactoring_map_keys = 0 "0 disables plugin auto mapping
-nnoremap <leader>rel  :RExtractLet<cr>
-vnoremap <leader>rem  :RExtractMethod<cr>
 
 set switchbuf=useopen
 " From GRB: Seriously, guys. It's not like :W is bound to anything anyway.
@@ -47,7 +46,6 @@ command! W :w
 " context (from http://www.vim.org/tips/tip.php?tip_id=102)
 inoremap <tab> <c-r>=InsertTabWrapper()<cr>
 inoremap <s-tab> <c-n>
-
 function! <SID>StripTrailingWhitespaces()
     " from http://vimcasts.org/episodes/tidying-whitespace/
     " Preparation: save last search, and cursor position.
@@ -60,121 +58,6 @@ function! <SID>StripTrailingWhitespaces()
     let @/=_s
     call cursor(l, c)
 endfunction
-function! GetVisual()
-    " From http://stackoverflow.com/a/6271254/794380
-    let [lnum1, col1] = getpos("'<")[1:2]
-    let [lnum2, col2] = getpos("'>")[1:2]
-    let lines = getline(lnum1, lnum2)
-    let lines[-1] = lines[-1][: col2 - (&selection == 'inclusive' ? 1 : 2)]
-    let lines[0] = lines[0][col1 - 1:]
-    return join(lines, "\n")
-endfunction
-function! OpenRequire()
-    let file = 'lib/' . expand('<cfile>') . '.rb'
-    execute ":edit " . file
-endfunction
-function! Automate()
-    let line = getline('.')
-    let word = expand("<cword>")
-    let seems_a_class = (word =~ '[A-Z][a-za-z]*')
-    if seems_a_class && line =~ word . '::'
-        call WriteModule(word)
-    elseif seems_a_class
-        call WriteClass(word)
-    elseif word =~ 'new'
-        call WriteInitialize()
-    elseif line =~ 'initialize'
-        call EatInitalizeArguments()
-    else
-        call MakeMethod()
-    endif
-endfunction
-function! WriteModule(module_name)
-    execute "normal! Omodule ".a:module_name."\<cr>end"
-endfunction
-function! WriteClass(class_name)
-    execute "normal! Oclass ".a:class_name."\<cr>end"
-endfunction
-function! EatInitalizeArguments() 
-    let line = getline('.')
-    let params = ExtractParamsFromInitializeDef(line)
-    call WriteEatLineForAllParams(params)
-endfunction
-function! WriteInitialize()
-    let line = getline('.')
-    let params = ExtractParamsFromNewCall(line)
-    execute "normal O".join(["def initialize",join(params, ', ')], ' '). "\<esc>=="
-    call WriteEatLineForAllParams(params)
-    execute "normal o"."end". "\<esc>=="
-    normal j
-endfunction
-function! WriteEatLineForAllParams(params)
-    for param in a:params
-        execute "normal o"."@".param." = ".param."\<esc>=="
-    endfor
-endfunction
-function! ExtractParamsFromInitializeDef(line)
-    let params_part = substitute(a:line, '.\{-}initialize ', '', '') 
-    return ExtractParamsFromParamsPart(params_part)
-endfunction
-function! ExtractParamsFromParamsPart(params_part)
-    let params = []
-    for p in split(a:params_part, ',')
-        let stripped = Strip(p)
-        call add(params, stripped)
-    endfor
-    return params
-endfunction
-function! ExtractParamsFromNewCall(line)
-    let params_part = substitute(a:line, '.\{-}new ', '', '') 
-    return ExtractParamsFromParamsPart(params_part)
-endfunction
-function! Strip(input_string)
-    return substitute(a:input_string, '^\s*\(.\{-}\)\s*$', '\1', '')
-endfunction
-function! MakeMethod()
-    let save_cursor = getcurpos()
-    let method_name = expand('<cword>')
-    execute "normal! Odef ". method_name
-    execute "normal! oend"
-    call setpos('.', save_cursor)
-    execute "normal! jj"
-endfunction
-function! AddExpectTo()
-  let word = expand('<cword>')
-  execute 'normal ciwexpect('.word.').to'
-endfunction
-function! WriteAboreARequireForClassDeclaredInCurrentLine()
-    let class_name = ExtractClassName(getline('.'))
-    let require_name = Snakecase(class_name)
-    execute "normal Orequire '". require_name . "'"
-endfunction
-function! ExtractClassName(line)
-    let current_line = a:line
-    let class_name = matchstr(current_line, '\(class\|module\)\( \)*\zs\(.*\)')
-    return class_name
-endfunction
-function! Snakecase(word)
-  let word = substitute(a:word,'::','/','g')
-  let word = substitute(word,'\(\u\+\)\(\u\l\)','\1_\2','g')
-  let word = substitute(word,'\(\l\|\d\)\(\u\)','\1_\2','g')
-  let word = substitute(word,'[.-]','_','g')
-  let word = tolower(word)
-  return word
-endfunction
-function! EatArgument()
-  let save_cursor = getpos('.')
-  let param = expand("<cword>")
-  :execute "normal o"."@".param." = ".param."\<esc>=="
-  call setpos('.', save_cursor)
-endfunction
-function! PromoteToDouble()
-  let save_cursor = getpos('.')
-  let param = expand("<cword>")
-  :execute "normal O".param." = double :".param."\<esc>=="
-  call setpos('.', save_cursor)
-endfunction
-
 " matchit required by nelstrom/vim-textobj-rubyblock
 " matchit required by ecomba/vim-ruby-refactoring
 runtime macros/matchit.vim
