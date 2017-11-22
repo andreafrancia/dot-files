@@ -132,11 +132,6 @@ endfunction
 function! Strip(input_string)
     return substitute(a:input_string, '^\s*\(.\{-}\)\s*$', '\1', '')
 endfunction
-function! EatAllArguments()
-    let line = getline('.')
-    let split = split(line)
-    echo split
-endfunction
 function! MakeMethod()
     let save_cursor = getcurpos()
     let method_name = expand('<cword>')
