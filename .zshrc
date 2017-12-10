@@ -1,12 +1,16 @@
 # If not running interactively ... get out of here! 
 [ -z "$PS1" ] && return
-
+add_path() {
+    local newpath="$1"
+    PATH="$newpath:$PATH"
+    PATH="${PATH//:$newpath/}"
+}
 GEM_PATH=~/.gems
-PATH="$HOME/bin:$PATH"
-PATH="$HOME/bin.local:$PATH"
-PATH="/usr/local/bin:$PATH"
-PATH="/usr/local/sbin:$PATH"
-PATH="$HOME/.vim/plugged/vim-themis/bin:$PATH"
+add_path "$HOME/bin"
+add_path "$HOME/bin.local"
+add_path "/usr/local/bin"
+add_path "/usr/local/sbin"
+add_path "$HOME/.vim/plugged/vim-themis/bin"
 export PATH
 
 export EDITOR=vim
@@ -170,12 +174,23 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 alias reload-zshrc='source ~/.zshrc'
 
 # vim: set ft=sh:
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
+#export PATH="$HOME/.rbenv/bin:$PATH"
+#eval "$(rbenv init -)"
 
 mkdir_cd () { mkdir -p "$1" && cd "$1"; }
+
+# Enable Ctrl-x-e to edit command line
+autoload -U edit-command-line
+# Emacs style
+zle -N edit-command-line
+bindkey '^xe' edit-command-line
+bindkey '^x^e' edit-command-line
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
 export PATH="$PATH:$HOME/.rvm/bin"
 
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export HOMEBREW_NO_ANALYTICS=1
+
