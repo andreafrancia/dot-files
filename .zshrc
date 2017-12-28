@@ -11,6 +11,7 @@ add_path "$HOME/bin.local"
 add_path "/usr/local/bin"
 add_path "/usr/local/sbin"
 add_path "$HOME/.vim/plugged/vim-themis/bin"
+add_path "$HOME/git-mass-amend/bin"
 export PATH
 
 export EDITOR=vim
