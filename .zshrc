@@ -195,4 +195,4 @@ export PATH="$PATH:$HOME/.rvm/bin"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export HOMEBREW_NO_ANALYTICS=1
-
+export HOMEBREW_NO_AUTO_UPDATE=1
