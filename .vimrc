@@ -63,6 +63,7 @@ endfunction
 runtime macros/matchit.vim
 " Load plugins {{{
 call plug#begin('~/.vim/plugged')
+Plug 'vim-scripts/DrawIt'
 Plug 'tpope/vim-commentary'
 Plug 'ecomba/vim-ruby-refactoring'
 Plug 'nelstrom/vim-textobj-rubyblock'
