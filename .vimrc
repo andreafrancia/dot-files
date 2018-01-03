@@ -68,6 +68,7 @@ runtime macros/matchit.vim
 " Load plugins {{{
 call plug#begin('~/.vim/plugged')
 " Plug 'gi1242/vim-tex-syntax'
+Plug 'keflavich/macvim-skim'
 Plug 'vim-scripts/DrawIt'
 Plug 'tpope/vim-commentary'
 Plug 'ecomba/vim-ruby-refactoring'
