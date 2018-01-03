@@ -23,6 +23,10 @@ nnoremap <leader>f   :NERDTreeToggle<CR>
 nnoremap <leader>k :Rg<CR>
 nnoremap <leader>rg :Rg ""<Left>
 nnoremap <leader>t :wa \| :make<CR>
+" Latex
+nnoremap <leader>ls ciw\lstinline{<c-r>-}<esc>
+vnoremap <leader>ls c\lstinline{<c-r>-}<esc>
+nnoremap ,verb O\begin{verbatim}<esc>o\end{verbatim}<esc>
 " Map ,e and ,v to open files in the same directory as the current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
@@ -63,6 +67,7 @@ endfunction
 runtime macros/matchit.vim
 " Load plugins {{{
 call plug#begin('~/.vim/plugged')
+" Plug 'gi1242/vim-tex-syntax'
 Plug 'vim-scripts/DrawIt'
 Plug 'tpope/vim-commentary'
 Plug 'ecomba/vim-ruby-refactoring'
