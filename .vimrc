@@ -4,30 +4,15 @@ set nocompatible
 
 " Key mappings {{{
 let mapleader=","
-let g:ruby_refactoring_map_keys = 0 "0 disables plugin auto mapping
-nnoremap <leader><leader> :wa \| :!clear && rspec<CR>
-nnoremap <leader>a   :call Automate()<CR>
-nnoremap <leader>xp  :call AddExpectTo()<CR>
-nnoremap <leader>dou :call PromoteToDouble()<cr>
-nnoremap <leader>d   :call <SID>StripTrailingWhitespaces()<CR>
-nnoremap <leader>eat :call EatArgument()<cr>
-nnoremap <leader>let :call ExtractIntoRspecLet()<cr>
-nnoremap <leader>mr  :call MakeRequire()<cr>
-nnoremap <leader>gf  :call OpenRequire()<cr>
-nnoremap <leader>rel  :RExtractLet<cr>
-vnoremap <leader>rem  :RExtractMethod<cr>
-vnoremap <leader>rv  :call ExtractVariable()<cr>
-nnoremap <leader>ri  :call InlineVariable()<cr>
-nnoremap <leader>mm  :call MakeMethod()<cr>
-nnoremap <leader>f   :NERDTreeToggle<CR>
-nnoremap <leader>k :Rg<CR>
+nnoremap <leader>f  :NERDTreeToggle<CR>
+nnoremap <leader>k  :Rg<CR>
 nnoremap <leader>rg :Rg ""<Left>
-nnoremap <leader>t :wa \| :make<CR>
+nnoremap <leader>d  :call <SID>StripTrailingWhitespaces()<CR>
 " Latex
 nnoremap <leader>ls ciw\lstinline{<c-r>-}<esc>
 vnoremap <leader>ls c\lstinline{<c-r>-}<esc>
 nnoremap ,verb O\begin{verbatim}<esc>o\end{verbatim}<esc>
-" Map ,e and ,v to open files in the same directory as the current file
+" Map ,e to open files in the same directory of the current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
 " Map ,n to rename file
@@ -62,9 +47,14 @@ function! <SID>StripTrailingWhitespaces()
     let @/=_s
     call cursor(l, c)
 endfunction
+
+" prevents ecomba/vim-ruby-refactoring auto mapping
+let g:ruby_refactoring_map_keys = 0 
+
 " matchit required by nelstrom/vim-textobj-rubyblock
 " matchit required by ecomba/vim-ruby-refactoring
 runtime macros/matchit.vim
+
 " Load plugins {{{
 call plug#begin('~/.vim/plugged')
 " Plug 'gi1242/vim-tex-syntax'
@@ -215,6 +205,8 @@ filetype plugin indent on          " Enable file type detection.
 autocmd FileType vim setlocal shiftwidth=2 softtabstop=2 expandtab
 " }}}
 
+autocmd FileType sh setlocal sts=4 sw=4
+
 " Text files {{{
 autocmd BufRead,BufNewFile *.txt setfiletype text
 autocmd BufRead,BufNewFile README setfiletype text
@@ -246,9 +238,19 @@ autocmd FocusLost * :wa  "save on focus lost
 
 " Plugins Configuratons {{{
 
-" ============================================================================
-" Function definitions
-" ============================================================================
+vnoremap <leader>rv  :call ExtractVariable()<cr>
+nnoremap <leader>ri  :call InlineVariable()<cr>
+
+function! RenameFile()
+    let old_name = expand('%')
+    let new_name = input('New file name: ', expand('%'))
+    if new_name != '' && new_name != old_name
+        exec ':saveas ' . new_name
+        exec ':silent !rm ' . old_name
+        redraw!
+    endif
+endfunction
+
 function! ExtractVariable()
     let name = input("Variable name: ")
     if name == ''
@@ -265,20 +267,7 @@ function! ExtractVariable()
     " Paste the original selected text to be the variable value
     normal! $p
 endfunction
-
-function! RenameFile()
-    let old_name = expand('%')
-    let new_name = input('New file name: ', expand('%'))
-    if new_name != '' && new_name != old_name
-        exec ':saveas ' . new_name
-        exec ':silent !rm ' . old_name
-        redraw!
-    endif
-endfunction
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" INLINE VARIABLE (SKETCHY)
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+ 
 function! InlineVariable()
     " Copy the variable under the cursor into the 'a' register
     :let l:tmp_a = @a
