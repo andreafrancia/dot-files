@@ -12,6 +12,7 @@ add_path "/usr/local/bin"
 add_path "/usr/local/sbin"
 add_path "$HOME/.vim/plugged/vim-themis/bin"
 add_path "$HOME/git-mass-amend/bin"
+add_path "$HOME/baby-steps-tdd/bin"
 add_path "/Library/TeX/texbin"
 export PATH
 
@@ -196,3 +197,6 @@ export PATH="$PATH:$HOME/.rvm/bin"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_AUTO_UPDATE=1
+
+source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
+source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
