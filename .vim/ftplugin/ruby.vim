@@ -8,6 +8,7 @@ nnoremap <leader>let :call ExtractIntoRspecLet()<cr>
 nnoremap <leader>mr  :call MakeRequire()<cr>
 nnoremap <leader>gf  :call OpenRequire()<cr>
 nnoremap <leader>rel  :RExtractLet<cr>
+nnoremap <leader>bef  :call ExtractIntoBefore()<cr>
 vnoremap <leader>rem  :RExtractMethod<cr>
 nnoremap <leader>mm  :call MakeMethod()<cr>
 
@@ -18,18 +19,30 @@ let ruby_space_errors = 1
 set path^=spec
 set path^=lib
 
+" Adapted from ruby-refactoring vim plugin
+function! ExtractIntoRspecLet()
+  normal 0
+  if empty(matchstr(getline("."), "=")) == 1
+    echo "Can't find an assignment"
+    return
+  end
+  normal! dd
+  exec "?^\\(RSpec\\.\\)*\\s*\\<\\(describe\\|context\\)\\>"
+  normal! $p
+  exec 's/\v([a-z_][a-zA-Z0-9_]*) \= (.+)/let(:\1) { \2 }'
+  normal V=
+endfunction
 
-compiler rspec
-
-setlocal shiftwidth=2 softtabstop=2 expandtab textwidth=78 foldmethod=syntax
-autocmd BufRead,BufNewFile *_spec.rb compiler rspec
-setlocal errorformat=
-    \%f:%l:\ %tarning:\ %m,
-    \%E%.%#:in\ `load':\ %f:%l:%m,
-    \%E%f:%l:in\ `%*[^']':\ %m,
-    \%E\ \ \ \ \ \#\ %f:%l:%.%#,
-    \%E\ \ %\\d%\\+)%.%#,
-    \%C\ \ \ \ \ %m,
-    \%-G%.%#
+setlocal shiftwidth=2 softtabstop=2 expandtab textwidth=78
+" compiler rspec
+" autocmd BufRead,BufNewFile *_spec.rb compiler rspec
+" setlocal errorformat=
+"     \%f:%l:\ %tarning:\ %m,
+"     \%E%.%#:in\ `load':\ %f:%l:%m,
+"     \%E%f:%l:in\ `%*[^']':\ %m,
+"     \%E\ \ \ \ \ \#\ %f:%l:%.%#,
+"     \%E\ \ %\\d%\\+)%.%#,
+"     \%C\ \ \ \ \ %m,
+"     \%-G%.%#
 
 
