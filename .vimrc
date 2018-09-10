@@ -1,3 +1,4 @@
+
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
@@ -8,10 +9,6 @@ nnoremap <leader>f  :NERDTreeToggle<CR>
 nnoremap <leader>k  :Rg<CR>
 nnoremap <leader>rg :Rg ""<Left>
 nnoremap <leader>d  :call <SID>StripTrailingWhitespaces()<CR>
-" Latex
-nnoremap <leader>ls ciw\lstinline{<c-r>-}<esc>
-vnoremap <leader>ls c\lstinline{<c-r>-}<esc>
-nnoremap ,verb O\begin{verbatim}<esc>o\end{verbatim}<esc>
 " Map ,e to open files in the same directory of the current file
 cnoremap %% <C-R>=expand('%:h').'/'<cr>
 map <leader>e :edit %%
@@ -26,6 +23,9 @@ map z*  <Plug>(asterisk-z*)
 map gz* <Plug>(asterisk-gz*)
 map z#  <Plug>(asterisk-z#)
 map gz# <Plug>(asterisk-gz#)
+
+" Load plugins {{{
+call plug#begin('~/.vim/plugged')
 
 set switchbuf=useopen
 " From GRB: Seriously, guys. It's not like :W is bound to anything anyway.
@@ -55,16 +55,10 @@ let g:ruby_refactoring_map_keys = 0
 " matchit required by ecomba/vim-ruby-refactoring
 runtime macros/matchit.vim
 
-" Load plugins {{{
-call plug#begin('~/.vim/plugged')
-" Plug 'gi1242/vim-tex-syntax'
-Plug 'keflavich/macvim-skim'
-Plug 'vim-scripts/DrawIt'
 Plug 'tpope/vim-commentary'
 Plug 'ecomba/vim-ruby-refactoring'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'kana/vim-textobj-user'
-Plug 'thinca/vim-themis'
 Plug 'Lokaltog/vim-powerline'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-endwise'
@@ -81,8 +75,6 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/xoria256.vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'haya14busa/vim-asterisk'
-Plug 'LucHermitte/lh-vim-lib'
-Plug 'LucHermitte/vim-UT'
 Plug '~/vim-automate'
 call plug#end()
 
