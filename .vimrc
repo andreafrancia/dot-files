@@ -59,7 +59,7 @@ Plug 'tpope/vim-commentary'
 Plug 'ecomba/vim-ruby-refactoring'
 Plug 'nelstrom/vim-textobj-rubyblock'
 Plug 'kana/vim-textobj-user'
-Plug 'Lokaltog/vim-powerline'
+Plug 'vim-airline/vim-airline'
 Plug 'scrooloose/nerdtree', { 'on':  'NERDTreeToggle' }
 Plug 'tpope/vim-endwise'
 Plug 'tpope/vim-eunuch'
@@ -78,7 +78,6 @@ Plug 'haya14busa/vim-asterisk'
 Plug '~/vim-automate'
 call plug#end()
 
-let g:Powerline_symbols = 'fancy'
 " Behaviour {{{
 set history=10000   " I want a big history (the default is only 50 commands)
 set hidden          " Allow backgrounding buffers, even unsaved ones
