@@ -74,6 +74,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-fugitive'
+Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-bundler'
 Plug 'kien/ctrlp.vim'
 Plug 'vim-ruby/vim-ruby'
@@ -84,7 +85,6 @@ Plug 'LucHermitte/lh-vim-lib'
 Plug 'LucHermitte/vim-UT'
 Plug '~/vim-automate'
 call plug#end()
-" }}}
 
 let g:Powerline_symbols = 'fancy'
 " Behaviour {{{
