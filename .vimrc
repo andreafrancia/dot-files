@@ -231,7 +231,7 @@ autocmd FocusLost * :wa  "save on focus lost
 
 vnoremap <leader>rv  :call ExtractVariable()<cr>
 nnoremap <leader>ri  :call InlineVariable()<cr>
-nnoremap <leader><leader> :wa \| :!clear && rspec<CR>
+autocmd FileType ruby nnoremap <leader><leader> :wa \| :!clear && rspec<CR>
 nnoremap <leader>a   :call Automate()<CR>
 nnoremap <leader>xp  :call AddExpectTo()<CR>
 nnoremap <leader>dou :call PromoteToDouble()<cr>
@@ -250,7 +250,41 @@ let ruby_space_errors = 1
 autocmd FileType ruby setlocal shiftwidth=2 softtabstop=2 expandtab textwidth=78
 
 " Make gf working for requires filenames
+if executable('rg')
+  set grepprg=rg\ --vimgrep
+endif
 autocmd FileType ruby setlocal path^=spec path^=lib
+function! TestAll()
+  call AssertEquals(1,1)
+  call AssertEquals('foo/bar/baz', RequireName('lib/foo/bar/baz'))
+  call AssertEquals('foo/bar/baz', RequireName('lib/foo/bar/baz.rb'))
+  call AssertEquals("require 'foo/bar/baz'", RequireLinePattern('lib/foo/bar/baz.rb'))
+endfunction
+function! SearchRequireLines(...)
+  if a:0 > 0
+    let path = a:1
+  else
+    let path = expand('%')
+  endif
+  let pattern = RequireLinePattern(path)
+  silent! execute "grep! " . shellescape(pattern) . " ."
+  cwindow
+  redraw!
+endfunction
+function! RequireLinePattern(path)
+  return "require '" . RequireName(a:path) . "'"
+endfunction"
+function! RequireName(path)
+  let tmp = substitute(a:path, "^lib/", "", "")
+  return substitute(tmp, ".rb$", "", "")
+endfunction
+function! AssertEquals(expected, actual)
+  if a:expected == a:actual
+    echom "PASS"
+  else
+    throw "FAIL Expected:" . a:expected . ", Actual: " . a:actual
+  endif
+endfunction
 
 " Adapted from ruby-refactoring vim plugin
 function! ExtractIntoRspecLet()
