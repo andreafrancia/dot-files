@@ -5,6 +5,7 @@ set nocompatible
 
 " Key mappings {{{
 let mapleader=","
+nnoremap <esc>; ,
 nnoremap <leader>f  :NERDTreeToggle<CR>
 nnoremap <leader>k  :Rg<CR>
 nnoremap <leader>rg :Rg ""<Left>
@@ -28,6 +29,9 @@ map gz# <Plug>(asterisk-gz#)
 call plug#begin('~/.vim/plugged')
 
 set switchbuf=useopen
+
+set splitright 
+
 " From GRB: Seriously, guys. It's not like :W is bound to anything anyway.
 command! W :w
 " From GRB:
@@ -75,8 +79,6 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/xoria256.vim'
 Plug 'jremmen/vim-ripgrep'
 Plug 'haya14busa/vim-asterisk'
-Plug '~/vim-automate'
-call plug#end()
 
 " Behaviour {{{
 set history=10000   " I want a big history (the default is only 50 commands)
@@ -133,39 +135,6 @@ set noignorecase  "make searches case-sensitive
 nnoremap <silent> <C-l> :<C-u>nohlsearch<CR><C-l>
 
 set smartcase
-" }}}
-" Visualisation {{{
-set t_Co=256          " Andrea: enable 256 colors
-set foldlevelstart=20 " Andrea: Should open all (almost) level
-set listchars=tab:▸\ ,trail:·,eol:¬ " Andrea: show tabs and spaces:
-" Andrea: Draw a red line on column (one char after the textwidth value)
-if exists('+colorcolumn') | set colorcolumn=+1 | endif
-set background=dark
-colorscheme xoria256
-
-set cursorline       " Andrea: highlight the line containing the cursor
-set ruler            " show the cursor position all the time
-set showcmd          " display incomplete commands
-set number
-set numberwidth=5
-set scrolloff=4      " Keep more context when scrolling off the end of a
-                     " buffer
-set nowrap
-syntax on
-
-if has("gui_running")
-    set guioptions-=T   " hide the toolbar in GUI mode
-    set columns=80      " this seems not to work
-endif
-
-highlight Folded guibg=white guifg=blue
-set foldtext=AFMyFoldText()
-function! AFMyFoldText()
-  let line = getline(v:foldstart)
-  let sub = substitute(line, '/\*\|\*/\|{'.'{{\d\=', '', 'g')
-  return v:folddashes . sub
-endfunction
-
 " }}}
 " Completion {{{
 "
@@ -242,7 +211,22 @@ nnoremap <leader>gf  :call OpenRequire()<cr>
 nnoremap <leader>rel  :RExtractLet<cr>
 nnoremap <leader>bef  :call ExtractIntoBefore()<cr>
 vnoremap <leader>rem  :RExtractMethod<cr>
-nnoremap <leader>mm  :call MakeMethod()<cr>
+nnoremap <leader>mm  :call MakeRubyThing('module')<cr>
+nnoremap <leader>mf  :call MakeRubyThing('def')<cr>
+nnoremap <leader>mc  :call MakeRubyThing('class')<cr>
+
+let g:blockle_mapping = '<Leader>{'
+Plug 'jgdavey/vim-blockle'
+
+function! MakeRubyThing(thing_type)
+    let save_cursor = getcurpos()
+    let thing_name = expand('<cword>')
+    let line = getline('.')
+    let col = getcurpos()[2]
+    execute "normal! O".a:thing_type." ".thing_name."\<cr>end"
+    call setpos('.', save_cursor)
+    execute "normal! jj"
+endfunction
 
 " Tell ruby syntax to highlight trailing whitespaces (:help ruby_space_errors)
 let ruby_space_errors = 1
@@ -358,4 +342,38 @@ function! InsertTabWrapper()
         return "\<c-p>"
     endif
 endfunction
+" }}}
+call plug#end()
+" Visualisation {{{
+set t_Co=256          " Andrea: enable 256 colors
+set foldlevelstart=20 " Andrea: Should open all (almost) level
+set listchars=tab:▸\ ,trail:·,eol:¬ " Andrea: show tabs and spaces:
+" Andrea: Draw a red line on column (one char after the textwidth value)
+if exists('+colorcolumn') | set colorcolumn=+1 | endif
+set background=dark
+colorscheme xoria256
+
+set cursorline       " Andrea: highlight the line containing the cursor
+set ruler            " show the cursor position all the time
+set showcmd          " display incomplete commands
+set number
+set numberwidth=5
+set scrolloff=4      " Keep more context when scrolling off the end of a
+                     " buffer
+set nowrap
+syntax on
+
+if has("gui_running")
+    set guioptions-=T   " hide the toolbar in GUI mode
+    set columns=80      " this seems not to work
+endif
+
+highlight Folded guibg=white guifg=blue
+set foldtext=AFMyFoldText()
+function! AFMyFoldText()
+  let line = getline(v:foldstart)
+  let sub = substitute(line, '/\*\|\*/\|{'.'{{\d\=', '', 'g')
+  return v:folddashes . sub
+endfunction
+
 " }}}
