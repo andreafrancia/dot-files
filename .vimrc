@@ -25,6 +25,8 @@ map gz* <Plug>(asterisk-gz*)
 map z#  <Plug>(asterisk-z#)
 map gz# <Plug>(asterisk-gz#)
 
+runtime visual-at.vim
+
 " Load plugins {{{
 call plug#begin('~/.vim/plugged')
 
