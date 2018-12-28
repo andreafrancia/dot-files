@@ -59,6 +59,23 @@ let g:ruby_refactoring_map_keys = 0
 " matchit required by ecomba/vim-ruby-refactoring
 runtime macros/matchit.vim
 
+" Language server
+Plug 'prabirshrestha/async.vim'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+imap <c-space> <Plug>(asyncomplete_force_refresh)
+if executable('solargraph')
+    " gem install solargraph
+    au User lsp_setup call lsp#register_server({
+        \ 'name': 'solargraph',
+        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
+        \ 'initialization_options': {"diagnostics": "true"},
+        \ 'whitelist': ['ruby'],
+        \ })
+endif
+
+
 Plug 'tpope/vim-commentary'
 Plug 'ecomba/vim-ruby-refactoring'
 Plug 'nelstrom/vim-textobj-rubyblock'
@@ -72,7 +89,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-unimpaired'
 Plug 'tpope/vim-abolish'
 Plug 'tpope/vim-fugitive'
-Plug 'mhinz/vim-signify'
+" Plug 'mhinz/vim-signify'
 Plug 'tpope/vim-bundler'
 Plug 'kien/ctrlp.vim'
 Plug 'vim-ruby/vim-ruby'
@@ -146,7 +163,7 @@ set completeopt=
 set completeopt+=menu     " Show menu
 set completeopt+=menuone  " Show menu also when there is only one item
 set completeopt+=longest  " Complete with the longest match available
-set completeopt+=preview  " Show extra information about the the current item
+set completeopt-=preview  " Show extra information about the the current item
 set complete-=t
 set complete-=i
 "
