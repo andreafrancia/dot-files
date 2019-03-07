@@ -30,6 +30,8 @@ runtime visual-at.vim
 " Load plugins {{{
 call plug#begin('~/.vim/plugged')
 
+Plug 'elixir-editors/vim-elixir'
+
 set switchbuf=useopen
 
 set splitright 
@@ -62,20 +64,31 @@ let g:ruby_refactoring_map_keys = 0
 runtime macros/matchit.vim
 
 " Language server
-Plug 'prabirshrestha/async.vim'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-imap <c-space> <Plug>(asyncomplete_force_refresh)
-if executable('solargraph')
-    " gem install solargraph
-    au User lsp_setup call lsp#register_server({
-        \ 'name': 'solargraph',
-        \ 'cmd': {server_info->[&shell, &shellcmdflag, 'solargraph stdio']},
-        \ 'initialization_options': {"diagnostics": "true"},
-        \ 'whitelist': ['ruby'],
-        \ })
-endif
+Plug 'autozimu/LanguageClient-neovim', {
+    \ 'branch': 'next',
+    \ 'do': 'bash install.sh',
+    \ }
+
+" (Optional) Multi-entry selection UI.
+Plug 'junegunn/fzf'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+
+let g:LanguageClient_serverCommands = {
+    \ 'ruby': ['tcp://localhost:7658']
+    \ }
+
+nnoremap <F5> :call LanguageClient_contextMenu()<CR>
+nnoremap <silent> K :call LanguageClient#textDocument_hover()<CR>
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+nnoremap <silent> <F2> :call LanguageClient#textDocument_rename()<CR>
+
+autocmd FileType ruby setlocal omnifunc=LanguageClient#complete
+
+
+" Don't send a stop signal to the server when exiting vim.
+" This is optional, but I don't like having to restart Solargraph
+" every time I restart vim.
+let g:LanguageClient_autoStop = 0
 
 
 Plug 'tpope/vim-commentary'
@@ -182,6 +195,15 @@ filetype plugin indent on          " Enable file type detection.
 
 " VimScript files {{{
 autocmd FileType vim setlocal shiftwidth=2 softtabstop=2 expandtab
+
+" vimrc autoreload https://superuser.com/a/1120318
+if has ('autocmd') " Remain compatible with earlier versions
+ augroup vimrc     " Source vim configuration upon save
+    autocmd! BufWritePost $MYVIMRC source % | echom "Reloaded " . $MYVIMRC | redraw
+    autocmd! BufWritePost $MYGVIMRC if has('gui_running') | so % | echom "Reloaded " . $MYGVIMRC | endif | redraw
+  augroup END
+endif " has autocmd
+
 " }}}
 
 autocmd FileType sh setlocal sts=4 sw=4
@@ -217,9 +239,14 @@ autocmd FocusLost * :wa  "save on focus lost
 
 " Plugins Configuratons {{{
 
+autocmd FileType ruby nnoremap <leader><leader> :wa \| call LauncRSpec()<CR>
+nnoremap <leader>tf  :let g:test_file = 1<cr>
+function! LauncRSpec()
+  :!clear && rspec
+endfunction
+
 vnoremap <leader>rv  :call ExtractVariable()<cr>
 nnoremap <leader>ri  :call InlineVariable()<cr>
-autocmd FileType ruby nnoremap <leader><leader> :wa \| :!clear && rspec<CR>
 nnoremap <leader>a   :call Automate()<CR>
 nnoremap <leader>xp  :call AddExpectTo()<CR>
 nnoremap <leader>dou :call PromoteToDouble()<cr>
