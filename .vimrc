@@ -31,6 +31,8 @@ runtime visual-at.vim
 call plug#begin('~/.vim/plugged')
 
 Plug 'elixir-editors/vim-elixir'
+Plug 'slashmili/alchemist.vim' " elixir completion
+Plug 'Valloric/YouCompleteMe'
 
 set switchbuf=useopen
 
