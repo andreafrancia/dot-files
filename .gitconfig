@@ -2,7 +2,7 @@
 	name = Andrea Francia
 	email = andrea@andreafrancia.it
 [core]
-	excludesfile = ~/.cvsignore
+	excludesfile = ~/global.gitignore
 	editor = vim
 [color]
 	ui = auto

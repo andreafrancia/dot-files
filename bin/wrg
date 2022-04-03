@@ -1,8 +1,0 @@
-#!/bin/bash
-
-test -d .git || { >&2 echo "How do you think you can go back if you mismatch the search pattern?"; exit 1; }
-
-rg --files-with-matches --null "$@" |
-    while IFS= read -r -d '' path; do
-        rg "$@" --context 999999 --color=never --no-line-number < "$path" | sponge "$path"
-    done

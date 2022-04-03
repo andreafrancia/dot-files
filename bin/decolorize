@@ -1,3 +1,0 @@
-#!/bin/bash
-gsed -r "s/\x1B\[[0-9;]*?[m|K]//g"
-

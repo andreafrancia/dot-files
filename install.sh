@@ -24,12 +24,9 @@ make_backup_if_necessary() {
 
 install_link .bash_profile 
 install_link .bashrc 
-install_link .cvsignore 
 install_link .gitconfig 
 install_link .gitignore 
 install_link .gitmodules 
-install_link .hgrc 
-install_link .global-hgignore
 install_link .gvimrc 
 install_link .vim 
 install_link .vimrc 
@@ -37,11 +34,11 @@ install_link .zsh
 install_link .zshenv 
 install_link .zshrc
 install_link bin 
-install_link .ackrc
 install_link .dircolors
 install_link .gemrc
 install_link .irbrc
 install_link .aliases.sh
+install_link global.gitignore
 
 mkdir -p ~/.vim-tmp ~/.tmp
 mkdir -m 0700 ~/.ssh
