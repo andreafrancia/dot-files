@@ -1,6 +1,7 @@
 alias a='git add -A . && git status --short'
 alias d='git diff HEAD'
 alias s='git status --short'
+alias l='git l'
 
 c() 
 {
