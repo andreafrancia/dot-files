@@ -1,4 +1,3 @@
-
 " Use Vim settings, rather then Vi settings (much better!).
 " This must be first, because it changes other options as a side effect.
 set nocompatible
@@ -30,10 +29,7 @@ runtime visual-at.vim
 " Load plugins {{{
 call plug#begin('~/.vim/plugged')
 
-Plug 'elixir-editors/vim-elixir'
-Plug 'slashmili/alchemist.vim' " elixir completion
-Plug 'Valloric/YouCompleteMe'
-
+Plug 'stefandtw/quickfix-reflector.vim'
 set switchbuf=useopen
 
 set splitright 
@@ -65,15 +61,8 @@ let g:ruby_refactoring_map_keys = 0
 " matchit required by ecomba/vim-ruby-refactoring
 runtime macros/matchit.vim
 
-" Language server
-Plug 'autozimu/LanguageClient-neovim', {
-    \ 'branch': 'next',
-    \ 'do': 'bash install.sh',
-    \ }
-
 " (Optional) Multi-entry selection UI.
 Plug 'junegunn/fzf'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 
 let g:LanguageClient_serverCommands = {
     \ 'ruby': ['tcp://localhost:7658']
@@ -111,7 +100,6 @@ Plug 'tpope/vim-bundler'
 Plug 'kien/ctrlp.vim'
 Plug 'vim-ruby/vim-ruby'
 Plug 'vim-scripts/xoria256.vim'
-Plug 'jremmen/vim-ripgrep'
 Plug 'haya14busa/vim-asterisk'
 
 " Behaviour {{{
@@ -423,5 +411,8 @@ function! AFMyFoldText()
   let sub = substitute(line, '/\*\|\*/\|{'.'{{\d\=', '', 'g')
   return v:folddashes . sub
 endfunction
+
+"Get the 2-space YAML as the default when hit carriage return after the colon
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 " }}}
