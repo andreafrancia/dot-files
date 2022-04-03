@@ -7,13 +7,8 @@ add_path() {
 }
 GEM_PATH=~/.gems
 add_path "$HOME/bin"
-add_path "$HOME/bin.local"
 add_path "/usr/local/bin"
 add_path "/usr/local/sbin"
-add_path "$HOME/.vim/plugged/vim-themis/bin"
-add_path "$HOME/git-mass-amend/bin"
-add_path "$HOME/baby-steps-tdd/bin"
-add_path "/Library/TeX/texbin"
 export PATH
 
 export EDITOR=vim
@@ -115,11 +110,6 @@ function load_compinit_at_first_tab_press() {
 }
 zle -N load_compinit_at_first_tab_press
 bindkey '^I' load_compinit_at_first_tab_press
-
-function 'rmdir!'() {
-    rm -fv "$1/.DS_Store">/dev/null
-    "$(which -p rmdir)" "$@"
-}
 
 function show-evil-whitespaces() {
     ack -k " +$" $(git diff --cached --name-only ) "$@"
