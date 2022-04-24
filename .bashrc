@@ -29,14 +29,5 @@ if [ -f $(brew --prefix)/etc/bash_completion ]; then
     . $(brew --prefix)/etc/bash_completion
 fi
 
-# load local conf
-[ -s ~/.bashrc.local ] && source ~/.bashrc.local
-
-# load aliases
-[ -s ~/.aliases.sh ] && source ~/.aliases.sh
-
 # reload conf
 alias reload-bashrc='source ~/.bashrc'
-
-# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
