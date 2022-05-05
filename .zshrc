@@ -40,13 +40,6 @@ prompt-normal() {
     export PROMPT="$dollar "
     export RPROMPT="$cur_dir "'$(git_cwd_info)'
 }
-prompt-testing() {
-    local green_or_red=$'%{\e[0;%(?.32.31)m%}'
-    local pass_or_fail=$'%(?.OK.KO)'
-    local dollar="\$"
-    local no_color=$'%{\e[0m%}'
-    export PROMPT="$green_or_red$pass_or_fail $dollar$no_color "
-}
 prompt-simple() {
     local dollar="$(red-on-error "\$")"
     export PROMPT="$dollar "
@@ -122,14 +115,6 @@ HELPDIR=~/.zsh_help
 # zsh completion
 fpath=(/usr/local/share/zsh-completions $fpath)
 
-# File protection aliases ----------------------------------------------------
-alias rm='rm -i'
-alias cp='cp -i'
-alias mv='mv -i'
-
-# Other aliases ---------------------------------------------------------------
-alias grep='grep --color'
-
 # prefer GNU version for some programs, when found in path
 for cmd in ls rm cp mv find grep; do
     if type "g$cmd" >& /dev/null; then
@@ -146,6 +131,14 @@ for cmd in ls rm cp mv find grep; do
         #    aliases, e.g. alias mv='mv -i'
     fi
 done
+
+# File protection aliases ----------------------------------------------------
+alias rm='rm -i'
+alias cp='cp -i'
+alias mv='mv -i'
+
+# Other aliases ---------------------------------------------------------------
+alias grep='grep --color'
 
 # Colors for ls --------------------------------------------------------------
 if ls --color . >& /dev/null; then
@@ -184,6 +177,3 @@ export PATH="$PATH:$HOME/.rvm/bin"
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_AUTO_UPDATE=1
-
-source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc
-source /usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc
