@@ -1,6 +1,6 @@
 [user]
 	name = Andrea Francia
-	email = andrea@andreafrancia.it
+	email = 260852+andreafrancia@users.noreply.github.com
 [core]
 	excludesfile = ~/global.gitignore
 	editor = vim
@@ -14,8 +14,11 @@
 	unstage = reset HEAD --
 	undo-last-commit = reset --soft HEAD~1
 	commit = commit -v
-	co = checkout
 [difftool]
 	prompt = false
 [push]
-	default = simple
+	default = current
+[init]
+	defaultBranch = main
+[pull]
+	rebase = false
