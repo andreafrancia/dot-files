@@ -41,5 +41,5 @@ install_link .aliases.sh
 install_link global.gitignore
 
 mkdir -p ~/.vim-tmp ~/.tmp
-mkdir -m 0700 ~/.ssh
+mkdir -p -m 0700 ~/.ssh
 echo "VisualHostKey yes" >> ~/.ssh/config
