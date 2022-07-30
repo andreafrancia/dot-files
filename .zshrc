@@ -141,7 +141,7 @@ alias mv='mv -i'
 alias grep='grep --color'
 
 # Colors for ls --------------------------------------------------------------
-if ls --color . >& /dev/null; then
+if ls -d --color . >& /dev/null; then
     alias ls='ls -h --color'
 else
     echo "Using the lame \`ls' of BSD"
