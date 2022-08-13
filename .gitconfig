@@ -4,6 +4,8 @@
 [core]
 	excludesfile = ~/global.gitignore
 	editor = vim
+        #  autocrlf = false means that it never touches line endings
+	autocrlf = false
 [color]
 	ui = auto
 [alias]
