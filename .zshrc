@@ -19,9 +19,11 @@ export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
 bindkey -e
 
 # history
+setopt SHARE_HISTORY # save the each command in history file and save the timestamp
 HISTFILE=~/.zsh_history
 HISTSIZE=$((1024*365))
 SAVEHIST=$((1024*365))
+
 
 # Git-aware fancy prompt {{{
 setopt prompt_subst
@@ -75,12 +77,6 @@ setopt numeric_glob_sort
 setopt no_clobber      # Fail when > existent
 setopt beep
 setopt notify
-
-SAVEHIST=$HISTSIZE  # Max number of history entries
-setopt appendhistory
-setopt hist_find_no_dups
-setopt no_hist_ignore_space
-setopt inc_append_history
 
 # Completion
 autoload -Uz compinit
