@@ -179,3 +179,7 @@ export HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1 # disable upgrade of all other p
 if [ -s  ~/.zsh-nvm/zsh-nvm.plugin.zsh ]; then
     source ~/.zsh-nvm/zsh-nvm.plugin.zsh
 fi
+
+aa() { source env/bin/activate; }
+alias python='python3'
+alias tt='pushd ~/wiki'
