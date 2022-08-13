@@ -175,3 +175,7 @@ export PATH="$PATH:$HOME/.rvm/bin"
 export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1 # disable upgrade of all other packages during install
+
+if [ -s  ~/.zsh-nvm/zsh-nvm.plugin.zsh ]; then
+    source ~/.zsh-nvm/zsh-nvm.plugin.zsh
+fi
