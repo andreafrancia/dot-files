@@ -14,7 +14,6 @@ grep
 htop
 hub
 jq
-macos-trash
 macvim
 moreutils
 mutt
