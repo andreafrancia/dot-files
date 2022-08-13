@@ -183,3 +183,10 @@ fi
 aa() { source env/bin/activate; }
 alias python='python3'
 alias tt='pushd ~/wiki'
+
+### Bashhub.com Installation
+if [ -f ~/.bashhub/bashhub.zsh ]; then
+    source ~/.bashhub/bashhub.zsh
+fi
+
+export BH_URL=http://localhost:18080
