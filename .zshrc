@@ -27,18 +27,19 @@ SAVEHIST=$((1024*365))
 
 # Git-aware fancy prompt {{{
 setopt prompt_subst
-tilde_or_pwd() {
-  echo "$PWD" | sed -e "s/\/Users\/$USER/~/"
-}
 
 red-on-error() {
     local red_on_error=$'%{\e[0;%(?.32.31)m%}'
     local no_color=$'%{\e[0m%}'
     echo "$red_on_error$@$no_color"
 }
+pwd_with_tilde()
+{
+    echo "${PWD/$HOME/~}"
+}
 prompt-normal() {
     local dollar="$(red-on-error "\$")"
-    local cur_dir=$'%{\e[0;90m%}$(tilde_or_pwd)%{\e[0m%}'
+    local cur_dir=$'%{\e[0;90m%}$(pwd_with_tilde)%{\e[0m%}'
     export PROMPT="$dollar "
     export RPROMPT="$cur_dir "'$(git_cwd_info)'
 }
