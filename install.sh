@@ -37,7 +37,6 @@ install_link bin
 install_link .dircolors
 install_link .gemrc
 install_link .irbrc
-install_link .aliases.sh
 install_link global.gitignore
 
 mkdir -p ~/.vim-tmp ~/.tmp
