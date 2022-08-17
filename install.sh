@@ -26,7 +26,6 @@ install_link .bash_profile
 install_link .bashrc 
 install_link .gitconfig 
 install_link .gitignore 
-install_link .gitmodules 
 install_link .gvimrc 
 install_link .vim 
 install_link .vimrc 
