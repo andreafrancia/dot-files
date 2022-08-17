@@ -29,8 +29,9 @@ install_link .gitignore
 install_link .gvimrc 
 install_link .vim 
 install_link .vimrc 
-install_link .zsh 
 install_link .zshenv 
+install_link .zsh 
+install_link .zlogin 
 install_link .zshrc
 install_link bin 
 install_link .dircolors
