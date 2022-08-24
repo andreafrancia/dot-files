@@ -26,5 +26,3 @@ brew "wget"
 brew "youtube-dl"
 brew "zlib"
 cask "google-chrome"
-
-whalebrew "whalebrew/wget"

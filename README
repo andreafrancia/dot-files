@@ -5,3 +5,6 @@ bash install.sh
 
 # bin.local
 ln -s ~/Dropbox/wiki/bin.local ~/bin.local
+
+# brew
+brew bundle
