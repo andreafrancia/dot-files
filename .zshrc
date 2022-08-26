@@ -154,7 +154,6 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 alias a='git add -A . && git status --short'
 alias d='git diff HEAD'
 alias s='git status --short'
-alias l='git l'
 
 c() 
 {
@@ -242,11 +241,10 @@ alias python='python3'
 alias tt='pushd ~/wiki'
 
 ### Bashhub.com Installation
-if [ -f ~/.bashhub/bashhub.zsh ]; then
-    source ~/.bashhub/bashhub.zsh
+if [ -f ~/super-zsh-history/load_in_shell.zsh ]; then
+    source ~/super-zsh-history/load_in_shell.zsh
 fi
 
-export BH_URL=http://localhost:18080
 export PATH=~"/Library/Application Support/JetBrains/Toolbox/scripts:$PATH"
 alias python='python3'
 alias pip='pip3'
