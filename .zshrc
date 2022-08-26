@@ -48,7 +48,12 @@ prompt-simple() {
     export PROMPT="$dollar "
     export RPROMPT=
 }
-prompt-normal
+
+if starship --version >& /dev/null; then
+    eval "$(starship init zsh)"
+else
+    prompt-normal
+fi
 # }}}
 
 # Bash-like Ctrl+W and Alt+Backspace{{{
