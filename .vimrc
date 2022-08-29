@@ -197,6 +197,7 @@ endif " has autocmd
 " }}}
 
 autocmd FileType sh setlocal sts=4 sw=4
+autocmd FileType zsh setlocal sts=4 sw=4
 
 " Text files {{{
 autocmd BufRead,BufNewFile *.txt setfiletype text
