@@ -216,7 +216,17 @@ if [ -s  ~/.zsh-nvm/zsh-nvm.plugin.zsh ]; then
     source ~/.zsh-nvm/zsh-nvm.plugin.zsh
 fi
 
-aa() { source env/bin/activate; }
+aa() { 
+    local activate
+    for activate in env/bin/activate venv/bin/activate; do
+        if [[ -f "$source" ]];then
+            source $activate
+        fi
+        return 0
+    done
+    echo "Virtual Env not found" 2>&1
+    return 1
+}
 alias python='python3'
 alias tt='pushd ~/wiki'
 
@@ -226,3 +236,12 @@ if [ -f ~/.bashhub/bashhub.zsh ]; then
 fi
 
 export BH_URL=http://localhost:18080
+export PATH=~"/Library/Application Support/JetBrains/Toolbox/scripts:$PATH"
+alias python='python3'
+alias pip='pip3'
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/opt/google-cloud-sdk/path.zsh.inc' ]; then . '/opt/google-cloud-sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/opt/google-cloud-sdk/completion.zsh.inc' ]; then . '/opt/google-cloud-sdk/completion.zsh.inc'; fi
