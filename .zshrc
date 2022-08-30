@@ -216,13 +216,15 @@ if [ -s  ~/.zsh-nvm/zsh-nvm.plugin.zsh ]; then
     source ~/.zsh-nvm/zsh-nvm.plugin.zsh
 fi
 
-aa() { 
-    local activate
-    for activate in env/bin/activate venv/bin/activate; do
-        if [[ -f "$source" ]];then
-            source $activate
+aa() {
+    local activate_source
+    for activate_source in env/bin/activate venv/bin/activate; do
+        if [[ -f "$activate_source" ]]; then
+            source "$activate_source"
+            return 0
+        else
+            echo "$activate_source not found" 2>&1
         fi
-        return 0
     done
     echo "Virtual Env not found" 2>&1
     return 1
