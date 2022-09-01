@@ -1,0 +1,16 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+add_newline = false
+format = """$character"""
+right_format = """$all"""
+
+[gcloud]
+disabled = true
+
+[aws]
+disabled = true
+
+[directory]
+truncate_to_repo = false
+
+[vagrant]
+disabled = true
