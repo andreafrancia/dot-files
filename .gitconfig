@@ -24,3 +24,5 @@
 	defaultBranch = main
 [pull]
 	rebase = false
+[rerere]
+	enabled = true

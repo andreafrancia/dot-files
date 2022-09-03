@@ -8,3 +8,9 @@ ln -s ~/Dropbox/wiki/bin.local ~/bin.local
 
 # brew
 brew bundle
+
+
+Copy and paste git config:
+```
+git config --global rerere.enabled true
+```
