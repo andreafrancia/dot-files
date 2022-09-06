@@ -4,7 +4,21 @@ function lineinfile(){
   if [[ $# != 3 ]];then
     local THIS_FUNC_NAME="${funcstack[1]-}${FUNCNAME[0]-}"
     echo "$THIS_FUNC_NAME - 3 arguments are expected. given $#. args=[$@]" >&2
-    echo "usage: $THIS_FUNC_NAME PATTERN LINE FILE" >&2
+    {
+    cat << USAGE
+Usage:
+
+    $THIS_FUNC_NAME PATTERN LINE FILE
+USAGE
+    cat << EXAMPLES
+
+Examples:
+
+    lineinfile '^foo\s*=\s*' "foo = POO # changed!" test.txt
+    lineinfile '^baz\s*=' "baz = BAZ" test.txt
+EXAMPLES
+} >&2
+
     return 1
   fi
   local PATTERN="$1"
