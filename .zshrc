@@ -54,6 +54,11 @@ if starship --version >& /dev/null; then
 else
     prompt-normal
 fi
+
+set-title() {
+	echo -ne "\033]0;$USER@$HOST:${PWD/#$HOME/~}\007"
+}
+precmd_functions+=(set-title)
 # }}}
 
 # Bash-like Ctrl+W and Alt+Backspace{{{
@@ -268,3 +273,5 @@ if type brew &>/dev/null; then
     compinit
 fi
 export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
+
+
