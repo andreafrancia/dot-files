@@ -1,0 +1,28 @@
+#!/bin/bash
+# from https://gist.github.com/kokumura/a6d819ddcb4efe54c5541fc15e1d0347
+function lineinfile(){
+  if [[ $# != 3 ]];then
+    local THIS_FUNC_NAME="${funcstack[1]-}${FUNCNAME[0]-}"
+    echo "$THIS_FUNC_NAME - 3 arguments are expected. given $#. args=[$@]" >&2
+    echo "usage: $THIS_FUNC_NAME PATTERN LINE FILE" >&2
+    return 1
+  fi
+  local PATTERN="$1"
+  local LINE="$2"
+  local FILE="$3"
+  if grep -E -q "${PATTERN}" "${FILE}" ;then
+    
+    ## solution 1: works with GNU sed well, but not works with BSD sed.
+    # sed -E -i '' "/${PATTERN//\//\\/}/c${LINE}" "${FILE}"
+
+    ## solution 2: works with both (GNU|BSD) sed, but get useless *.bak file generated.
+    # sed -E -i.bak "/${PATTERN//\//\\/}/c\\"$'\n'"${LINE}" "${FILE}"
+
+    ## solution 3: give up to use sed, using perl instead.
+    PATTERN="${PATTERN}" LINE="${LINE}" perl -i -nle 'if(/$ENV{"PATTERN"}/){print $ENV{"LINE"}}else{print}' "${FILE}"
+
+  else
+    echo "$LINE" >> "$FILE"
+  fi
+}
+
