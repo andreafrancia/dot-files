@@ -9,10 +9,7 @@
 [color]
 	ui = auto
 [alias]
-	aa = add --all
 	l = log --graph --pretty=format':%C(yellow)%h%Cblue%d%Creset %s %C(white) %an, %ar%Creset'
-	st = status
-	ci = commit
 	unstage = reset HEAD --
 	undo-last-commit = reset --soft HEAD~1
 	commit = commit -v

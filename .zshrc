@@ -49,8 +49,12 @@ prompt-simple() {
     export RPROMPT=
 }
 
-if starship --version >& /dev/null; then
+prompt-starship() {
     eval "$(starship init zsh)"
+}
+
+if starship --version >& /dev/null; then
+    prompt-starship
 else
     prompt-normal
 fi
@@ -247,7 +251,6 @@ aa() {
     echo "Virtual Env not found" 2>&1
     return 1
 }
-alias python='python3'
 alias tt='pushd ~/wiki'
 
 ### Bashhub.com Installation
@@ -256,8 +259,6 @@ if [ -f ~/super-zsh-history/load_in_shell.zsh ]; then
 fi
 
 export PATH=~"/Library/Application Support/JetBrains/Toolbox/scripts:$PATH"
-alias python='python3'
-alias pip='pip3'
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f '/opt/google-cloud-sdk/path.zsh.inc' ]; then . '/opt/google-cloud-sdk/path.zsh.inc'; fi
