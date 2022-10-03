@@ -274,5 +274,7 @@ if type brew &>/dev/null; then
     compinit
 fi
 export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
+[ -f ~/.ghcup/env ] && source ~/.ghcup/env # ghcup-env
+alias e="exa --git"
 
-
+[ -f /opt/homebrew/etc/profile.d/z.sh ] && source /opt/homebrew/etc/profile.d/z.sh 
