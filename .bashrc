@@ -31,3 +31,22 @@ fi
 
 # reload conf
 alias reload-bashrc='source ~/.bashrc'
+alias a='git add -A . && git status --short'
+alias d='git diff HEAD'
+alias s='git status --short'
+alias c='git commit -m Save'
+
+PROMPT_COMMAND=__prompt_colorato
+function __prompt_colorato() {
+    local exit_code="$?"
+    local red='\[\e[0;31m\]'
+    local green='\[\e[0;32m\]'
+    local reset_colors='\[\e[0m\]'
+
+    PS1=
+    if [[ $exit_code == 0 ]]; then
+        PS1="$green"'\u@\h:\W \$'"$reset_colors "
+    else
+        PS1="$red"'\u@\h:\W'" ($exit_code)"' \$'"$reset_colors "
+    fi
+}
