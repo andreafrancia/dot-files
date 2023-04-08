@@ -50,3 +50,6 @@ function __prompt_colorato() {
         PS1="$red"'\u@\h:\W'" ($exit_code)"' \$'"$reset_colors "
     fi
 }
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
