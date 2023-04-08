@@ -12,6 +12,9 @@ add_path "/usr/local/sbin"
 export PATH
 
 export EDITOR=vim
+export LC_CTYPE=C.UTF-8
+export LC_CTYPE=C
+export LC_CTYPE=
 export LC_CTYPE=en_US.UTF-8
 
 export MANPATH="/usr/local/opt/coreutils/libexec/gnuman:$MANPATH"
@@ -23,7 +26,6 @@ setopt SHARE_HISTORY # save the each command in history file and save the timest
 HISTFILE=~/.zsh_history
 HISTSIZE=$((1024*365))
 SAVEHIST=$((1024*365))
-
 
 # Git-aware fancy prompt {{{
 setopt prompt_subst
@@ -229,14 +231,12 @@ export HOMEBREW_NO_ANALYTICS=1
 export HOMEBREW_NO_AUTO_UPDATE=1
 export HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK=1 # disable upgrade of all other packages during install
 
-
 nvm-activate()
 {
     if [ -s  ~/.zsh-nvm/zsh-nvm.plugin.zsh ]; then
         source ~/.zsh-nvm/zsh-nvm.plugin.zsh
     fi
 }
-
 
 aa() {
     local activate_source
@@ -278,3 +278,14 @@ export PATH="$HOME/.gem/ruby/2.6.0/bin:$PATH"
 alias e="exa --git"
 
 [ -f /opt/homebrew/etc/profile.d/z.sh ] && source /opt/homebrew/etc/profile.d/z.sh 
+
+rvm-as-a-function
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+export PATH="$PATH:$HOME/.rvm/bin"
+
+# Created by `pipx` on 2023-04-08 09:12:09
+export PATH="$PATH":~/.local/bin
+autoload -U bashcompinit
+bashcompinit
+eval "$(register-python-argcomplete pipx)"
