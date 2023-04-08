@@ -23,3 +23,6 @@
 	rebase = false
 [rerere]
 	enabled = true
+[diff "rspec"]
+    # see https://gist.github.com/tekin/12500956bd56784728e490d8cef9cb81#file-gitconfig
+    xfuncname = "^[ \t]*((RSpec|describe|context|it|before|after|around|feature|scenario)[ \t].*)$"
