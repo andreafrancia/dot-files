@@ -1,0 +1,21 @@
+#!/bin/bash
+arg="$1"; shift
+declare -a command
+if (($#==0))
+then
+    command=(ls --color -lad "$arg")
+else
+    case "$1" in
+        l) command=(ls --color -lad "$arg") ;;
+        lr) command=(fd -ls . "$arg") ;;
+        gr) command=(git -C "$arg" remote -v) ;;
+        gl) command=(git -C "$arg" l) ;;
+        tp) command=(trash-put "$arg") ;;
+        *) command=("$@" "$arg") ;;
+    esac
+fi
+echo -n ">> "
+tput setaf 4
+echo "${command[@]}"
+tput sgr0
+"${command[@]}"
