@@ -20,7 +20,7 @@
 [init]
 	defaultBranch = main
 [pull]
-	rebase = false
+	rebase = true
 [rerere]
 	enabled = true
 [diff "rspec"]
